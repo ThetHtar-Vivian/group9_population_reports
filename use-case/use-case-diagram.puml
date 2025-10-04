@@ -1,0 +1,157 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+
+actor Admin
+rectangle Database
+rectangle "System" {
+
+  ' ===== Country Reports =====
+  usecase "Get All Countries By Population Desc" as UC1
+  usecase "Get Countries By Continent Population Desc" as UC2
+  usecase "Get Countries By Region Population Desc" as UC3
+  usecase "Get Top 50 Countries By Population" as UC4
+  usecase "Get Top 10 Countries By Continent Population" as UC5
+  usecase "Get Top 5 Countries By Region Population" as UC6
+  usecase "Country Report" as CR
+
+  ' ===== City Reports =====
+  usecase "Get All Cities By Population Desc" as UC7
+  usecase "Get All Cities By Continent Population Desc" as UC8
+  usecase "Get Cities By Region Population Desc" as UC9
+  usecase "Get Cities By Country Population Desc" as UC10
+  usecase "Get Cities By District Population Desc" as UC11
+  usecase "Get Top 50 Cities By Population" as UC12
+  usecase "Get Top 10 Cities By Continent Population" as UC13
+  usecase "Get Top 5 Cities By Region Population" as UC14
+  usecase "Get Top 5 Cities By Country Population" as UC15
+  usecase "Get Top Most City By District Population" as UC16
+  usecase "City Report" as CIR
+
+  ' ===== Capital City Reports =====
+  usecase "Get All Capital Cities By Population Desc" as UC17
+  usecase "Get Capital Cities By Continent Population Desc" as UC18
+  usecase "Get Capital Cities By Region Population Desc" as UC19
+  usecase "Get Top 50 Capital Cities By Population" as UC20
+  usecase "Get Top 10 Capital Cities By Continent Population" as UC21
+  usecase "Get Top 5 Capital Cities By Region Population" as UC22
+  usecase "Capital City Report" as CCR
+
+  ' ===== Population Reports =====
+  usecase "Get Continent Population Report" as UC23
+  usecase "Get Region Population Report" as UC24
+  usecase "Get Country Population Report" as UC25
+  usecase "Get World Total Population" as UC26
+  usecase "Get Continent Total Population" as UC27
+  usecase "Get Region Total Population" as UC28
+  usecase "Get Country Total Population" as UC29
+  usecase "Get District Total Population" as UC30
+  usecase "Get City Total Population" as UC31
+  usecase "Get Top Languages Report" as UC32
+  usecase "Population Report" as PR
+}
+
+' ===== Actor connections =====
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
+Admin --> UC6
+UC1 ..> CR : <<include>>
+UC2 ..> CR : <<include>>
+UC3 ..> CR : <<include>>
+UC4 ..> CR : <<include>>
+UC5 ..> CR : <<include>>
+UC6 ..> CR : <<include>>
+
+Admin --> UC7
+Admin --> UC8
+Admin --> UC9
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+Admin --> UC13
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+UC7 ..> CIR : <<include>>
+UC8 ..> CIR : <<include>>
+UC9 ..> CIR : <<include>>
+UC10 ..> CIR : <<include>>
+UC11 ..> CIR : <<include>>
+UC12 ..> CIR : <<include>>
+UC13 ..> CIR : <<include>>
+UC14 ..> CIR : <<include>>
+UC15 ..> CIR : <<include>>
+UC16 ..> CIR : <<include>>
+
+Admin --> UC17
+Admin --> UC18
+Admin --> UC19
+Admin --> UC20
+Admin --> UC21
+Admin --> UC22
+UC17 ..> CCR : <<include>>
+UC18 ..> CCR : <<include>>
+UC19 ..> CCR : <<include>>
+UC20 ..> CCR : <<include>>
+UC21 ..> CCR : <<include>>
+UC22 ..> CCR : <<include>>
+
+Admin --> UC23
+Admin --> UC24
+Admin --> UC25
+Admin --> UC26
+Admin --> UC27
+Admin --> UC28
+Admin --> UC29
+Admin --> UC30
+Admin --> UC31
+Admin --> UC32
+UC23 ..> PR : <<include>>
+UC24 ..> PR : <<include>>
+UC25 ..> PR : <<include>>
+UC26 ..> PR : <<include>>
+UC27 ..> PR : <<include>>
+UC28 ..> PR : <<include>>
+UC29 ..> PR : <<include>>
+UC30 ..> PR : <<include>>
+UC31 ..> PR : <<include>>
+UC32 ..> PR : <<include>>
+
+' ===== Each task connects to Database =====
+UC1 -- Database
+UC2 -- Database
+UC3 -- Database
+UC4 -- Database
+UC5 -- Database
+UC6 -- Database
+UC7 -- Database
+UC8 -- Database
+UC9 -- Database
+UC10 -- Database
+UC11 -- Database
+UC12 -- Database
+UC13 -- Database
+UC14 -- Database
+UC15 -- Database
+UC16 -- Database
+UC17 -- Database
+UC18 -- Database
+UC19 -- Database
+UC20 -- Database
+UC21 -- Database
+UC22 -- Database
+UC23 -- Database
+UC24 -- Database
+UC25 -- Database
+UC26 -- Database
+UC27 -- Database
+UC28 -- Database
+UC29 -- Database
+UC30 -- Database
+UC31 -- Database
+UC32 -- Database
+
+@enduml
