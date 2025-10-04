@@ -73,6 +73,10 @@ public class ReportManager {
 
         // Print the result using Display class
         display.printCountryReport(countries);
+
+        System.out.println("\nGenerating All Countries in the World by Population Report");
+        ArrayList<Country> countriesByPopulation = report.getAllCountriesByPopulationDesc();
+        display.printCountryReport(countriesByPopulation);
     }
 
     /**

@@ -68,5 +68,60 @@ public class CountryReport {
 
         return countries;
     }
+    /**
+     * Retrieves a list of all countries in the world ordered by population (from largest to smallest).
+     * Each record includes the country's code, name, capital city name and district,
+     * region, continent, and total population. The data is fetched by joining the
+     * country and city tables to include capital city details.
+     * @return ArrayList of Country objects sorted in descending order by population.
+     */
+    public ArrayList<Country> getAllCountriesByPopulationDesc() {
+        // Create a list to hold all countries retrieved from the database
+        ArrayList<Country> countries = new ArrayList<>();
+
+        try {
+            // Create a statement to execute SQL queries
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Select country details including name, code, region, continent, and population
+            // - Left join with city table to include capital city details
+            // - Sort the results by population in descending order
+            String sql =
+                    "SELECT co.Code, co.Name AS CountryName, " +
+                            "       c.Name AS CapitalName, " +
+                            "       c.District, " +
+                            "       co.Region, co.Continent, co.Population " +
+                            "FROM country co " +
+                            "LEFT JOIN city c ON co.Capital = c.ID " +   // Join to include capital details
+                            "ORDER BY co.Population DESC;";              // Order by population (largest first)
+
+            // Execute query and obtain result set
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each record in the result set
+            while (rset.next()) {
+                Country country = new Country();
+
+                // Map each field from the query result to the Country object
+                country.setCode(rset.getString("Code"));               // Country code
+                country.setName(rset.getString("CountryName"));        // Country name
+                country.setCapitalName(rset.getString("CapitalName")); // Capital city name
+                country.setDistrict(rset.getString("District"));       // Capital's district
+                country.setRegion(rset.getString("Region"));           // Region of the country
+                country.setContinent(rset.getString("Continent"));     // Continent name
+                country.setPopulation(rset.getInt("Population"));      // Total population
+
+                // Add populated Country object to the list
+                countries.add(country);
+            }
+        } catch (SQLException e) {
+            // Handle SQL exceptions and log an error message
+            System.out.println("Failed to get countries by population: " + e.getMessage());
+        }
+
+        // Return the complete list of countries sorted by population
+        return countries;
+    }
 
 }
