@@ -66,6 +66,13 @@ public class ReportManager {
     public void generateCountryReport() {
         CountryReport report = new CountryReport(con);
 
+        System.out.println("\nGenerate All Countries by Continent Population Report");
+
+        // Fetch the list of countries sorted by continent and population
+        ArrayList<Country> countries = report.getCountriesByContinentPopulationDesc();
+
+        // Print the result using Display class
+        display.printCountryReport(countries);
     }
 
     /**
