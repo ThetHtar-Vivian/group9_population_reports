@@ -123,5 +123,71 @@ public class CountryReport {
         // Return the complete list of countries sorted by population
         return countries;
     }
+    /**
+     * Retrieves the top 10 most populated countries within each continent.
+     *
+     * Only the top 10 countries per continent are included in the result.
+     * Each record includes the country's code, name, capital city name and district, region,
+     * continent, and total population.
+     *
+     * @return ArrayList of Country objects containing the top 10 populated countries per continent,
+     * ordered by continent and population in descending order.
+     */
+    public ArrayList<Country> getTop10CountriesByContinentPopulation() {
+        // Create a list to store the resulting countries
+        ArrayList<Country> countries = new ArrayList<>();
 
+        try {
+            // Create a statement to execute the SQL query
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Join the country table with city to include capital information
+            // - Use ROW_NUMBER() to rank countries within each continent by population
+            // - Select only the top 10 countries for each continent
+            // - Order by continent and descending population
+            String sql =
+                    "SELECT Code, CountryName, CapitalName, District, Region, Continent, Population " +
+                            "FROM ( " +
+                            "   SELECT co.Code, co.Name AS CountryName, c.Name AS CapitalName, c.District, " +
+                            "          co.Region, co.Continent, co.Population, " +
+                            "          ROW_NUMBER() OVER (PARTITION BY co.Continent ORDER BY co.Population DESC) AS rn " +
+                            "   FROM country co " +
+                            "   LEFT JOIN city c ON co.Capital = c.ID " +
+                            ") sub " +
+                            "WHERE rn <= 10 " +  // Top 10 countries per continent
+                            "ORDER BY Continent, Population DESC;";
+
+            // Execute the SQL query and store the result
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each row in the result set
+            while (rset.next()) {
+                Country country = new Country();
+
+                // Map each database column to the corresponding Country object field
+                country.setCode(rset.getString("Code"));               // Country code
+                country.setName(rset.getString("CountryName"));        // Country name
+                country.setCapitalName(rset.getString("CapitalName")); // Capital city name
+                country.setDistrict(rset.getString("District"));       // Capital's district
+                country.setRegion(rset.getString("Region"));           // Region
+                country.setContinent(rset.getString("Continent"));     // Continent
+                country.setPopulation(rset.getInt("Population"));      // Population
+
+                // Add the populated Country object to the list
+                countries.add(country);
+            }
+
+            // Close the result set and statement to free resources
+            rset.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            // Handle SQL exceptions and display error message
+            System.out.println("Failed to get top 10 countries by continent: " + e.getMessage());
+        }
+
+        // Return the list of top 10 populated countries per continent
+        return countries;
+    }
 }

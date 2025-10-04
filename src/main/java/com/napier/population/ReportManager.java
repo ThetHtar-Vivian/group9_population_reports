@@ -77,6 +77,11 @@ public class ReportManager {
         System.out.println("\nGenerating All Countries in the World by Population Report");
         ArrayList<Country> countriesByPopulation = report.getAllCountriesByPopulationDesc();
         display.printCountryReport(countriesByPopulation);
+
+        // Generate Top 10 Populated Countries for each continent
+        System.out.println("\nGenerating Top 10 Populated Countries per Continent Report");
+        ArrayList<Country> top10CountriesPerContinent = report.getTop10CountriesByContinentPopulation();
+        display.printCountryReport(top10CountriesPerContinent);
     }
 
     /**
