@@ -178,6 +178,46 @@ public class CityReport {
         return cities;
     }
 
+    /**
+     * Retrieves the top 10 most populated cities for each continent.
+     * SQL uses ROW_NUMBER() window function to rank cities within each continent.
+     * Only the top 10 cities per continent are returned, ordered by continent and population descending.
+     *
+     * @return ArrayList of City objects containing name, country, district, region, continent, and population
+     */
+    public ArrayList<City> getTop10CitiesByContinentPopulation() {
+        ArrayList<City> cities = new ArrayList<>();
 
+        try {
+            // Create a statement to execute SQL query
+            Statement stmt = con.createStatement();
 
+            // SQL query:
+            // - Join city and country tables
+            // - Partition by continent and order by city population descending
+            // - Use ROW_NUMBER() to select top 10 per continent
+            String sql = "SELECT CityName, CountryName, District, Region, Continent, Population " + "FROM ( " + "    SELECT c.Name AS CityName, " + "           co.Name AS CountryName, " + "           c.District, " + "           co.Region, " + "           co.Continent, " + "           c.Population, " + "           ROW_NUMBER() OVER (PARTITION BY co.Continent ORDER BY c.Population DESC) AS rn " + "    FROM city c " + "    JOIN country co ON c.CountryCode = co.Code " + ") sub " + "WHERE rn <= 10 " + "ORDER BY Continent, Population DESC;";
+
+            // Execute query and get results
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each row in the result set
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));            // Set city name
+                city.setCountry_name(rset.getString("CountryName")); // Set country name
+                city.setDistrict(rset.getString("District"));        // Set district
+                city.setRegion(rset.getString("Region"));            // Set region
+                city.setContinent(rset.getString("Continent"));      // Set continent
+                city.setPopulation(rset.getInt("Population"));       // Set population
+
+                cities.add(city); // Add city to list
+            }
+        } catch (SQLException e) {
+            // Print error message if query fails
+            System.out.println("Failed to get top 10 cities by continent: " + e.getMessage());
+        }
+
+        return cities; // Return list of top cities
+    }
 }
