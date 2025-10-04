@@ -45,6 +45,14 @@ public class ReportManager {
         // Create CityReport instance to query database
         CityReport report = new CityReport(con);
 
+        System.out.println("\n Generate all cities by population");
+
+        // Fetch all cites by population
+        ArrayList<City> allCities = report.getAllCitiesByPopulation();
+
+        // Print the result using the display class
+        display.printCityReport(allCities);
+
     }
 
     /**
