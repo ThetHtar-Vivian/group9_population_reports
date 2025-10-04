@@ -1,30 +1,36 @@
 package com.napier.population;
 
+import java.sql.Connection;
+
 /**
- * The App class is the entry point of the application.
- * It demonstrates how to:
- * Create a database connection
- * Connect to the database
- * Disconnect safely
+ * Main entry point for the Population Reporting Application.
+ * This class is responsible for:
+ * - Establishing a database connection
+ * - Passing the connection to ReportManager
+ * - Generating different types of reports
+ * - Closing the database connection before exiting
  */
 public class App {
-
-    /**
-     * The main method where the program starts execution.
-     *
-     * @param args Command line arguments (not used in this program).
-     */
     public static void main(String[] args) {
-        // Create a new database connection object
-        DbConnection con = new DbConnection();
+        // Create a new database connection instance
+        DbConnection db = new DbConnection();
 
-        /*
-         * Establish a connection to the MySQL database.
-         * If connection fails, retry logic inside DbConnection will handle it.
-         */
-        con.connect();
+        // Establish connection to the database
+        db.connect();
 
-        // Disconnect from the database safely
-        con.disconnect();
+        // Retrieve active database connection
+        Connection con = db.getConnection();
+
+        // Initialize ReportManager with the database connection
+        ReportManager manager = new ReportManager(con);
+
+        // Generate different reports
+        manager.generateCityReport();         // Report on cities
+        manager.generateCountryReport();      // Report on countries
+        manager.generateCapitalCityReport();  // Report on capital cities
+        // manager.generateLanguageReport();   // Report on languages
+
+        // Close the database connection before exiting
+        db.disconnect();
     }
 }
