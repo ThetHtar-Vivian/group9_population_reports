@@ -61,6 +61,13 @@ public class ReportManager {
         // Display the retrieved list in a formatted city report
         display.printCityReport(cities);
 
+
+        System.out.println("\nGenerating Top 50 Cities by Population Report");
+        // Fetch top 50 cities by population
+        ArrayList<City> top50Cities = report.getTop50CitiesByPopulation();
+        // Print the result using Display class
+        display.printCityReport(top50Cities);
+
     }
 
     /**

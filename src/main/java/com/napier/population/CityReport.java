@@ -119,4 +119,65 @@ public class CityReport {
         return cities;
     }
 
+    /**
+     * Retrieves the top 50 most populated cities in the world.
+     *
+     * This method queries the database, joining the city and country tables
+     * to get additional information such as country name, region, and continent.
+     * Results are ordered by city population in descending order and limited to 50 entries.
+     *
+     * @return ArrayList of City objects containing city name, country, district, region, continent, and population
+     */
+    public ArrayList<City> getTop50CitiesByPopulation() {
+        ArrayList<City> cities = new ArrayList<>();
+
+        try {
+            // Create a statement object to execute the SQL query
+            Statement stmt = con.createStatement();
+
+            // SQL query explanation:
+            // - Select city name, country name, district, region, continent, and population
+            // - Join city table with country table using CountryCode
+            // - Order the results by population descending
+            // - Limit to top 50 cities
+            String sql =
+                    "SELECT city.Name AS City, " +
+                            "       country.Name AS Country, " +
+                            "       city.District, " +
+                            "       country.Region, " +
+                            "       country.Continent, " +
+                            "       city.Population " +
+                            "FROM city " +
+                            "JOIN country ON city.CountryCode = country.Code " +
+                            "ORDER BY city.Population DESC " +
+                            "LIMIT 50;";
+
+            // Execute the query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each row in the result set
+            while (rset.next()) {
+                City city = new City();
+
+                city.setName(rset.getString("City"));              // Set city name
+                city.setCountry_name(rset.getString("Country"));   // Set country name
+                city.setDistrict(rset.getString("District"));      // Set district
+                city.setRegion(rset.getString("Region"));          // Set region
+                city.setContinent(rset.getString("Continent"));    // Set continent
+                city.setPopulation(rset.getInt("Population"));     // Set population
+
+                // Add city to the list
+                cities.add(city);
+            }
+        } catch (SQLException e) {
+            // Print error message if query fails
+            System.out.println("Failed to get city report: " + e.getMessage());
+        }
+
+        // Return the list of top 50 cities
+        return cities;
+    }
+
+
+
 }
