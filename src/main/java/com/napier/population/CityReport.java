@@ -426,4 +426,51 @@ public class CityReport {
         // Return the list of cities organized by continent and sorted by population
         return cities;
     }
+
+    /**
+     * Retrieves the top 5 most populated cities for each country.
+     * Uses a window function to number cities per country by population and
+     * returns rows where row_number <= 5. Results are ordered by country name
+     * and city population descending.
+     *
+     * @return ArrayList of City objects containing city name, country, district, region, continent, and population
+     */
+    public ArrayList<City> getTop5CitiesByCountryPopulation() {
+        ArrayList<City> cities = new ArrayList<>();
+
+        String sql =
+                "SELECT CityName, CountryName, District, Region, Continent, Population " +
+                        "FROM ( " +
+                        "    SELECT c.Name AS CityName, " +
+                        "           co.Name AS CountryName, " +
+                        "           c.District, " +
+                        "           co.Region, " +
+                        "           co.Continent, " +
+                        "           c.Population, " +
+                        "           ROW_NUMBER() OVER (PARTITION BY co.Code ORDER BY c.Population DESC) AS rn " +
+                        "    FROM city c " +
+                        "    JOIN country co ON c.CountryCode = co.Code " +
+                        ") sub " +
+                        "WHERE rn <= 5 " +
+                        "ORDER BY CountryName, Population DESC;";
+
+        try (Statement stmt = con.createStatement();
+             ResultSet rset = stmt.executeQuery(sql)) {
+
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("City"));
+                city.setCountry_name(rset.getString("Country"));
+                city.setDistrict(rset.getString("District"));
+                city.setRegion(rset.getString("Region"));
+                city.setContinent(rset.getString("Continent"));
+                city.setPopulation(rset.getInt("Population"));
+                cities.add(city);
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get city report: " + e.getMessage());
+        }
+
+        return cities;
+    }
 }
