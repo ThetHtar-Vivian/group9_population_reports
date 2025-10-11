@@ -30,7 +30,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 3. All the countries in a region organized by largest population to smallest.
 
-   [![No3getCountriesByRegionPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No3getCountriesByRegionPopulationDesc&label=No3getCountriesByRegionDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No3getCountriesByRegionDesc)
+   [![No3getCountriesByRegionPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No3getCountriesByRegionPopulationDesc&label=No3getCountriesByRegionPopulationDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No3getCountriesByRegionPopulationDesc)
 
 4. The top N populated countries in the world where N is provided by the user.
 
@@ -42,7 +42,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 6. The top N populated countries in a region where N is provided by the user.
 
-   [![No6getTop5CountriesByRegionPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No6getTop5CountriesByRegionPopulation&label=No6getTop5CountriesByRegionPopulation&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No6getTop5CountriesByRegionPopulation)
+   [![No6getTop5CountriesPerRegion](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No6getTop5CountriesPerRegion&label=No6getTop5CountriesPerRegion&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No6getTop5CountriesPerRegion)
 
 7. All the cities in the world organised by largest population to smallest.
 
@@ -62,7 +62,8 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 11. All the cities in a district organised by largest population to smallest.
 
-    [![No11getCitiesByDistrictPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No11getCitiesByDistrictPopulationDesc&label=No11getCitiesByDistrictPopulationDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No11getTop50CountriesByPopulation)
+    [![No11getCitiesByDistrictPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No11getCitiesByDistrictPopulationDesc&label=No11getCitiesByDistrictPopulationDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No11getCitiesByDistrictPopulationDesc)
+
 12. The top N populated cities in the world where N is provided by the user.
 
     [![No12getTop50CitiesByPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No12getTop50CitiesByPopulation&label=No12getTop50CitiesByPopulation&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No12getTop50CitiesByPopulation)
