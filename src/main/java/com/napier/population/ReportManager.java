@@ -62,6 +62,10 @@ public class ReportManager {
         // Cities by Region Population Report
         ArrayList<City> cityByRegion = report.getAllCitiesByRegionPopulationDesc();
         display.writeCityReportToFile(cityByRegion, "No 9 Cities by Region Population Report");
+
+        // Cities by Country Population Report
+        ArrayList<City> cityByCountry = report.getAllCitiesByCountryPopulationDesc();
+        display.writeCityReportToFile(cityByCountry, "No 10  Cities by Country Population Report");
     }
 
     /**
