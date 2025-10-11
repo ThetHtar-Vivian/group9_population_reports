@@ -284,4 +284,56 @@ public class CountryReport {
 
         return countries;
     }
+
+    /**
+     * Retrieves the top 5 most populated countries per region.
+     * Skips countries with null or zero population.
+     *
+     * @return List of Country objects containing code, name, capital, district, region, continent, and population
+     */
+    public ArrayList<Country> getTop5CountriesPerRegion() {
+        ArrayList<Country> countries = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // SQL: Top 5 populated countries per region, skip null/0 population
+            String sql = "SELECT Code, CountryName, CapitalName, CapitalDistrict, Region, Continent, Population\n" +
+                    "            FROM (\n" +
+                    "                SELECT \n" +
+                    "                    c.Code,\n" +
+                    "                    c.Name AS CountryName,\n" +
+                    "                    ci.Name AS CapitalName,\n" +
+                    "                    ci.District AS CapitalDistrict,\n" +
+                    "                    c.Region,\n" +
+                    "                    c.Continent,\n" +
+                    "                    c.Population,\n" +
+                    "                    ROW_NUMBER() OVER (PARTITION BY c.Region ORDER BY c.Population DESC) AS rn\n" +
+                    "                FROM country c\n" +
+                    "                LEFT JOIN city ci ON c.Capital = ci.ID\n" +
+                    "                WHERE c.Population IS NOT NULL AND c.Population > 0\n" +
+                    "            ) AS sub\n" +
+                    "            WHERE rn <= 5\n" +
+                    "            ORDER BY Region, Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                Country country = new Country();
+                country.setCode(rset.getString("Code"));
+                country.setName(rset.getString("CountryName"));
+                country.setCapitalName(rset.getString("CapitalName"));      // Capital city name
+                country.setDistrict(rset.getString("CapitalDistrict"));     // Capital's district
+                country.setRegion(rset.getString("Region"));
+                country.setContinent(rset.getString("Continent"));
+                country.setPopulation(rset.getInt("Population"));
+                countries.add(country);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get top 5 countries per region: " + e.getMessage());
+        }
+
+        return countries;
+    }
 }

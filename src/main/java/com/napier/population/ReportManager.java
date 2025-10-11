@@ -86,6 +86,10 @@ public class ReportManager {
         // Countries by Region Population Report
         ArrayList<Country> countriesByRegion = report.getCountriesByRegionPopulationDesc();
         display.writeCountryReportToFile(countriesByRegion, "No 3 Countries by Region Population Report");
+
+        // The top 5 populated countries in a region.
+        ArrayList<Country> top5Countries = report.getTop5CountriesPerRegion();
+        display.writeCountryReportToFile(top5Countries, "No 6 Top 5 Countries by Population Report");
     }
 
     /**
