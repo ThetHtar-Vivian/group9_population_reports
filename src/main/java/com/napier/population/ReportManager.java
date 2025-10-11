@@ -54,7 +54,6 @@ public class ReportManager {
         // Top 10 Cities By Continent Population Report
         ArrayList<City> top10Cities = report.getTop10CitiesByContinentPopulation();
         display.writeCityReportToFile(top10Cities, "No 13 Top 10 Cities By Continent Population Report");
-
     }
 
     /**
@@ -84,7 +83,9 @@ public class ReportManager {
         ArrayList<Country> top50Countries = report.getTop50CountriesByPopulation();
         display.writeCountryReportToFile(top50Countries, "No 4 Top 50 Countries by Population Report");
 
-
+        // Countries by Region Population Report
+        ArrayList<Country> countriesByRegion = report.getCountriesByRegionPopulationDesc();
+        display.writeCountryReportToFile(countriesByRegion, "No 3 Countries by Region Population Report");
     }
 
     /**

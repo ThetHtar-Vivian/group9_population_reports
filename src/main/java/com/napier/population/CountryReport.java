@@ -241,4 +241,47 @@ public class CountryReport {
         // Return the list of top 50 countries
         return countries;
     }
+
+    /**
+     * Retrieves all countries in each region organized by population (largest to smallest)
+     * Uses capital city's name for the report.
+     * @return A list of countries ordered by region and population
+     */
+    public ArrayList<Country> getCountriesByRegionPopulationDesc() {
+        ArrayList<Country> countries = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // Join country with city to get capital name
+            String sql = "SELECT co.Code, co.Name AS CountryName, ci.Name AS CapitalName, ci.District AS CapitalDistrict, " +
+                    "co.Region, co.Continent, co.Population " +
+                    "FROM country co " +
+                    "LEFT JOIN city ci ON co.Capital = ci.ID " +
+                    "ORDER BY co.Region ASC, co.Population DESC;";
+
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Country country = new Country();
+                country.setCode(rs.getString("Code"));
+                country.setName(rs.getString("CountryName"));
+                country.setCapitalName(rs.getString("CapitalName"));  // string name of capital
+                country.setDistrict(rs.getString("CapitalDistrict"));     // Capital's district
+                country.setRegion(rs.getString("Region"));
+                country.setContinent(rs.getString("Continent"));
+                country.setPopulation(rs.getInt("Population"));
+                countries.add(country);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get countries by region population: " + e.getMessage());
+        }
+
+        return countries;
+    }
 }
