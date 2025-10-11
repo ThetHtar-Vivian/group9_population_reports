@@ -1,4 +1,12 @@
 FROM openjdk:17
-COPY ./target/world_population-0.1.0.1-jar-with-dependencies.jar /tmp
-WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "world_population-0.1.0.1-jar-with-dependencies.jar"]
+
+WORKDIR /app
+
+# Copy fat jar (whatever its name is)
+COPY target/*-jar-with-dependencies.jar /app/app.jar
+
+# Create a folder for report output
+RUN mkdir -p /app/reports
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]

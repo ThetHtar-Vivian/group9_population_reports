@@ -1,5 +1,8 @@
 package com.napier.population;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -8,34 +11,33 @@ import java.util.ArrayList;
  */
 public class Display {
 
+    private static final String OUTPUT_FILE = "reports/PopulationReports.txt";
+
     /**
      * Prints a country report in a formatted table.
      * Displays: code, name, capital, district, region, continent, and population.
      *
      * @param countries List of countries to display
      */
-    public void printCountryReport(ArrayList<Country> countries) {
-        if (countries == null || countries.isEmpty()) {
-            System.out.println("No countries to display.");
-            return;
-        }
+    public void writeCountryReportToFile(ArrayList<Country> countries, String title) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE, true))) { // append mode
+            writer.write("===== " + title + " =====\n");
+            writer.write(String.format("%-10s %-55s %-20s %-25s %-30s %-15s %-12s%n",
+                    "Code", "Country Name", "Capital", "District", "Region", "Continent", "Population"));
 
-        // Print table header
-        System.out.printf("%-10s %-55s %-20s %-25s %-30s %-15s %-12s%n",
-                "Code", "Country Name", "Capital", "District", "Region", "Continent", "Population");
-
-        // Print each country
-        for (Country country : countries) {
-            if (country == null) continue;  // Defensive programming: skip null objects
-
-            System.out.printf("%-10s %-55s %-20s %-25s %-30s %-15s %-12d%n",
-                    country.getCode(),
-                    country.getName(),
-                    country.getCapitalName(), // Display capital city name (from City table)
-                    country.getDistrict(),
-                    country.getRegion(),
-                    country.getContinent(),
-                    country.getPopulation());
+            for (Country country : countries) {
+                writer.write(String.format("%-10s %-55s %-20s %-25s %-30s %-15s %-12d%n",
+                        country.getCode(),
+                        country.getName(),
+                        country.getCapitalName(),
+                        country.getDistrict(),
+                        country.getRegion(),
+                        country.getContinent(),
+                        country.getPopulation()));
+            }
+            writer.write("\n");
+        } catch (IOException e) {
+            System.out.println("Error writing country report: " + e.getMessage());
         }
     }
 
@@ -45,30 +47,26 @@ public class Display {
      *
      * @param cities List of cities to display
      */
-    public void printCityReport(ArrayList<City> cities) {
-        if (cities == null || cities.isEmpty()) {
-            System.out.println("No cities to display.");
-            return;
-        }
+    public void writeCityReportToFile(ArrayList<City> cities, String title) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE, true))) {
+            writer.write("===== " + title + " =====\n");
+            writer.write(String.format("%-5s %-25s %-40s %-20s %-30s %-15s %-10s%n",
+                    "ID", "City", "Country", "District", "Region", "Continent", "Population"));
 
-        // Print table header
-        System.out.printf("%-5s %-25s %-40s %-20s %-30s %-15s %-10s%n",
-                "ID", "City", "Country", "District", "Region", "Continent", "Population");
-
-        int id = 1; // Auto-increment row ID (for readability)
-
-        // Print each city
-        for (City city : cities) {
-            if (city == null) continue; // Defensive: skip null objects
-
-            System.out.printf("%-5d %-25s %-40s %-20s %-30s %-15s %-10d%n",
-                    id++,
-                    city.getName(),
-                    city.getCountry_name(),
-                    city.getDistrict(),
-                    city.getRegion(),
-                    city.getContinent(),
-                    city.getPopulation());
+            int id = 1;
+            for (City city : cities) {
+                writer.write(String.format("%-5d %-25s %-40s %-20s %-30s %-15s %-10d%n",
+                        id++,
+                        city.getName(),
+                        city.getCountry_name(),
+                        city.getDistrict(),
+                        city.getRegion(),
+                        city.getContinent(),
+                        city.getPopulation()));
+            }
+            writer.write("\n");
+        } catch (IOException e) {
+            System.out.println("Error writing city report: " + e.getMessage());
         }
     }
 
@@ -111,31 +109,34 @@ public class Display {
      * @param peoplePopulations List of population objects to display
      * @param level             Label describing the report level (e.g., "World", "Continent", "Country")
      */
-    public void printPopulationReport(ArrayList<PeoplePopulation> peoplePopulations, String level) {
-        if (peoplePopulations == null || peoplePopulations.isEmpty()) {
-            System.out.println("No people populations available.");
-            return;
+    public void writePopulationReportToFile(ArrayList<PeoplePopulation> peoplePopulations, String level) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE, true))) {
+            writer.write("===== " + level + " Population Report =====\n");
+            writer.write(String.format("%-30s %-20s %-30s %-30s%n",
+                    level, "Total Population", "City Population (% of total)", "Non-City Population (% of total)"));
+
+            for (PeoplePopulation pp : peoplePopulations) {
+                writer.write(String.format("%-30s %-20d %-30s %-30s%n",
+                        pp.getLevel(),
+                        pp.getTotalPopulation(),
+                        pp.getCityPopulation() + " (" + String.format("%.2f", pp.getCityPopulationPercentage()) + "%)",
+                        pp.getNonCityPopulation() + " (" + String.format("%.2f", pp.getNonCityPopulationPercentage()) + "%)"
+                ));
+            }
+            writer.write("\n");
+        } catch (IOException e) {
+            System.out.println("Error writing population report: " + e.getMessage());
         }
+    }
 
-        // Print report title
-        System.out.println("===== " + level + " Population Report =====");
-
-        // Print table header
-        System.out.printf("%-30s %-20s %-30s %-30s%n",
-                level, "Total Population", "City Population (% of total)", "Non-City Population (% of total)");
-
-        // Print each row of population data
-        for (PeoplePopulation peoplePopulation : peoplePopulations) {
-            if (peoplePopulation == null) continue; // Skip null objects
-
-            System.out.printf("%-30s %-20d %-30s %-30s%n",
-                    peoplePopulation.getLevel(),
-                    peoplePopulation.getTotalPopulation(),
-                    peoplePopulation.getCityPopulation() + " (" +
-                            String.format("%.2f", peoplePopulation.getCityPopulationPercentage()) + "%%)",
-                    peoplePopulation.getNonCityPopulation() + " (" +
-                            String.format("%.2f", peoplePopulation.getNonCityPopulationPercentage()) + "%%)"
-            );
+    /**
+     * Optional: Clear previous reports before writing new ones
+     */
+    public void clearReportFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE))) {
+            writer.write(""); // overwrite with empty content
+        } catch (IOException e) {
+            System.out.println("Error clearing report file: " + e.getMessage());
         }
     }
 }

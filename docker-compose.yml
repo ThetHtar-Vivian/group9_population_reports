@@ -1,10 +1,13 @@
 version: '3'
 services:
-  # Application Dockerfile is in same folder which is .
   app:
     build: .
+    volumes:
+      - ./reports:/app/reports
+    depends_on:
+      - db
+    working_dir: /app
 
-  # db is is db folder
   db:
     build: db/.
     restart: always

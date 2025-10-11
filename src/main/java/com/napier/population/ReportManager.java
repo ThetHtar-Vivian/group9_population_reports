@@ -12,14 +12,7 @@ import java.util.ArrayList;
  * - Sends the result to Display for formatted output.
  */
 public class ReportManager {
-    /**
-     * Database connection (passed in from DbConnection)
-     */
     private final Connection con;
-
-    /**
-     * Display utility for printing reports
-     */
     private final Display display;
 
     /**
@@ -31,6 +24,7 @@ public class ReportManager {
     public ReportManager(Connection con) {
         this.con = con;
         this.display = new Display();
+        display.clearReportFile();
     }
 
     /**
@@ -45,39 +39,27 @@ public class ReportManager {
         // Create CityReport instance to query database
         CityReport report = new CityReport(con);
 
-        System.out.println("\n Generate all cities by population");
-
-        // Fetch all cites by population
+        // All Cities by Population Report
         ArrayList<City> allCities = report.getAllCitiesByPopulation();
+        display.writeCityReportToFile(allCities, "No 7 All Cities by Population Report");
 
-        // Print the result using the display class
-        display.printCityReport(allCities);
+        // All Cities by Population Report
+        ArrayList<City> citiesByContinent = report.getCitiesByContinentPopulationDesc();
+        display.writeCityReportToFile(citiesByContinent, "No 8 Cities by Continent Population Report");
 
-        // 8. All the cities in a continent organized by largest population to smallest.
-        System.out.println("\nGenerate All Cities by Continent Population Report");
-        // Call the report method to retrieve a list of all cities,
-        // ordered by continent and sorted by population in descending order within each continent
-        ArrayList<City> cities = report.getCitiesByContinentPopulationDesc();
-        // Display the retrieved list in a formatted city report
-        display.printCityReport(cities);
-
-
-        System.out.println("\nGenerating Top 50 Cities by Population Report");
-        // Fetch top 50 cities by population
+        // Top 50 Cities by Population Report
         ArrayList<City> top50Cities = report.getTop50CitiesByPopulation();
-        // Print the result using Display class
-        display.printCityReport(top50Cities);
+        display.writeCityReportToFile(top50Cities, "No 12 Top 50 Cities by Population Report");
 
-        System.out.println("\nGenerating Top 10 Cities by Continent Report");
-        // Fetch top 10 cities by continent population
+        // Top 10 Cities By Continent Population Report
         ArrayList<City> top10Cities = report.getTop10CitiesByContinentPopulation();
-        // Print the result using Display class
-        display.printCityReport(top10Cities);
+        display.writeCityReportToFile(top10Cities, "No 13 Top 10 Cities By Continent Population Report");
+
     }
 
     /**
      * Generates and displays a country report.
-     * Currently, it is a placeholder (no display logic yet).
+     * Currently, a placeholder (no display logic yet).
      * Steps (future implementation):
      * 1. Create CountryReport instance
      * 2. Fetch country data
@@ -86,34 +68,28 @@ public class ReportManager {
     public void generateCountryReport() {
         CountryReport report = new CountryReport(con);
 
-        System.out.println("\nGenerate All Countries by Continent Population Report");
+        // Top 10 Cities By Continent Population Report
+        ArrayList<Country> countriesByContinent = report.getCountriesByContinentPopulationDesc();
+        display.writeCountryReportToFile(countriesByContinent, "No 2 Countries by Continent Population Report");
 
-        // Fetch the list of countries sorted by continent and population
-        ArrayList<Country> countries = report.getCountriesByContinentPopulationDesc();
-
-        // Print the result using Display class
-        display.printCountryReport(countries);
-
-        System.out.println("\nGenerating All Countries in the World by Population Report");
+        // All Countries by Population Report
         ArrayList<Country> countriesByPopulation = report.getAllCountriesByPopulationDesc();
-        display.printCountryReport(countriesByPopulation);
+        display.writeCountryReportToFile(countriesByPopulation, "No 1 All Countries by Population Report");
 
-        // Generate Top 10 Populated Countries for each continent
-        System.out.println("\nGenerating Top 10 Populated Countries per Continent Report");
-        ArrayList<Country> top10CountriesPerContinent = report.getTop10CountriesByContinentPopulation();
-        display.printCountryReport(top10CountriesPerContinent);
+        // Top 10 Countries by Continent Population Report
+        ArrayList<Country> top10Countries = report.getTop10CountriesByContinentPopulation();
+        display.writeCountryReportToFile(top10Countries, "No 5 Top 10 Countries by Continent Population Report");
 
-        // 4. The top 50 populated countries in the world.
-        System.out.println("\nGenerate Top 50 Most Populated Countries Report");
-        // Call the report method to retrieve a list of the top 50 most populated countries
+        // Top 50 Countries by Population Report
         ArrayList<Country> top50Countries = report.getTop50CountriesByPopulation();
-        // Display the retrieved list in a formatted country report
-        display.printCountryReport(top50Countries);
+        display.writeCountryReportToFile(top50Countries, "No 4 Top 50 Countries by Population Report");
+
+
     }
 
     /**
      * Generates and displays a capital city report.
-     * Currently, it is a placeholder (no display logic yet).
+     * Currently, a placeholder (no display logic yet).
      * Steps (future implementation):
      * 1. Create CapitalCityReport instance
      * 2. Fetch capital city data
@@ -125,7 +101,7 @@ public class ReportManager {
 
     /**
      * Generates and displays a population report.
-     * Currently, it is a placeholder (no display logic yet).
+     * Currently, a placeholder (no display logic yet).
      * Steps (future implementation):
      * 1. Create PopulationReport instance
      * 2. Fetch population data
