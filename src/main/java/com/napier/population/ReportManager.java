@@ -58,6 +58,10 @@ public class ReportManager {
         // The top 5 populated cities in a region.
         ArrayList<City> top5Cities = report.getTop5CitiesByRegionPopulation();
         display.writeCityReportToFile(top5Cities, "No 14 Top 5 Cities by Region Population Report");
+
+        // Cities by Region Population Report
+        ArrayList<City> cityByRegion = report.getAllCitiesByRegionPopulationDesc();
+        display.writeCityReportToFile(cityByRegion, "No 9 Cities by Region Population Report");
     }
 
     /**
