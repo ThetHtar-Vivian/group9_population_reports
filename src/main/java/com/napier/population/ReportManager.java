@@ -74,6 +74,11 @@ public class ReportManager {
         // Top 5 Cities By Country Population Report
         ArrayList<City> top5CitiesByCountries = report.getTop5CitiesByCountryPopulation();
         display.writeCityReportToFile(top5CitiesByCountries, "No 15 Top 5 Cities By Country Population Report");
+
+        //16. The topmost populated cities in each district.
+        ArrayList<City> topMostCity = report.getTopCityByDistrictPopulation();
+        display.writeCityReportToFile(topMostCity, "No 16 Top Most City by District Population Report");
+
     }
 
     /**

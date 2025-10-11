@@ -473,4 +473,58 @@ public class CityReport {
 
         return cities;
     }
+
+    /**
+     * 16. Retrieves the most populated city in each district.
+     * @return A list of City objects containing the top city per district.
+     */
+    public ArrayList<City> getTopCityByDistrictPopulation() {
+        // List to store the top cities for each district
+        ArrayList<City> cities = new ArrayList<>();
+
+        try {
+            // Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Join city and country tables
+            // - Use a subquery to find the maximum population for each district
+            // - Match each city with the max population in its district
+            // - Order the results by district name
+            String sql = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, " +
+                    "co.Region, co.Continent, ci.Population " +
+                    "FROM city ci " +
+                    "JOIN country co ON ci.CountryCode = co.Code " +
+                    "INNER JOIN ( " +
+                    "    SELECT District, MAX(Population) AS MaxPop " +
+                    "    FROM city " +
+                    "    GROUP BY District " +
+                    ") max_ci ON ci.District = max_ci.District AND ci.Population = max_ci.MaxPop " +
+                    "ORDER BY ci.District;";
+
+            // Execute the query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Loop through the result set and create City objects
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));
+                city.setCountry_name(rset.getString("CountryName"));
+                city.setDistrict(rset.getString("District"));
+                city.setRegion(rset.getString("Region"));
+                city.setContinent(rset.getString("Continent"));
+                city.setPopulation(rset.getInt("Population"));
+
+                // Add the city to the list
+                cities.add(city);
+            }
+
+        } catch (SQLException e) {
+            // Print error message if query fails
+            System.out.println("Failed to get top city by district population: " + e.getMessage());
+        }
+
+        // Return the list of top cities
+        return cities;
+    }
 }
