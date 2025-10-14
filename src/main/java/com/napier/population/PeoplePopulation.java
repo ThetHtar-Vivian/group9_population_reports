@@ -17,7 +17,7 @@ public class PeoplePopulation {
     /**
      * Constructor to initialize population data.
      *
-     * @param level             Name of the level (e.g., "World", "Continent: Asia", "Country: France")
+     * @param level             Name of the level (e.g., "World", "Continent", "Country")
      * @param totalPopulation   Total population
      * @param cityPopulation    Population living in cities
      * @param nonCityPopulation Population not living in cities
@@ -36,6 +36,17 @@ public class PeoplePopulation {
             this.cityPopulationPercentage = 0.0;
             this.nonCityPopulationPercentage = 0.0;
         }
+    }
+
+    /**
+     * Constructs a PeoplePopulation object with only the total population data.
+     *
+     * @param level             the aggregation level
+     * @param totalPopulation   the total population for this level
+     */
+    public PeoplePopulation(String level, long totalPopulation) {
+        this.level = level;
+        this.totalPopulation = totalPopulation;
     }
 
     // Getters and setters
