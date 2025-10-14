@@ -459,8 +459,8 @@ public class CityReport {
 
             while (rset.next()) {
                 City city = new City();
-                city.setName(rset.getString("City"));
-                city.setCountry_name(rset.getString("Country"));
+                city.setName(rset.getString("CityName"));
+                city.setCountry_name(rset.getString("CountryName"));
                 city.setDistrict(rset.getString("District"));
                 city.setRegion(rset.getString("Region"));
                 city.setContinent(rset.getString("Continent"));
