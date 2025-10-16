@@ -132,6 +132,12 @@ public class ReportManager {
         ArrayList<City> top50capitals = report.getTop50CapitalCitiesByPopulation();
         // Write the retrieved data to a file with the given report title
         display.writeCapitalCityReportToFile(top50capitals, "No 20 Top 50 Capital Cities by Population Report");
+
+        // Fetch all capital cities sorted by continent and descending population
+        ArrayList<City> capitals = report.getAllCapitalCitiesByContinentPopulationDesc();
+        // then write the results to an output file with the given report title.
+        display.writeCityReportToFile(capitals, "No 18 Capital City by Continent Population Report");
+
     }
 
     /**

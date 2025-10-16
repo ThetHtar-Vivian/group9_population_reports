@@ -23718,3 +23718,238 @@ ID    City                           Country                                    
 49    Hanoi                          Vietnam                                       Southeast Asia                 Asia            1410000     
 50    Yaoundé                        Cameroon                                      Central Africa                 Africa          1372800     
 
+===== No 18 Capital City by Continent Population Report =====
+ID    City                      Country                                  District             Region                         Continent       Population
+1     Seoul                     South Korea                              Seoul                Eastern Asia                   Asia            9981619   
+2     Jakarta                   Indonesia                                Jakarta Raya         Southeast Asia                 Asia            9604900   
+3     Tokyo                     Japan                                    Tokyo-to             Eastern Asia                   Asia            7980230   
+4     Peking                    China                                    Peking               Eastern Asia                   Asia            7472000   
+5     Teheran                   Iran                                     Teheran              Southern and Central Asia      Asia            6758845   
+6     Bangkok                   Thailand                                 Bangkok              Southeast Asia                 Asia            6320174   
+7     Baghdad                   Iraq                                     Baghdad              Middle East                    Asia            4336000   
+8     Singapore                 Singapore                                –                    Southeast Asia                 Asia            4017733   
+9     Dhaka                     Bangladesh                               Dhaka                Southern and Central Asia      Asia            3612850   
+10    Rangoon (Yangon)          Myanmar                                  Rangoon [Yangon]     Southeast Asia                 Asia            3361700   
+11    Riyadh                    Saudi Arabia                             Riyadh               Middle East                    Asia            3324000   
+12    Ankara                    Turkey                                   Ankara               Middle East                    Asia            3038159   
+13    Taipei                    Taiwan                                   Taipei               Eastern Asia                   Asia            2641312   
+14    Pyongyang                 North Korea                              Pyongyang-si         Eastern Asia                   Asia            2484000   
+15    Toskent                   Uzbekistan                               Toskent Shahri       Southern and Central Asia      Asia            2117500   
+16    Bakı                      Azerbaijan                               Bakı                 Middle East                    Asia            1787800   
+17    Kabul                     Afghanistan                              Kabol                Southern and Central Asia      Asia            1780000   
+18    Manila                    Philippines                              National Capital Reg Southeast Asia                 Asia            1581082   
+19    Hanoi                     Vietnam                                  Hanoi                Southeast Asia                 Asia            1410000   
+20    Damascus                  Syria                                    Damascus             Middle East                    Asia            1347000   
+21    Victoria                  Hong Kong                                Hongkong             Eastern Asia                   Asia            1312637   
+22    Kuala Lumpur              Malaysia                                 Wilayah Persekutuan  Southeast Asia                 Asia            1297526   
+23    Yerevan                   Armenia                                  Yerevan              Middle East                    Asia            1248700   
+24    Tbilisi                   Georgia                                  Tbilisi              Middle East                    Asia            1235200   
+25    Beirut                    Lebanon                                  Beirut               Middle East                    Asia            1100000   
+26    Amman                     Jordan                                   Amman                Middle East                    Asia            1000000   
+27    Ulan Bator                Mongolia                                 Ulaanbaatar          Eastern Asia                   Asia            773700    
+28    Colombo                   Sri Lanka                                Western              Southern and Central Asia      Asia            645000    
+29    Jerusalem                 Israel                                   Jerusalem            Middle East                    Asia            633700    
+30    Kathmandu                 Nepal                                    Central              Southern and Central Asia      Asia            591835    
+31    Bishkek                   Kyrgyzstan                               Bishkek shaary       Southern and Central Asia      Asia            589400    
+32    Phnom Penh                Cambodia                                 Phnom Penh           Southeast Asia                 Asia            570155    
+33    Ashgabat                  Turkmenistan                             Ahal                 Southern and Central Asia      Asia            540600    
+34    Vientiane                 Laos                                     Viangchan            Southeast Asia                 Asia            531800    
+35    Islamabad                 Pakistan                                 Islamabad            Southern and Central Asia      Asia            524500    
+36    Dushanbe                  Tajikistan                               Karotegin            Southern and Central Asia      Asia            524000    
+37    Sanaa                     Yemen                                    Sanaa                Middle East                    Asia            503600    
+38    Macao                     Macao                                    Macau                Eastern Asia                   Asia            437500    
+39    Abu Dhabi                 United Arab Emirates                     Abu Dhabi            Middle East                    Asia            398695    
+40    Doha                      Qatar                                    Doha                 Middle East                    Asia            355000    
+41    Gaza                      Palestine                                Gaza                 Middle East                    Asia            353632    
+42    Astana                    Kazakstan                                Astana               Southern and Central Asia      Asia            311200    
+43    New Delhi                 India                                    Delhi                Southern and Central Asia      Asia            301297    
+44    Nicosia                   Cyprus                                   Nicosia              Middle East                    Asia            195000    
+45    al-Manama                 Bahrain                                  al-Manama            Middle East                    Asia            148000    
+46    Male                      Maldives                                 Maale                Southern and Central Asia      Asia            71000     
+47    Masqat                    Oman                                     Masqat               Middle East                    Asia            51969     
+48    Dili                      East Timor                               Dili                 Southeast Asia                 Asia            47900     
+49    Kuwait                    Kuwait                                   al-Asima             Middle East                    Asia            28859     
+50    Thimphu                   Bhutan                                   Thimphu              Southern and Central Asia      Asia            22000     
+51    Bandar Seri Begawan       Brunei                                   Brunei and Muara     Southeast Asia                 Asia            21484     
+52    Moscow                    Russian Federation                       Moscow (City)        Eastern Europe                 Europe          8389200   
+53    London                    United Kingdom                           England              British Islands                Europe          7285000   
+54    Berlin                    Germany                                  Berliini             Western Europe                 Europe          3386667   
+55    Madrid                    Spain                                    Madrid               Southern Europe                Europe          2879052   
+56    Roma                      Italy                                    Latium               Southern Europe                Europe          2643581   
+57    Kyiv                      Ukraine                                  Kiova                Eastern Europe                 Europe          2624000   
+58    Paris                     France                                   Île-de-France        Western Europe                 Europe          2125246   
+59    Bucuresti                 Romania                                  Bukarest             Eastern Europe                 Europe          2016131   
+60    Budapest                  Hungary                                  Budapest             Eastern Europe                 Europe          1811552   
+61    Minsk                     Belarus                                  Horad Minsk          Eastern Europe                 Europe          1674000   
+62    Warszawa                  Poland                                   Mazowieckie          Eastern Europe                 Europe          1615369   
+63    Wien                      Austria                                  Wien                 Western Europe                 Europe          1608144   
+64    Beograd                   Yugoslavia                               Central Serbia       Southern Europe                Europe          1204000   
+65    Praha                     Czech Republic                           Hlavní mesto Praha   Eastern Europe                 Europe          1181126   
+66    Sofija                    Bulgaria                                 Grad Sofija          Eastern Europe                 Europe          1122302   
+67    Athenai                   Greece                                   Attika               Southern Europe                Europe          772072    
+68    Riga                      Latvia                                   Riika                Baltic Countries               Europe          764328    
+69    Stockholm                 Sweden                                   Lisboa               Nordic Countries               Europe          750348    
+70    Amsterdam                 Netherlands                              Noord-Holland        Western Europe                 Europe          731200    
+71    Chisinau                  Moldova                                  Chisinau             Eastern Europe                 Europe          719900    
+72    Zagreb                    Croatia                                  Grad Zagreb          Southern Europe                Europe          706770    
+73    Vilnius                   Lithuania                                Vilna                Baltic Countries               Europe          577969    
+74    Lisboa                    Portugal                                 Lisboa               Southern Europe                Europe          563210    
+75    Helsinki [Helsingfors]    Finland                                  Newmaa               Nordic Countries               Europe          555474    
+76    Oslo                      Norway                                   Oslo                 Nordic Countries               Europe          508726    
+77    København                 Denmark                                  København            Nordic Countries               Europe          495699    
+78    Dublin                    Ireland                                  Leinster             British Islands                Europe          481854    
+79    Bratislava                Slovakia                                 Bratislava           Eastern Europe                 Europe          448292    
+80    Skopje                    Macedonia                                Skopje               Southern Europe                Europe          444299    
+81    Tallinn                   Estonia                                  Harjumaa             Baltic Countries               Europe          403981    
+82    Sarajevo                  Bosnia and Herzegovina                   Federaatio           Southern Europe                Europe          360000    
+83    Ljubljana                 Slovenia                                 Osrednjeslovenska    Southern Europe                Europe          270986    
+84    Tirana                    Albania                                  Tirana               Southern Europe                Europe          270000    
+85    Bruxelles [Brussel]       Belgium                                  Bryssel              Western Europe                 Europe          133859    
+86    Bern                      Switzerland                              Bern                 Western Europe                 Europe          122700    
+87    Reykjavík                 Iceland                                  Höfuðborgarsvæði     Nordic Countries               Europe          109184    
+88    Luxembourg [Luxemburg/Lëtzebuerg] Luxembourg                               Luxembourg           Western Europe                 Europe          80700     
+89    Gibraltar                 Gibraltar                                –                    Southern Europe                Europe          27025     
+90    Andorra la Vella          Andorra                                  Andorra la Vella     Southern Europe                Europe          21189     
+91    Tórshavn                  Faroe Islands                            Streymoyar           Nordic Countries               Europe          14542     
+92    Valletta                  Malta                                    Inner Harbour        Southern Europe                Europe          7073      
+93    Vaduz                     Liechtenstein                            Vaduz                Western Europe                 Europe          5043      
+94    San Marino                San Marino                               San Marino           Southern Europe                Europe          2294      
+95    Longyearbyen              Svalbard and Jan Mayen                   Länsimaa             Nordic Countries               Europe          1438      
+96    Monaco-Ville              Monaco                                   –                    Western Europe                 Europe          1234      
+97    Città del Vaticano        Holy See (Vatican City State)            –                    Southern Europe                Europe          455       
+98    Ciudad de México          Mexico                                   Distrito Federal     Central America                North America   8591309   
+99    La Habana                 Cuba                                     La Habana            Caribbean                      North America   2256000   
+100   Santo Domingo de Guzmán   Dominican Republic                       Distrito Nacional    Caribbean                      North America   1609966   
+101   Managua                   Nicaragua                                Managua              Central America                North America   959000    
+102   Port-au-Prince            Haiti                                    Ouest                Caribbean                      North America   884472    
+103   Ciudad de Guatemala       Guatemala                                Guatemala            Central America                North America   823301    
+104   Tegucigalpa               Honduras                                 Distrito Central     Central America                North America   813900    
+105   Washington                United States                            District of Columbia North America                  North America   572059    
+106   Ciudad de Panamá          Panama                                   Panamá               Central America                North America   471373    
+107   San Juan                  Puerto Rico                              San Juan             Caribbean                      North America   434374    
+108   San Salvador              El Salvador                              San Salvador         Central America                North America   415346    
+109   San José                  Costa Rica                               San José             Central America                North America   339131    
+110   Ottawa                    Canada                                   Ontario              North America                  North America   335277    
+111   Nassau                    Bahamas                                  New Providence       Caribbean                      North America   172000    
+112   Kingston                  Jamaica                                  St. Andrew           Caribbean                      North America   103962    
+113   Fort-de-France            Martinique                               Fort-de-France       Caribbean                      North America   94050     
+114   Port-of-Spain             Trinidad and Tobago                      Port-of-Spain        Caribbean                      North America   43396     
+115   Oranjestad                Aruba                                    –                    Caribbean                      North America   29034     
+116   Saint John´s              Antigua and Barbuda                      St John              Caribbean                      North America   24000     
+117   George Town               Cayman Islands                           Grand Cayman         Caribbean                      North America   19600     
+118   Kingstown                 Saint Vincent and the Grenadines         St George            Caribbean                      North America   17100     
+119   Roseau                    Dominica                                 St George            Caribbean                      North America   16243     
+120   Nuuk                      Greenland                                Kitaa                North America                  North America   13445     
+121   Charlotte Amalie          Virgin Islands, U.S.                     St Thomas            Caribbean                      North America   13000     
+122   Basse-Terre               Guadeloupe                               Basse-Terre          Caribbean                      North America   12433     
+123   Basseterre                Saint Kitts and Nevis                    St George Basseterre Caribbean                      North America   11600     
+124   Road Town                 Virgin Islands, British                  Tortola              Caribbean                      North America   8000      
+125   Belmopan                  Belize                                   Cayo                 Central America                North America   7105      
+126   Bridgetown                Barbados                                 St Michael           Caribbean                      North America   6070      
+127   Saint-Pierre              Saint Pierre and Miquelon                Saint-Pierre         North America                  North America   5808      
+128   Cockburn Town             Turks and Caicos Islands                 Grand Turk           Caribbean                      North America   4800      
+129   Saint George´s            Grenada                                  St George            Caribbean                      North America   4621      
+130   Willemstad                Netherlands Antilles                     Curaçao              Caribbean                      North America   2345      
+131   Castries                  Saint Lucia                              Castries             Caribbean                      North America   2301      
+132   Plymouth                  Montserrat                               Plymouth             Caribbean                      North America   2000      
+133   Hamilton                  Bermuda                                  Hamilton             North America                  North America   1200      
+134   The Valley                Anguilla                                 –                    Caribbean                      North America   595       
+135   Cairo                     Egypt                                    Kairo                Northern Africa                Africa          6789479   
+136   Kinshasa                  Congo, The Democratic Republic of the    Kinshasa             Central Africa                 Africa          5064000   
+137   Addis Abeba               Ethiopia                                 Addis Abeba          Eastern Africa                 Africa          2495000   
+138   Nairobi                   Kenya                                    Nairobi              Eastern Africa                 Africa          2290000   
+139   Alger                     Algeria                                  Alger                Northern Africa                Africa          2168000   
+140   Luanda                    Angola                                   Luanda               Central Africa                 Africa          2022000   
+141   Tripoli                   Libyan Arab Jamahiriya                   Tripoli              Northern Africa                Africa          1682000   
+142   Harare                    Zimbabwe                                 Harare               Eastern Africa                 Africa          1410000   
+143   Yaoundé                   Cameroon                                 Centre               Central Africa                 Africa          1372800   
+144   Lusaka                    Zambia                                   Lusaka               Eastern Africa                 Africa          1317000   
+145   Conakry                   Guinea                                   Conakry              Western Africa                 Africa          1090610   
+146   Accra                     Ghana                                    Greater Accra        Western Africa                 Africa          1070000   
+147   Maputo                    Mozambique                               Maputo               Eastern Africa                 Africa          1018938   
+148   Mogadishu                 Somalia                                  Banaadir             Eastern Africa                 Africa          997000    
+149   Brazzaville               Congo                                    Brazzaville          Central Africa                 Africa          950000    
+150   Khartum                   Sudan                                    Khartum              Northern Africa                Africa          947483    
+151   Kampala                   Uganda                                   Central              Eastern Africa                 Africa          890800    
+152   Monrovia                  Liberia                                  Montserrado          Western Africa                 Africa          850000    
+153   Freetown                  Sierra Leone                             Western              Western Africa                 Africa          850000    
+154   Ouagadougou               Burkina Faso                             Kadiogo              Western Africa                 Africa          824000    
+155   Bamako                    Mali                                     Bamako               Western Africa                 Africa          809552    
+156   Dakar                     Senegal                                  Cap-Vert             Western Africa                 Africa          785071    
+157   Tunis                     Tunisia                                  Tunis                Northern Africa                Africa          690600    
+158   Antananarivo              Madagascar                               Antananarivo         Eastern Africa                 Africa          675669    
+159   Nouakchott                Mauritania                               Nouakchott           Western Africa                 Africa          667300    
+160   Pretoria                  South Africa                             Gauteng              Southern Africa                Africa          658630    
+161   Rabat                     Morocco                                  Rabat-Salé-Zammour-Z Northern Africa                Africa          623457    
+162   N´Djaména                 Chad                                     Chari-Baguirmi       Central Africa                 Africa          530965    
+163   Bangui                    Central African Republic                 Bangui               Central Africa                 Africa          524000    
+164   Lilongwe                  Malawi                                   Lilongwe             Eastern Africa                 Africa          435964    
+165   Asmara                    Eritrea                                  Maekel               Eastern Africa                 Africa          431000    
+166   Niamey                    Niger                                    Niamey               Western Africa                 Africa          420000    
+167   Libreville                Gabon                                    Estuaire             Central Africa                 Africa          419000    
+168   Djibouti                  Djibouti                                 Djibouti             Eastern Africa                 Africa          383000    
+169   Lomé                      Togo                                     Maritime             Western Africa                 Africa          375000    
+170   Abuja                     Nigeria                                  Federal Capital Dist Western Africa                 Africa          350100    
+171   Bujumbura                 Burundi                                  Bujumbura            Eastern Africa                 Africa          300000    
+172   Maseru                    Lesotho                                  Maseru               Southern Africa                Africa          297000    
+173   Kigali                    Rwanda                                   Kigali               Eastern Africa                 Africa          286000    
+174   Bissau                    Guinea-Bissau                            Bissau               Western Africa                 Africa          241000    
+175   Gaborone                  Botswana                                 Gaborone             Southern Africa                Africa          213017    
+176   Porto-Novo                Benin                                    Ouémé                Western Africa                 Africa          194000    
+177   Dodoma                    Tanzania                                 Dodoma               Eastern Africa                 Africa          189000    
+178   El-Aaiún                  Western Sahara                           El-Aaiún             Northern Africa                Africa          169000    
+179   Windhoek                  Namibia                                  Khomas               Southern Africa                Africa          169000    
+180   Port-Louis                Mauritius                                Port-Louis           Eastern Africa                 Africa          138200    
+181   Saint-Denis               Réunion                                  Saint-Denis          Eastern Africa                 Africa          131480    
+182   Yamoussoukro              Côte d’Ivoire                            Yamoussoukro         Western Africa                 Africa          130000    
+183   Praia                     Cape Verde                               São Tiago            Western Africa                 Africa          94800     
+184   Mbabane                   Swaziland                                Hhohho               Southern Africa                Africa          61000     
+185   São Tomé                  Sao Tome and Principe                    Aqua Grande          Central Africa                 Africa          49541     
+186   Banjul                    Gambia                                   Banjul               Western Africa                 Africa          42326     
+187   Victoria                  Seychelles                               Mahé                 Eastern Africa                 Africa          41000     
+188   Malabo                    Equatorial Guinea                        Bioko                Central Africa                 Africa          40000     
+189   Moroni                    Comoros                                  Njazidja             Eastern Africa                 Africa          36000     
+190   Mamoutzou                 Mayotte                                  Mamoutzou            Eastern Africa                 Africa          12000     
+191   Jamestown                 Saint Helena                             Saint Helena         Western Africa                 Africa          1500      
+192   Canberra                  Australia                                Capital Region       Australia and New Zealand      Oceania         322723    
+193   Port Moresby              Papua New Guinea                         National Capital Dis Melanesia                      Oceania         247000    
+194   Wellington                New Zealand                              Wellington           Australia and New Zealand      Oceania         166700    
+195   Suva                      Fiji Islands                             Central              Melanesia                      Oceania         77366     
+196   Nouméa                    New Caledonia                            –                    Melanesia                      Oceania         76293     
+197   Honiara                   Solomon Islands                          Honiara              Melanesia                      Oceania         50100     
+198   Apia                      Samoa                                    Upolu                Polynesia                      Oceania         35900     
+199   Port-Vila                 Vanuatu                                  Shefa                Melanesia                      Oceania         33700     
+200   Dalap-Uliga-Darrit        Marshall Islands                         Majuro               Micronesia                     Oceania         28000     
+201   Papeete                   French Polynesia                         Tahiti               Polynesia                      Oceania         25553     
+202   Nuku´alofa                Tonga                                    Tongatapu            Polynesia                      Oceania         22400     
+203   Koror                     Palau                                    Koror                Micronesia                     Oceania         12000     
+204   Avarua                    Cook Islands                             Rarotonga            Polynesia                      Oceania         11900     
+205   Garapan                   Northern Mariana Islands                 Saipan               Micronesia                     Oceania         9200      
+206   Palikir                   Micronesia, Federated States of          Pohnpei              Micronesia                     Oceania         8600      
+207   Funafuti                  Tuvalu                                   Funafuti             Polynesia                      Oceania         4600      
+208   Fagatogo                  American Samoa                           Tutuila              Polynesia                      Oceania         2323      
+209   Bairiki                   Kiribati                                 South Tarawa         Micronesia                     Oceania         2226      
+210   Agaña                     Guam                                     –                    Micronesia                     Oceania         1139      
+211   Mata-Utu                  Wallis and Futuna                        Wallis               Polynesia                      Oceania         1137      
+212   Kingston                  Norfolk Island                           –                    Australia and New Zealand      Oceania         800       
+213   Flying Fish Cove          Christmas Island                         –                    Australia and New Zealand      Oceania         700       
+214   Alofi                     Niue                                     –                    Polynesia                      Oceania         682       
+215   Yaren                     Nauru                                    –                    Micronesia                     Oceania         559       
+216   Fakaofo                   Tokelau                                  Fakaofo              Polynesia                      Oceania         300       
+217   West Island               Cocos (Keeling) Islands                  West Island          Australia and New Zealand      Oceania         167       
+218   Adamstown                 Pitcairn                                 –                    Polynesia                      Oceania         42        
+219   Lima                      Peru                                     Lima                 South America                  South America   6464693   
+220   Santafé de Bogotá         Colombia                                 Santafé de Bogotá    South America                  South America   6260862   
+221   Santiago de Chile         Chile                                    Santiago             South America                  South America   4703954   
+222   Buenos Aires              Argentina                                Distrito Federal     South America                  South America   2982146   
+223   Caracas                   Venezuela                                Distrito Federal     South America                  South America   1975294   
+224   Brasília                  Brazil                                   Distrito Federal     South America                  South America   1969868   
+225   Quito                     Ecuador                                  Pichincha            South America                  South America   1573458   
+226   Montevideo                Uruguay                                  Montevideo           South America                  South America   1236000   
+227   La Paz                    Bolivia                                  La Paz               South America                  South America   758141    
+228   Asunción                  Paraguay                                 Asunción             South America                  South America   557776    
+229   Georgetown                Guyana                                   Georgetown           South America                  South America   254000    
+230   Paramaribo                Suriname                                 Paramaribo           South America                  South America   112000    
+231   Cayenne                   French Guiana                            Cayenne              South America                  South America   50699     
+232   Stanley                   Falkland Islands                         East Falkland        South America                  South America   1636      
+

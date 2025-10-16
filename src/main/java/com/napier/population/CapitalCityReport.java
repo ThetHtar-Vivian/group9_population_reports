@@ -78,4 +78,48 @@ public class CapitalCityReport {
         return capitals;
     }
 
+    /**
+     * Retrieves all capital cities ordered by continent (A–Z) and population (highest first).
+     * Each result includes the city's name, country, district, region, continent, and population.
+     *
+     * @return a list of capital cities sorted by continent and descending population
+     */
+    public ArrayList<City> getAllCapitalCitiesByContinentPopulationDesc() {
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // SQL query: Include District to match report columns
+            String sql = "SELECT " +
+                    "ci.Name AS CityName, " +
+                    "co.Name AS CountryName, " +
+                    "ci.District, " +
+                    "co.Region, " +
+                    "co.Continent, " +
+                    "ci.Population " +
+                    "FROM city ci " +
+                    "JOIN country co ON ci.ID = co.Capital " +
+                    "ORDER BY co.Continent ASC, ci.Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                City capital = new City();
+                capital.setName(rset.getString("CityName"));
+                capital.setCountry_name(rset.getString("CountryName"));
+                capital.setDistrict(rset.getString("District"));
+                capital.setRegion(rset.getString("Region"));
+                capital.setContinent(rset.getString("Continent"));
+                capital.setPopulation(rset.getInt("Population"));
+                capitals.add(capital);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get capital cities by continent population: " + e.getMessage());
+        }
+
+        return capitals;
+    }
+
 }
