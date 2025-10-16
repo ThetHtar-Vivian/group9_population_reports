@@ -24195,3 +24195,7 @@ Yugoslavia                     10640000             2189507 (20.58%)            
 Zambia                         9169000              2473500 (26.98%)               6695500 (73.02%)              
 Zimbabwe                       11669000             2730420 (23.40%)               8938580 (76.60%)              
 
+===== World Total Population Report =====
+World                                    Total Population    
+World                                    6078749450          
+

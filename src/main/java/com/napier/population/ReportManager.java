@@ -155,6 +155,11 @@ public class ReportManager {
         ArrayList<PeoplePopulation> populations = report.getCountryPopulationReport();
         display.writePopulationReportToFile(populations, "Country");
 
+        // Get the total world population and write it to a report file.
+        ArrayList<PeoplePopulation> worldPopulations = report.getWorldPopulation();
+        display.writeOverallPopulationReportToFile(worldPopulations, "World");
+
+
     }
 
     /**

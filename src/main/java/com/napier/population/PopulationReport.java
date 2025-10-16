@@ -67,4 +67,36 @@ public class PopulationReport {
         return populations;
     }
 
+    /**
+     * Gets the total world population by summing all country populations.
+     *
+     * @return a list with one PeoplePopulation object labeled "World"
+     */
+    public ArrayList<PeoplePopulation> getWorldPopulation() {
+        ArrayList<PeoplePopulation> worldPopulations = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // ✅ SQL: Calculate total world population
+            String sql = "SELECT SUM(Population) AS WorldPopulation FROM country;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // ✅ Process result
+            if (rset.next()) {
+                long total = rset.getLong("WorldPopulation");
+                PeoplePopulation pop = new PeoplePopulation("World", total);
+                worldPopulations.add(pop);
+            }
+
+            rset.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get world population: " + e.getMessage());
+        }
+
+        return worldPopulations;
+    }
 }
