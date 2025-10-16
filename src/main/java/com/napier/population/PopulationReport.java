@@ -12,9 +12,7 @@ import java.util.ArrayList;
  */
 public class PopulationReport {
 
-    /**
-     * Active database connection used to run queries
-     */
+    // Active database connection used to query capital city information
     private Connection con;
 
     /**

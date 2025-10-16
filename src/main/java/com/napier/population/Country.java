@@ -6,6 +6,8 @@ package com.napier.population;
  * used for reporting (e.g., district, capital name).
  */
 public class Country {
+
+    // Core attributes
     private String code;
     private String name;
     private String continent;
@@ -23,9 +25,60 @@ public class Country {
     private String code2;
 
     // Extra fields for reporting (not directly in the Country table)
-
     private String district;
     private String capitalName;
+
+    /**
+     * Default constructor for creating an empty Country object.
+     * Useful when values will be set later or when frameworks require it.
+     */
+    public Country() {
+        // Default constructor
+    }
+
+    /**
+     * Parameterized constructor for creating a fully initialized Country object.
+     *
+     * @param code             ISO country code
+     * @param name             Country name
+     * @param continent        Continent name
+     * @param region           Region name
+     * @param surface_area     Surface area
+     * @param indep_year       Year of independence
+     * @param population       Population of the country
+     * @param life_expectancy  Average life expectancy
+     * @param gnp              Gross National Product (GNP)
+     * @param gnp_old          Previous GNP
+     * @param local_name       Local name of the country
+     * @param government_form  Government form
+     * @param head_of_state    Head of state
+     * @param capital          Capital city ID
+     * @param code2            Two-letter ISO code
+     * @param district         District (for reporting)
+     * @param capitalName      Capital city name (for reporting)
+     */
+    public Country(String code, String name, String continent, String region, double surface_area,
+                   int indep_year, int population, double life_expectancy, double gnp, double gnp_old,
+                   String local_name, String government_form, String head_of_state, int capital,
+                   String code2, String district, String capitalName) {
+        this.code = code;
+        this.name = name;
+        this.continent = continent;
+        this.region = region;
+        this.surface_area = surface_area;
+        this.indep_year = indep_year;
+        this.population = population;
+        this.life_expectancy = life_expectancy;
+        this.gnp = gnp;
+        this.gnp_old = gnp_old;
+        this.local_name = local_name;
+        this.government_form = government_form;
+        this.head_of_state = head_of_state;
+        this.capital = capital;
+        this.code2 = code2;
+        this.district = district;
+        this.capitalName = capitalName;
+    }
 
     // Getters and Setters
 
@@ -265,5 +318,19 @@ public class Country {
      */
     public void setCode2(String code2) {
         this.code2 = code2;
+    }
+
+    /**
+     * Returns a string representation of the Country object.
+     *
+     * @return A formatted string with country details
+     */
+    @Override
+    public String toString() {
+        return String.format(
+                "Country{code='%s', name='%s', continent='%s', region='%s', surface_area=%.2f, indep_year=%d, population=%d, life_expectancy=%.2f, gnp=%.2f, gnp_old=%.2f, local_name='%s', government_form='%s', head_of_state='%s', capital=%d, code2='%s', district='%s', capitalName='%s'}",
+                code, name, continent, region, surface_area, indep_year, population, life_expectancy,
+                gnp, gnp_old, local_name, government_form, head_of_state, capital, code2, district, capitalName
+        );
     }
 }

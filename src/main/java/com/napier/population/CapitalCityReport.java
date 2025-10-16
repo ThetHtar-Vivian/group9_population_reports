@@ -13,11 +13,9 @@ import java.util.ArrayList;
  */
 public class CapitalCityReport {
 
-    /**
-     * Active database connection used to query capital city information
-     */
-    private Connection con;
 
+    // Active database connection used to query capital city information
+    private Connection con;
     /**
      * Constructor initializes the CapitalCityReport with an active database connection.
      *

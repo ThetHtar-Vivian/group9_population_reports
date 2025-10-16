@@ -11,9 +11,8 @@ import java.sql.SQLException;
  * - Safely disconnects from the database
  */
 public class DbConnection {
-    /**
-     * Holds the active connection to the MySQL database
-     */
+
+    // Active database connection used to execute queries
     private Connection con = null;
 
     /**

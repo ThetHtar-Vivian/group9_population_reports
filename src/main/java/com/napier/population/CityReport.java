@@ -13,9 +13,7 @@ import java.util.ArrayList;
  */
 public class CityReport {
 
-    /**
-     * Active database connection used to execute queries
-     */
+    // Active database connection used to query capital city information
     private Connection con;
 
     /**

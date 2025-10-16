@@ -145,4 +145,13 @@ public class ReportManager {
     public void generatePopulationReport() {
         PopulationReport report = new PopulationReport(con);
     }
+
+    /**
+     * Generates and writes the language population distribution report.
+     * This method will use the PopulationReport class to retrieve
+     * world language statistics and delegate formatted writing to Display
+     */
+    public void generateLanguageReport() {
+        PopulationReport report = new PopulationReport(con);
+    }
 }

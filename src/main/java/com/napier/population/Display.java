@@ -154,6 +154,40 @@ public class Display {
     }
 
     /**
+     * Writes the global language statistics report to the output file.
+     * Each entry shows the language name, total number of speakers, and
+     * its percentage of the total world population.
+     *
+     * @param languages A list of CountryLanguage objects containing language statistics.
+     * @param title     The report title (e.g., "Top 5 Languages by Total Speakers").
+     */
+    public void writeLanguageReportToFile(ArrayList<CountryLanguage> languages, String title) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE, true))) {
+            // Write report title and table header
+            writer.write("===== " + title + " =====\n");
+            writer.write(String.format("%-10s %-20s %-5s%n",
+                    "Language", "Total Speakers", "World Percentage"));
+
+            // Loop through each language record and print formatted data
+            for (CountryLanguage lang : languages) {
+                writer.write(String.format(
+                        "%-10s %, -20.0f %-5.2f%%%n",
+                        lang.getLanguage(),           // Language name
+                        lang.getPercentage(),          // Total speakers (stored in 'percentage' field)
+                        lang.getWorld_percentage()     // World percentage of speakers
+                ));
+            }
+
+            // Add a blank line after each report for readability
+            writer.write("\n");
+
+        } catch (IOException e) {
+            // Handle file writing errors gracefully
+            System.out.println("Error writing language report: " + e.getMessage());
+        }
+    }
+
+    /**
      * Optional: Clear previous reports before writing new ones
      */
     public void clearReportFile() {

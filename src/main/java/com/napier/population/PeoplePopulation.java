@@ -7,10 +7,13 @@ package com.napier.population;
  */
 public class PeoplePopulation {
 
-    private String level;
+    // Core attributes from the table
     private long totalPopulation;
     private long cityPopulation;
     private long nonCityPopulation;
+
+    // Extra fields for reporting
+    private String level;
     private double cityPopulationPercentage;
     private double nonCityPopulationPercentage;
 
@@ -133,5 +136,18 @@ public class PeoplePopulation {
      */
     public void setNonCityPopulationPercentage(double nonCityPopulationPercentage) {
         this.nonCityPopulationPercentage = nonCityPopulationPercentage;
+    }
+
+    /**
+     * Returns a string representation of the PeoplePopulation object.
+     *
+     * @return Formatted string containing all population details
+     */
+    @Override
+    public String toString() {
+        return String.format(
+                "PeoplePopulation{level='%s', totalPopulation=%d, cityPopulation=%d (%.2f%%), nonCityPopulation=%d (%.2f%%)}",
+                level, totalPopulation, cityPopulation, cityPopulationPercentage, nonCityPopulation, nonCityPopulationPercentage
+        );
     }
 }

@@ -25,10 +25,10 @@ public class App {
         ReportManager manager = new ReportManager(con);
 
         // Generate different reports
-        manager.generateCityReport();         // Report on cities
-        manager.generateCountryReport();      // Report on countries
-        manager.generateCapitalCityReport();  // Report on capital cities
-        // manager.generateLanguageReport();   // Report on languages
+        manager.generateCityReport();           // Report on cities
+        manager.generateCountryReport();        // Report on countries
+        manager.generateCapitalCityReport();    // Report on capital cities
+        manager.generateLanguageReport();       // Report on languages
 
         // Close the database connection before exiting
         db.disconnect();
