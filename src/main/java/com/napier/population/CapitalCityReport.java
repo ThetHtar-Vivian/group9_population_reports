@@ -170,4 +170,50 @@ public class CapitalCityReport {
 
         return capitals;
     }
+
+    /**
+     * No 19 Retrieves all capital cities in each region, ordered by population (largest to smallest).
+     * Joins the city and country tables using the country’s Capital ID.
+     * Skips any records where region or city name is null/empty to ensure clean output.
+     *
+     * @return A list of City objects representing capital cities in each region, sorted by population.
+     */
+    public ArrayList<City> getAllCapitalCitiesByRegionPopulationDesc() {
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String sql =
+                    "SELECT ci.Name AS CityName, " +
+                            "co.Name AS CountryName, " +
+                            "co.Region, " +
+                            "co.Continent, " +
+                            "ci.Population " +
+                            "FROM city ci " +
+                            "JOIN country co ON ci.ID = co.Capital " +
+                            "WHERE co.Region IS NOT NULL " +
+                            "  AND co.Region <> '' " +
+                            "  AND ci.Name IS NOT NULL " +
+                            "  AND ci.Name <> '' " +
+                            "ORDER BY co.Region, ci.Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));
+                city.setCountry_name(rset.getString("CountryName"));
+                city.setRegion(rset.getString("Region"));
+                city.setContinent(rset.getString("Continent"));
+                city.setPopulation(rset.getInt("Population"));
+                capitals.add(city);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get capital cities by region: " + e.getMessage());
+        }
+
+        return capitals;
+    }
 }

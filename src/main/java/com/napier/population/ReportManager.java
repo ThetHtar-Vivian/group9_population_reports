@@ -138,6 +138,10 @@ public class ReportManager {
         // then write the results to an output file with the given report title.
         display.writeCityReportToFile(capitals, "No 18 Capital City by Continent Population Report");
 
+        // No 19 Retrieve all capital cities in each region organized by population
+        ArrayList<City> capitalCitiesByRegion = report.getAllCapitalCitiesByRegionPopulationDesc();
+        display.writeCapitalCityReportToFile(capitalCitiesByRegion, "No 19 Capital Cities by Region Population Report");
+
         // No 22 Top 5 Capital Cities by Region Population
         ArrayList<City> top5CapitalsByRegion = report.getTop5CapitalCitiesByRegion();
         display.writeCapitalCityReportToFile(top5CapitalsByRegion, "No 22 Top 5 Capital Cities by Region Population Report");
