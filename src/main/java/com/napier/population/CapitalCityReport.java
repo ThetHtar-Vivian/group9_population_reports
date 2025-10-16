@@ -122,4 +122,52 @@ public class CapitalCityReport {
         return capitals;
     }
 
+
+    /**
+     * No 22 Retrieves the top 5 most populated capital cities in each region.
+     * Uses ROW_NUMBER() to rank capital cities by population within each region
+     * and returns the top 5 per region. Skips null or empty region names and invalid population values.
+     *
+     * @return List of City objects containing city name, country name, region, continent, and population.
+     */
+    public ArrayList<City> getTop5CapitalCitiesByRegion() {
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String sql =
+                    "SELECT CityName, CountryName, Region, Continent, Population " +
+                            "FROM ( " +
+                            "   SELECT ci.Name AS CityName, co.Name AS CountryName, " +
+                            "          co.Region, co.Continent, ci.Population, " +
+                            "          ROW_NUMBER() OVER (PARTITION BY co.Region ORDER BY ci.Population DESC) AS rn " +
+                            "   FROM city ci " +
+                            "   JOIN country co ON ci.ID = co.Capital " +
+                            "   WHERE co.Region IS NOT NULL AND co.Region <> '' " +
+                            "     AND ci.Population IS NOT NULL AND ci.Population > 0 " +
+                            "     AND ci.Name IS NOT NULL AND ci.Name <> '' " +
+                            ") ranked " +
+                            "WHERE rn <= 5 " +
+                            "ORDER BY Region, Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));
+                city.setCountry_name(rset.getString("CountryName"));
+                city.setRegion(rset.getString("Region"));
+                city.setContinent(rset.getString("Continent"));
+                city.setPopulation(rset.getInt("Population"));
+                capitals.add(city);
+            }
+
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed to get top 5 capital cities by region: " + e.getMessage());
+        }
+
+        return capitals;
+    }
 }
