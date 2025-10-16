@@ -150,6 +150,11 @@ public class ReportManager {
      */
     public void generatePopulationReport() {
         PopulationReport report = new PopulationReport(con);
+
+        // Retrieve the population report for all countries and write it to a file.
+        ArrayList<PeoplePopulation> populations = report.getCountryPopulationReport();
+        display.writePopulationReportToFile(populations, "Country");
+
     }
 
     /**
