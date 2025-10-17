@@ -115,10 +115,6 @@ public class ReportManager {
         // The top 5 populated countries in a region.
         ArrayList<Country> top5Countries = report.getTop5CountriesPerRegion();
         display.writeCountryReportToFile(top5Countries, "No 6 Top 5 Countries by Population Report");
-
-        // No 29 Total Population of Each Country Report
-        ArrayList<Country> countryPopulations = report.getCountryPopulations();
-        display.writeCountryReportToFile(countryPopulations, "No 29 Total Population of Each Country Report");
     }
 
     /**
@@ -170,7 +166,9 @@ public class ReportManager {
         ArrayList<PeoplePopulation> worldPopulations = report.getWorldPopulation();
         display.writeOverallPopulationReportToFile(worldPopulations, "World");
 
-
+        // No 29 Total world population
+        ArrayList<PeoplePopulation> totalCountryPopulations = report.getTotalPopulationPerCountry();
+        display.writeOverallPopulationReportToFile(totalCountryPopulations, "City");
     }
 
     /**
