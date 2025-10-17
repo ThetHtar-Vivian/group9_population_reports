@@ -150,6 +150,11 @@ public class ReportManager {
         ArrayList<City> allCapitalCities = report.getAllCapitalCitiesByPopulationDesc();
         // Write the data to a report file
         display.writeCapitalCityReportToFile(allCapitalCities, "No 17 All Capital Cities by Population Report");
+
+        // No 21 Top 10 Capital Cities by Continent Population Report
+        ArrayList<City> top10Capitals = report.getTop10CapitalCitiesByContinentPopulation();
+        // Write the data to a report file
+        display.writeCapitalCityReportToFile(top10Capitals, "No 21 Top 10 Capital Cities by Continent Population Report");
     }
 
     /**
