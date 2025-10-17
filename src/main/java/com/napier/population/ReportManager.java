@@ -149,6 +149,11 @@ public class ReportManager {
         // No 22 Top 5 Capital Cities by Region Population
         ArrayList<City> top5CapitalsByRegion = report.getTop5CapitalCitiesByRegion();
         display.writeCapitalCityReportToFile(top5CapitalsByRegion, "No 22 Top 5 Capital Cities by Region Population Report");
+
+        // No 17 Retrieve all capital cities in the world ordered by population
+        ArrayList<City> allCapitalCities = report.getAllCapitalCitiesByPopulationDesc();
+        // Write the data to a report file
+        display.writeCapitalCityReportToFile(allCapitalCities, "No 17 All Capital Cities by Population Report");
     }
 
     /**

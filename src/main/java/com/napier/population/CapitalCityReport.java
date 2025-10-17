@@ -216,4 +216,53 @@ public class CapitalCityReport {
 
         return capitals;
     }
+    /**
+     * No 17 Retrieves all capital cities in the world organized by population (largest to smallest).
+     * Joins the city and country tables where the city's ID matches the country's Capital ID.
+     * Includes city name, country name, district, region, continent, and population.
+     *
+     * @return A list of City objects containing all capital cities ordered by population descending.
+     */
+    public ArrayList<City> getAllCapitalCitiesByPopulationDesc() {
+        // List to store all capital cities
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            // Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Join city and country tables
+            // - Include region and continent from the country table
+            // - Order results by population descending
+            String sql = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, " +
+                    "co.Region, co.Continent, ci.Population " +
+                    "FROM city ci " +
+                    "JOIN country co ON ci.ID = co.Capital " +
+                    "ORDER BY ci.Population DESC;";
+
+            // Execute query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each result
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));             // Capital city name
+                city.setCountry_name(rset.getString("CountryName"));  // Country name
+                city.setDistrict(rset.getString("District"));         // District
+                city.setRegion(rset.getString("Region"));             // Region
+                city.setContinent(rset.getString("Continent"));       // Continent
+                city.setPopulation(rset.getInt("Population"));        // Population
+
+                capitals.add(city);
+            }
+
+            rset.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed to get all capital cities by population: " + e.getMessage());
+        }
+
+        return capitals;
+    }
 }
