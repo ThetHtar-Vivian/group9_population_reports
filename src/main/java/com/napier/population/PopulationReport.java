@@ -99,4 +99,46 @@ public class PopulationReport {
 
         return worldPopulations;
     }
+
+    /**
+     * Gets the total population of each country.
+     * This report lists every country with its total population.
+     *
+     * @return List of PeoplePopulation objects representing total population per country.
+     */
+    public ArrayList<PeoplePopulation> getTotalPopulationPerCountry() {
+        ArrayList<PeoplePopulation> populations = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // SQL: Get total population per country, excluding null or empty names
+            String sql = "SELECT Name AS CountryName, Population AS TotalPopulation " +
+                    "FROM country " +
+                    "WHERE Name IS NOT NULL AND Name <> '' " +
+                    "ORDER BY Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each record
+            while (rset.next()) {
+                String level = rset.getString("CountryName");
+                long total = rset.getLong("TotalPopulation");
+
+                // Only include if population > 0
+                if (total > 0) {
+                    PeoplePopulation pop = new PeoplePopulation(level, total);
+                    populations.add(pop);
+                }
+            }
+
+            rset.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get total population per country: " + e.getMessage());
+        }
+
+        return populations;
+    }
 }
