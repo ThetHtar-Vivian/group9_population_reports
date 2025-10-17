@@ -25080,3 +25080,13 @@ Holy See (Vatican City State)            1000
 Cocos (Keeling) Islands                  600                 
 Pitcairn                                 50                  
 
+===== Continent Total Population Report =====
+Continent                                Total Population    
+Asia                                     3705025700          
+Africa                                   784475000           
+Europe                                   730074600           
+North America                            482993000           
+South America                            345780000           
+Oceania                                  30401150            
+Antarctica                               0                   
+

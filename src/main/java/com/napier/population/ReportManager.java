@@ -179,6 +179,11 @@ public class ReportManager {
         // No 29 Total world population
         ArrayList<PeoplePopulation> totalCountryPopulations = report.getTotalPopulationPerCountry();
         display.writeOverallPopulationReportToFile(totalCountryPopulations, "City");
+
+        // Call the method in PopulationReport to get total population per continent
+        ArrayList<PeoplePopulation> continentTotalPopulations = report.getContinentTotalPopulation();
+        // Write the population report to file using Display
+        display.writeOverallPopulationReportToFile(continentTotalPopulations, "Continent");
     }
 
     /**

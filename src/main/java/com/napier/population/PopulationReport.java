@@ -141,4 +141,39 @@ public class PopulationReport {
 
         return populations;
     }
+    /**
+     * No 27 Retrieves the total population of each continent.
+     *
+     * @return ArrayList<PeoplePopulation> list of continents with their total population
+     */
+    public ArrayList<PeoplePopulation> getContinentTotalPopulation() {
+        ArrayList<PeoplePopulation> continentPopulations = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT Continent, SUM(Population) AS TotalPopulation " +
+                    "FROM country " +
+                    "GROUP BY Continent " +
+                    "ORDER BY TotalPopulation DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                String continentName = rset.getString("Continent");
+                long totalPopulation = rset.getLong("TotalPopulation");
+
+                PeoplePopulation pp = new PeoplePopulation(continentName, totalPopulation);
+                continentPopulations.add(pp);
+            }
+
+            rset.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get continent total population: " + e.getMessage());
+        }
+
+        return continentPopulations;
+    }
 }
