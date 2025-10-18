@@ -178,6 +178,53 @@ public class PopulationReport {
     }
 
     /**
+     * Retrieves a population report grouped by continent.
+     * For each continent, it calculates:
+     * - Total population (from all countries in that continent)
+     * - Total city population (sum of populations of all cities in that continent)
+     * - Non-city population (difference between total and city populations)
+     *
+     * @return ArrayList of PeoplePopulation objects containing population data per continent.
+     */
+    public ArrayList<PeoplePopulation> getContinentPopulationReport() {
+        // Create a list to store population results
+        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+
+        try {
+            // Create SQL statement object for query execution
+            Statement stmt = con.createStatement();
+
+            // SQL query to calculate continent-level populations
+            String sql = "SELECT c.Continent AS name, " +
+                    "SUM(c.Population) AS totalPopulation, " +
+                    "SUM(ci.Population) AS cityPopulation, " +
+                    "(SUM(c.Population) - SUM(ci.Population)) AS nonCityPopulation " +
+                    "FROM country c " +
+                    "LEFT JOIN city ci ON ci.CountryCode = c.Code " +
+                    "GROUP BY c.Continent";
+
+            // Execute query and store result set
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Iterate through results and store in the list
+            while (rset.next()) {
+                peoplePopulations.add(new PeoplePopulation(
+                        rset.getString("name"),                 // Continent name
+                        rset.getLong("totalPopulation"),       // Total population
+                        rset.getLong("cityPopulation"),        // City population
+                        rset.getLong("nonCityPopulation")      // Non-city population
+                ));
+            }
+        } catch (Exception e) {
+            // Print exception message if something goes wrong
+            System.out.println(e.getMessage());
+        }
+
+        // Return final list of continent population data
+        return peoplePopulations;
+    }
+
+    /**
      * Retrieves the total population for each city.
      * Lists all cities in ascending order of population.
      *

@@ -29172,6 +29172,16 @@ São Paulo                                9968485
 Seoul                                    9981619             
 Mumbai (Bombay)                          10500000            
 
+===== Continent Population Report =====
+Continent                      Total Population     City Population (% of total)   Non-City Population (% of total)
+North America                  95330838000          168250381 (0.18%)              95162587619 (99.82%)          
+Asia                           900937599400         697604103 (0.08%)              900239995297 (99.92%)         
+Africa                         16179610000          135838579 (0.84%)              16043771421 (99.16%)          
+Europe                         55118944000          241942813 (0.44%)              54877001187 (99.56%)          
+South America                  48533025000          172037859 (0.35%)              48360987141 (99.65%)          
+Oceania                        307500750            13886149 (4.52%)               293614601 (95.48%)            
+Antarctica                     0                    0 (0.00%)                      0 (0.00%)                     
+
 ===== No 32 World Language Report =====
 Language   Total Speakers       World Percentage
 Chinese     1,191,843,539       19.61%
