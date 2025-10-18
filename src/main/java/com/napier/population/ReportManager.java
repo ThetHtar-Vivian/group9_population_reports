@@ -193,6 +193,10 @@ public class ReportManager {
         ArrayList<PeoplePopulation> continentPopulations = report.getContinentPopulationReport();
         display.writePopulationReportToFile(continentPopulations, "Continent");
 
+        // No 30 get District Total Population
+        ArrayList<PeoplePopulation> districtTotalPopulations = report.getDistrictTotalPopulation();
+        display.writeOverallPopulationReportToFile(districtTotalPopulations, "District");
+
     }
 
     /**

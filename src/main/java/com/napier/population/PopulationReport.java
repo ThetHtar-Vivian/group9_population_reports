@@ -176,6 +176,46 @@ public class PopulationReport {
 
         return continentPopulations;
     }
+    /**
+     * Retrieves the total population for each district within each country.
+     * Groups the city data by both CountryCode and District to avoid merging
+     * districts with the same name in different countries.
+     *
+     * @return ArrayList of PeoplePopulation objects containing district population data.
+     */
+    public ArrayList<PeoplePopulation> getDistrictTotalPopulation() {
+        // Initialize list to store population data by district
+        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+
+        try {
+            // Create SQL statement object
+            Statement stmt = con.createStatement();
+
+            // SQL query to calculate total population per district within each country
+            String sql = "SELECT ci.CountryCode, ci.District AS name, " +
+                    "SUM(ci.Population) AS totalPopulation " +
+                    "FROM city ci " +
+                    "GROUP BY ci.CountryCode, ci.District " +
+                    "ORDER BY ci.CountryCode, ci.District";
+
+            // Execute the query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Loop through results and populate PeoplePopulation objects
+            while (rset.next()) {
+                peoplePopulations.add(new PeoplePopulation(
+                        rset.getString("name"),           // District name
+                        rset.getLong("totalPopulation")   // Total population
+                ));
+            }
+        } catch (Exception e) {
+            // Print exception message if any error occurs
+            System.out.println(e.getMessage());
+        }
+
+        // Return final list of district populations
+        return peoplePopulations;
+    }
 
     /**
      * Retrieves a population report grouped by continent.
