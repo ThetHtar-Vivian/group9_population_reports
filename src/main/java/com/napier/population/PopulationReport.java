@@ -99,4 +99,43 @@ public class PopulationReport {
 
         return worldPopulations;
     }
+
+    /**
+     * Retrieves the total population for each city.
+     * Lists all cities in ascending order of population.
+     *
+     * @return ArrayList of PeoplePopulation objects containing city population data.
+     */
+    public ArrayList<PeoplePopulation> getCityTotalPopulation() {
+        // Create a list to store city-level population data
+        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+
+        try {
+            // Create SQL statement object
+            Statement stmt = con.createStatement();
+
+            // SQL query to retrieve population of each city ordered by population ascending
+            String sql = "SELECT ci.Name AS name, " +
+                    "ci.Population AS totalPopulation " +
+                    "FROM city ci " +
+                    "ORDER BY ci.Population ASC;";
+
+            // Execute query and retrieve results
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Populate each record into PeoplePopulation objects
+            while (rset.next()) {
+                peoplePopulations.add(new PeoplePopulation(
+                        rset.getString("name"),           // City name
+                        rset.getLong("totalPopulation")   // City population
+                ));
+            }
+        } catch (SQLException e) {
+            // Print detailed message if SQL query fails
+            System.out.println("Failed to get city population: " + e.getMessage());
+        }
+
+        // Return all city population data
+        return peoplePopulations;
+    }
 }

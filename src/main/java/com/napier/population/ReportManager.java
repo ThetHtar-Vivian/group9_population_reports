@@ -170,7 +170,9 @@ public class ReportManager {
         ArrayList<PeoplePopulation> worldPopulations = report.getWorldPopulation();
         display.writeOverallPopulationReportToFile(worldPopulations, "World");
 
-
+        // No 31 Get the total city population and write it to a report file
+        ArrayList<PeoplePopulation> cityPopulations = report.getCityTotalPopulation();
+        display.writeOverallPopulationReportToFile(cityPopulations, "City");
     }
 
     /**
