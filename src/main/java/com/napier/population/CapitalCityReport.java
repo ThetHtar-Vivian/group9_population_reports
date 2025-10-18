@@ -216,4 +216,100 @@ public class CapitalCityReport {
 
         return capitals;
     }
+    /**
+     * No 17 Retrieves all capital cities in the world organized by population (largest to smallest).
+     * Joins the city and country tables where the city's ID matches the country's Capital ID.
+     * Includes city name, country name, district, region, continent, and population.
+     *
+     * @return A list of City objects containing all capital cities ordered by population descending.
+     */
+    public ArrayList<City> getAllCapitalCitiesByPopulationDesc() {
+        // List to store all capital cities
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            // Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Join city and country tables
+            // - Include region and continent from the country table
+            // - Order results by population descending
+            String sql = "SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, " +
+                    "co.Region, co.Continent, ci.Population " +
+                    "FROM city ci " +
+                    "JOIN country co ON ci.ID = co.Capital " +
+                    "ORDER BY ci.Population DESC;";
+
+            // Execute query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Process each result
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));             // Capital city name
+                city.setCountry_name(rset.getString("CountryName"));  // Country name
+                city.setDistrict(rset.getString("District"));         // District
+                city.setRegion(rset.getString("Region"));             // Region
+                city.setContinent(rset.getString("Continent"));       // Continent
+                city.setPopulation(rset.getInt("Population"));        // Population
+
+                capitals.add(city);
+            }
+
+            rset.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed to get all capital cities by population: " + e.getMessage());
+        }
+
+        return capitals;
+    }
+    /**
+     * No 21 Retrieves the top 10 most populated capital cities in each continent.
+     * Joins the city and country tables, ranks capitals within each continent by population,
+     * and selects only the top 10 per continent.
+     *
+     * @return A list of City objects containing top 10 capitals per continent ordered by continent and population.
+     */
+    public ArrayList<City> getTop10CapitalCitiesByContinentPopulation() {
+        ArrayList<City> capitals = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            // SQL query: rank capitals within each continent and select top 10
+            String sql = "SELECT CityName, CountryName, District, Region, Continent, Population " +
+                    "FROM ( " +
+                    "    SELECT ci.Name AS CityName, co.Name AS CountryName, ci.District, " +
+                    "           co.Region, co.Continent, ci.Population, " +
+                    "           ROW_NUMBER() OVER (PARTITION BY co.Continent ORDER BY ci.Population DESC) AS rn " +
+                    "    FROM city ci " +
+                    "    JOIN country co ON ci.ID = co.Capital " +
+                    ") sub " +
+                    "WHERE rn <= 10 " +
+                    "ORDER BY Continent, Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                City city = new City();
+                city.setName(rset.getString("CityName"));
+                city.setCountry_name(rset.getString("CountryName"));
+                city.setDistrict(rset.getString("District"));
+                city.setRegion(rset.getString("Region"));
+                city.setContinent(rset.getString("Continent"));
+                city.setPopulation(rset.getInt("Population"));
+
+                capitals.add(city);
+            }
+
+            rset.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Failed to get top 10 capital cities by continent: " + e.getMessage());
+        }
+
+        return capitals;
+    }
 }

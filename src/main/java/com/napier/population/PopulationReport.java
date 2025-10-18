@@ -101,41 +101,79 @@ public class PopulationReport {
     }
 
     /**
-     * Retrieves the total population for each city.
-     * Lists all cities in ascending order of population.
+     * Gets the total population of each country.
+     * This report lists every country with its total population.
      *
-     * @return ArrayList of PeoplePopulation objects containing city population data.
+     * @return List of PeoplePopulation objects representing total population per country.
      */
-    public ArrayList<PeoplePopulation> getCityTotalPopulation() {
-        // Create a list to store city-level population data
-        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+    public ArrayList<PeoplePopulation> getTotalPopulationPerCountry() {
+        ArrayList<PeoplePopulation> populations = new ArrayList<>();
 
         try {
-            // Create SQL statement object
             Statement stmt = con.createStatement();
 
-            // SQL query to retrieve population of each city ordered by population ascending
-            String sql = "SELECT ci.Name AS name, " +
-                    "ci.Population AS totalPopulation " +
-                    "FROM city ci " +
-                    "ORDER BY ci.Population ASC;";
+            // SQL: Get total population per country, excluding null or empty names
+            String sql = "SELECT Name AS CountryName, Population AS TotalPopulation " +
+                    "FROM country " +
+                    "WHERE Name IS NOT NULL AND Name <> '' " +
+                    "ORDER BY Population DESC;";
 
-            // Execute query and retrieve results
             ResultSet rset = stmt.executeQuery(sql);
 
-            // Populate each record into PeoplePopulation objects
+            // Process each record
             while (rset.next()) {
-                peoplePopulations.add(new PeoplePopulation(
-                        rset.getString("name"),           // City name
-                        rset.getLong("totalPopulation")   // City population
-                ));
+                String level = rset.getString("CountryName");
+                long total = rset.getLong("TotalPopulation");
+
+                // Only include if population > 0
+                if (total > 0) {
+                    PeoplePopulation pop = new PeoplePopulation(level, total);
+                    populations.add(pop);
+                }
             }
+
+            rset.close();
+            stmt.close();
+
         } catch (SQLException e) {
-            // Print detailed message if SQL query fails
-            System.out.println("Failed to get city population: " + e.getMessage());
+            System.out.println("Failed to get total population per country: " + e.getMessage());
         }
 
-        // Return all city population data
-        return peoplePopulations;
+        return populations;
+    }
+    /**
+     * No 27 Retrieves the total population of each continent.
+     *
+     * @return ArrayList<PeoplePopulation> list of continents with their total population
+     */
+    public ArrayList<PeoplePopulation> getContinentTotalPopulation() {
+        ArrayList<PeoplePopulation> continentPopulations = new ArrayList<>();
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String sql = "SELECT Continent, SUM(Population) AS TotalPopulation " +
+                    "FROM country " +
+                    "GROUP BY Continent " +
+                    "ORDER BY TotalPopulation DESC;";
+
+            ResultSet rset = stmt.executeQuery(sql);
+
+            while (rset.next()) {
+                String continentName = rset.getString("Continent");
+                long totalPopulation = rset.getLong("TotalPopulation");
+
+                PeoplePopulation pp = new PeoplePopulation(continentName, totalPopulation);
+                continentPopulations.add(pp);
+            }
+
+            rset.close();
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Failed to get continent total population: " + e.getMessage());
+        }
+
+        return continentPopulations;
     }
 }
