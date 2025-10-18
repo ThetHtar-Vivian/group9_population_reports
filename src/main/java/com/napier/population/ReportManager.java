@@ -197,6 +197,12 @@ public class ReportManager {
         ArrayList<PeoplePopulation> districtTotalPopulations = report.getDistrictTotalPopulation();
         display.writeOverallPopulationReportToFile(districtTotalPopulations, "District");
 
+        // No 24 Call the method in PopulationReport to get population data per region
+        ArrayList<PeoplePopulation> regionPopulations = report.getRegionPopulationReport();
+        // Write the population report to file using Display
+        display.writePopulationReportToFile(regionPopulations, "Region");
+
+
     }
 
     /**
