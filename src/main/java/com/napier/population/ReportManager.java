@@ -184,6 +184,10 @@ public class ReportManager {
         ArrayList<PeoplePopulation> continentTotalPopulations = report.getContinentTotalPopulation();
         // Write the population report to file using Display
         display.writeOverallPopulationReportToFile(continentTotalPopulations, "Continent");
+
+        // No 31 the total city population and write it to a report file.
+        ArrayList<PeoplePopulation> cityTotalPopulations = report.getCityTotalPopulation();
+        display.writeOverallPopulationReportToFile(cityTotalPopulations, "City");
     }
 
     /**
