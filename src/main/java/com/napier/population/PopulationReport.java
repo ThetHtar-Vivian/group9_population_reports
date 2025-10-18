@@ -416,4 +416,51 @@ public class PopulationReport {
         // Return the list of population data per region
         return regionPopulations;
     }
+
+    /**
+     * 28 Retrieves the total population of each region.
+     *
+     * @return ArrayList<PeoplePopulation> list of regions with their total population
+     */
+    public ArrayList<PeoplePopulation> getRegionTotalPopulation() {
+        // List to store total population data per region
+        ArrayList<PeoplePopulation> regionPopulations = new ArrayList<>();
+
+        try {
+            // Create a SQL statement
+            Statement stmt = con.createStatement();
+
+            // SQL query:
+            // - Selects region name and sum of population for that region
+            // - Groups by region
+            // - Orders the results by total population in descending order
+            String sql = "SELECT Region, SUM(Population) AS TotalPopulation " +
+                    "FROM country " +
+                    "GROUP BY Region " +
+                    "ORDER BY TotalPopulation DESC;";
+
+            // Execute the query
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Loop through each row of the result set
+            while (rset.next()) {
+                String regionName = rset.getString("Region");            // Get region name
+                long totalPopulation = rset.getLong("TotalPopulation"); // Get total population
+
+                // Create a PeoplePopulation object with only the total population
+                PeoplePopulation pp = new PeoplePopulation(regionName, totalPopulation);
+
+                // Add the object to the list
+                regionPopulations.add(pp);
+            }
+
+        } catch (SQLException e) {
+            // Print error message if query fails
+            System.out.println("Failed to get region total population: " + e.getMessage());
+        }
+
+        // Return the list of total populations per region
+        return regionPopulations;
+    }
+
 }

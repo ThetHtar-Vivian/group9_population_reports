@@ -202,7 +202,10 @@ public class ReportManager {
         // Write the population report to file using Display
         display.writePopulationReportToFile(regionPopulations, "Region");
 
-
+        // No 28 Call the method in PopulationReport to get total population per region
+        ArrayList<PeoplePopulation> regionTotalPopulations = report.getRegionTotalPopulation();
+        // Write the population report to file using Display
+        display.writeOverallPopulationReportToFile(regionTotalPopulations, "Region");
     }
 
     /**
