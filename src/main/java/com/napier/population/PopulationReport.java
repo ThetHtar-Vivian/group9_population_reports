@@ -215,4 +215,67 @@ public class PopulationReport {
         // Return all city population data
         return peoplePopulations;
     }
+
+    /**
+     * Retrieves the world language report for the five most spoken languages:
+     * Chinese, English, Hindi, Spanish, and Arabic.
+     * The report includes:
+     * - Language name
+     * - Total number of speakers worldwide
+     * - Percentage of world population speaking that language
+     *
+     * @return An ArrayList of CountryLanguage objects containing language statistics
+     */
+    public ArrayList<CountryLanguage> getWorldLanguageReport() {
+        // Initialize list to store language report data
+        ArrayList<CountryLanguage> languages = new ArrayList<>();
+
+        try {
+            // Create a Statement object to execute SQL queries
+            Statement stmt = con.createStatement();
+
+            // SQL query to calculate total speakers and world percentage for selected languages
+            String sql = "SELECT " +
+                    "cl.Language AS language, " +
+                    "SUM(c.Population * (cl.Percentage / 100)) AS totalSpeakers, " +
+                    "ROUND(SUM(c.Population * (cl.Percentage / 100)) / " +
+                    "(SELECT SUM(Population) FROM country) * 100, 2) AS worldPercentage " +
+                    "FROM countrylanguage cl " +
+                    "JOIN country c ON cl.CountryCode = c.Code " +
+                    "WHERE cl.Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic') " +
+                    "GROUP BY cl.Language " +
+                    "ORDER BY totalSpeakers DESC;";
+
+            // Execute the SQL query and obtain results
+            ResultSet rset = stmt.executeQuery(sql);
+
+            // Loop through the result set to populate CountryLanguage objects
+            while (rset.next()) {
+                CountryLanguage cl = new CountryLanguage();
+
+                // Set the language name
+                cl.setLanguage(rset.getString("language"));
+
+                // Store total speakers temporarily in the 'percentage' field
+                // (optional: could create a separate field for total speakers)
+                cl.setPercentage(rset.getDouble("totalSpeakers"));
+
+                // Set world population percentage for this language
+                cl.setWorld_percentage(rset.getDouble("worldPercentage"));
+
+                // Add the CountryLanguage object to the list
+                languages.add(cl);
+            }
+
+            // Close ResultSet and Statement to free resources
+            rset.close();
+            stmt.close();
+        } catch (Exception e) {
+            // Print any errors encountered during the database operation
+            System.out.println("Error retrieving world language report: " + e.getMessage());
+        }
+
+        // Return the list of languages with calculated statistics
+        return languages;
+    }
 }

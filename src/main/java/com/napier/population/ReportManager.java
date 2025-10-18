@@ -197,5 +197,9 @@ public class ReportManager {
      */
     public void generateLanguageReport() {
         PopulationReport report = new PopulationReport(con);
+
+        // No 32 the languages from the greatest number to smallest, including the percentage of the world population
+        ArrayList<CountryLanguage> countryLanguages = report.getWorldLanguageReport();
+        display.writeLanguageReportToFile(countryLanguages, "No 32 World Language Report");
     }
 }
