@@ -24163,8 +24163,8 @@ ID    City                           Country                                    
 206   Città del Vaticano             Holy See (Vatican City State)                 Southern Europe                Europe          455         
 207   Conakry                        Guinea                                        Western Africa                 Africa          1090610     
 208   Accra                          Ghana                                         Western Africa                 Africa          1070000     
-209   Monrovia                       Liberia                                       Western Africa                 Africa          850000      
-210   Freetown                       Sierra Leone                                  Western Africa                 Africa          850000      
+209   Freetown                       Sierra Leone                                  Western Africa                 Africa          850000      
+210   Monrovia                       Liberia                                       Western Africa                 Africa          850000      
 211   Ouagadougou                    Burkina Faso                                  Western Africa                 Africa          824000      
 212   Bamako                         Mali                                          Western Africa                 Africa          809552      
 213   Dakar                          Senegal                                       Western Africa                 Africa          785071      
@@ -24292,8 +24292,8 @@ ID    City                           Country                                    
 100   Zagreb                         Croatia                                       Southern Europe                Europe          706770      
 101   Conakry                        Guinea                                        Western Africa                 Africa          1090610     
 102   Accra                          Ghana                                         Western Africa                 Africa          1070000     
-103   Monrovia                       Liberia                                       Western Africa                 Africa          850000      
-104   Freetown                       Sierra Leone                                  Western Africa                 Africa          850000      
+103   Freetown                       Sierra Leone                                  Western Africa                 Africa          850000      
+104   Monrovia                       Liberia                                       Western Africa                 Africa          850000      
 105   Ouagadougou                    Burkina Faso                                  Western Africa                 Africa          824000      
 106   Berlin                         Germany                                       Western Europe                 Europe          3386667     
 107   Paris                          France                                        Western Europe                 Europe          2125246     
@@ -29174,12 +29174,12 @@ Mumbai (Bombay)                          10500000
 
 ===== Continent Population Report =====
 Continent                      Total Population     City Population (% of total)   Non-City Population (% of total)
-North America                  95330838000          168250381 (0.18%)              95162587619 (99.82%)          
-Asia                           900937599400         697604103 (0.08%)              900239995297 (99.92%)         
-Africa                         16179610000          135838579 (0.84%)              16043771421 (99.16%)          
-Europe                         55118944000          241942813 (0.44%)              54877001187 (99.56%)          
-South America                  48533025000          172037859 (0.35%)              48360987141 (99.65%)          
-Oceania                        307500750            13886149 (4.52%)               293614601 (95.48%)            
+North America                  482993000            168250381 (34.83%)             314742619 (65.17%)            
+Asia                           3705025700           697604103 (18.83%)             3007421597 (81.17%)           
+Africa                         784475000            135838579 (17.32%)             648636421 (82.68%)            
+Europe                         730074600            241942813 (33.14%)             488131787 (66.86%)            
+South America                  345780000            172037859 (49.75%)             173742141 (50.25%)            
+Oceania                        30401150             13886149 (45.68%)              16515001 (54.32%)             
 Antarctica                     0                    0 (0.00%)                      0 (0.00%)                     
 
 ===== District Total Population Report =====
@@ -30599,30 +30599,30 @@ Midlands                                 128037
 
 ===== Region Population Report =====
 Region                         Total Population     City Population (% of total)   Non-City Population (% of total)
-Caribbean                      288771000            11067550 (3.83%)               277703450 (96.17%)            
-Southern and Central Asia      363665421000         207688970 (0.06%)              363457732030 (99.94%)         
-Central Africa                 1126386000           19061775 (1.69%)               1107324225 (98.31%)           
-Southern Europe                5932101100           40016658 (0.67%)               5892084442 (99.33%)           
-Middle East                    5517497400           70371374 (1.28%)               5447126026 (98.72%)           
-South America                  48533025000          172037859 (0.35%)              48360987141 (99.65%)          
-Polynesia                      936050               135925 (14.52%)                800125 (85.48%)               
+Caribbean                      38140000             11067550 (29.02%)              27072450 (70.98%)             
+Southern and Central Asia      1490776000           207688970 (13.93%)             1283087030 (86.07%)           
+Central Africa                 95652000             19061775 (19.93%)              76590225 (80.07%)             
+Southern Europe                144674200            40016658 (27.66%)              104657542 (72.34%)            
+Middle East                    188380700            70371374 (37.36%)              118009326 (62.64%)            
+South America                  345780000            172037859 (49.75%)             173742141 (50.25%)            
+Polynesia                      633050               135925 (21.47%)                497125 (78.53%)               
 Antarctica                     0                    0 (0.00%)                      0 (0.00%)                     
-Australia and New Zealand      299167700            13163436 (4.40%)               286004264 (95.60%)            
-Western Europe                 10631609200          45683298 (0.43%)               10585925902 (99.57%)          
-Eastern Africa                 1561644000           24067066 (1.54%)               1537576934 (98.46%)           
-Western Africa                 7529990000           33222032 (0.44%)               7496767968 (99.56%)           
-Eastern Europe                 33471056800          123384516 (0.37%)              33347672284 (99.63%)          
-Central America                17245853000          65860964 (0.38%)               17179992036 (99.62%)          
-North America                  77796214000          91321867 (0.12%)               77704892133 (99.88%)          
-Southeast Asia                 32033017000          102067225 (0.32%)              31930949775 (99.68%)          
-Southern Africa                1784719000           16038192 (0.90%)               1768680808 (99.10%)           
-Eastern Asia                   499721664000         317476534 (0.06%)              499404187466 (99.94%)         
-Nordic Countries               218487800            6865487 (3.14%)                211622313 (96.86%)            
-Northern Africa                4176871000           43449514 (1.04%)               4133421486 (98.96%)           
-Baltic Countries               28643500             2947140 (10.29%)               25696360 (89.71%)             
+Australia and New Zealand      22753100             13163436 (57.85%)              9589664 (42.15%)              
+Western Europe                 183247600            45683298 (24.93%)              137564302 (75.07%)            
+Eastern Africa                 246999000            24067066 (9.74%)               222931934 (90.26%)            
+Western Africa                 221672000            33222032 (14.99%)              188449968 (85.01%)            
+Eastern Europe                 307026000            123384516 (40.19%)             183641484 (59.81%)            
+Central America                135221000            65860964 (48.71%)              69360036 (51.29%)             
+North America                  309632000            91321867 (29.49%)              218310133 (70.51%)            
+Southeast Asia                 518541000            102067225 (19.68%)             416473775 (80.32%)            
+Southern Africa                46886000             16038192 (34.21%)              30847808 (65.79%)             
+Eastern Asia                   1507328000           317476534 (21.06%)             1189851466 (78.94%)           
+Nordic Countries               24166400             6865487 (28.41%)               17300913 (71.59%)             
+Northern Africa                173266000            43449514 (25.08%)              129816486 (74.92%)            
+Baltic Countries               7561900              2947140 (38.97%)               4614760 (61.03%)              
 Melanesia                      6472000              484459 (7.49%)                 5987541 (92.51%)              
-Micronesia                     925000               102329 (11.06%)                822671 (88.94%)               
-British Islands                4837045600           23045714 (0.48%)               4813999886 (99.52%)           
+Micronesia                     543000               102329 (18.85%)                440671 (81.15%)               
+British Islands                63398500             23045714 (36.35%)              40352786 (63.65%)             
 Micronesia/Caribbean           0                    0 (0.00%)                      0 (0.00%)                     
 
 ===== Region Total Population Report =====
