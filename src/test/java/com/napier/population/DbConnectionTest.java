@@ -23,4 +23,14 @@ class DbConnectionTest {
     void tearDown() {
     }
 
+    @Test
+    void connect() {
+        assertNotNull(con);
+    }
+
+    @Test
+    void disconnect() {
+        int check = db.disconnect();
+        assertEquals(1, check);
+    }
 }
