@@ -9,4 +9,4 @@ COPY target/*-jar-with-dependencies.jar /app/app.jar
 RUN mkdir -p /app/reports
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "db:3306", "30000"]

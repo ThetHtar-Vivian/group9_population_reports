@@ -20,65 +20,52 @@ public class DbConnection {
      * Includes retry logic (up to 10 attempts) with a wait time
      * between retries, useful when the database container is starting up.
      */
-    public void connect() {
+    public Connection connect(String location, int delay) {
         try {
-            // Load MySQL JDBC driver
+            // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
-            System.exit(-1); // Exit if driver not found
+            System.exit(-1);
         }
 
-        int retries = 10; // Maximum connection attempts
-
-        /*
-         * Attempt to connect multiple times (10 retries).
-         * Waits 30 seconds between retries in case DB service is not ready.
-         */
+        int retries = 10;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                Thread.sleep(30000); // Pause before retrying connection
-
-                // Establish connection to the database
+                // Wait a bit for db to start
+                Thread.sleep(delay);
+                // Connect to database
                 con = DriverManager.getConnection(
-                        "jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+                        "jdbc:mysql://" + location + "/world?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
                         "root",
                         "abc123!@#");
 
                 System.out.println("Successfully connected");
-                break; // Exit loop once connection succeeds
+                break;
             } catch (SQLException sqle) {
-                // Log failure and retry
-                System.out.println("Failed to connect to database attempt " + i);
+                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
-                // This should rarely happen, but log it anyway
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+        return con;
     }
 
     /**
      * Disconnects from the MySQL database if a connection exists.
      */
-    public void disconnect() {
+    public int disconnect() {
         if (con != null) {
             try {
                 // Close active connection
                 con.close();
+                return 1;
             } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
         }
-    }
-
-    /**
-     * Returns the active JDBC connection.
-     *
-     * @return Connection object if connected, otherwise null
-     */
-    public Connection getConnection() {
-        return con;
+        return 0;
     }
 }

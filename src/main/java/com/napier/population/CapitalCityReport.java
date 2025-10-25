@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 public class CapitalCityReport {
 
-
     // Active database connection used to query capital city information
     private Connection con;
+
     /**
      * Constructor initializes the CapitalCityReport with an active database connection.
      *
@@ -35,6 +35,10 @@ public class CapitalCityReport {
     public ArrayList<City> getTop50CapitalCitiesByPopulation() {
         // List to store the top 50 capital cities
         ArrayList<City> capitals = new ArrayList<>();
+
+        if (con == null) {
+            return capitals;
+        }
 
         try {
             // Create a SQL statement
@@ -57,15 +61,14 @@ public class CapitalCityReport {
 
             // Loop through the result set and create City objects
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));             // Set city name
-                city.setCountry_name(rset.getString("CountryName"));  // Set country name
-                city.setDistrict(rset.getString("District"));         // Set district name
-                city.setRegion(rset.getString("Region"));             // Set region name
-                city.setContinent(rset.getString("Continent"));       // Set continent name
-                city.setPopulation(rset.getInt("Population"));        // Set population
-
-                // Add the city to the list
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 capitals.add(city);
             }
 
@@ -87,6 +90,10 @@ public class CapitalCityReport {
     public ArrayList<City> getAllCapitalCitiesByContinentPopulationDesc() {
         ArrayList<City> capitals = new ArrayList<>();
 
+        if (con == null) {
+            return capitals;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -105,14 +112,15 @@ public class CapitalCityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City capital = new City();
-                capital.setName(rset.getString("CityName"));
-                capital.setCountry_name(rset.getString("CountryName"));
-                capital.setDistrict(rset.getString("District"));
-                capital.setRegion(rset.getString("Region"));
-                capital.setContinent(rset.getString("Continent"));
-                capital.setPopulation(rset.getInt("Population"));
-                capitals.add(capital);
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
+                capitals.add(city);
             }
 
         } catch (SQLException e) {
@@ -133,14 +141,18 @@ public class CapitalCityReport {
     public ArrayList<City> getTop5CapitalCitiesByRegion() {
         ArrayList<City> capitals = new ArrayList<>();
 
+        if (con == null) {
+            return capitals;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
             String sql =
-                    "SELECT CityName, CountryName, Region, Continent, Population " +
+                    "SELECT CityName, CountryName, District, Region, Continent, Population " +
                             "FROM ( " +
                             "   SELECT ci.Name AS CityName, co.Name AS CountryName, " +
-                            "          co.Region, co.Continent, ci.Population, " +
+                            "          ci.District, co.Region, co.Continent, ci.Population, " +
                             "          ROW_NUMBER() OVER (PARTITION BY co.Region ORDER BY ci.Population DESC) AS rn " +
                             "   FROM city ci " +
                             "   JOIN country co ON ci.ID = co.Capital " +
@@ -154,12 +166,14 @@ public class CapitalCityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 capitals.add(city);
             }
 
@@ -181,12 +195,17 @@ public class CapitalCityReport {
     public ArrayList<City> getAllCapitalCitiesByRegionPopulationDesc() {
         ArrayList<City> capitals = new ArrayList<>();
 
+        if (con == null) {
+            return capitals;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
             String sql =
                     "SELECT ci.Name AS CityName, " +
                             "co.Name AS CountryName, " +
+                            "ci.District, " +
                             "co.Region, " +
                             "co.Continent, " +
                             "ci.Population " +
@@ -201,12 +220,14 @@ public class CapitalCityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 capitals.add(city);
             }
 
@@ -227,6 +248,10 @@ public class CapitalCityReport {
         // List to store all capital cities
         ArrayList<City> capitals = new ArrayList<>();
 
+        if (con == null) {
+            return capitals;
+        }
+
         try {
             // Create a SQL statement
             Statement stmt = con.createStatement();
@@ -246,14 +271,14 @@ public class CapitalCityReport {
 
             // Process each result
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));             // Capital city name
-                city.setCountry_name(rset.getString("CountryName"));  // Country name
-                city.setDistrict(rset.getString("District"));         // District
-                city.setRegion(rset.getString("Region"));             // Region
-                city.setContinent(rset.getString("Continent"));       // Continent
-                city.setPopulation(rset.getInt("Population"));        // Population
-
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 capitals.add(city);
             }
 
@@ -275,6 +300,10 @@ public class CapitalCityReport {
     public ArrayList<City> getTop10CapitalCitiesByContinentPopulation() {
         ArrayList<City> capitals = new ArrayList<>();
 
+        if (con == null) {
+            return capitals;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -293,14 +322,14 @@ public class CapitalCityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
-
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 capitals.add(city);
             }
 

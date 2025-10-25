@@ -33,6 +33,11 @@ public class CityReport {
 
     public ArrayList<City> getAllCitiesByPopulation() {
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
+
         try {
             Statement stmt = con.createStatement();
             String sql = "SELECT \n" +
@@ -49,13 +54,14 @@ public class CityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
         } catch (SQLException e) {
@@ -75,6 +81,10 @@ public class CityReport {
     public ArrayList<City> getCitiesByContinentPopulationDesc() {
         // Create a list to store the retrieved City objects
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             // Create a SQL statement object to execute the query
@@ -96,15 +106,14 @@ public class CityReport {
 
             // Loop through the result set and map each row to a City object
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));             // Set city name
-                city.setCountry_name(rset.getString("CountryName"));  // Set the name of the country the city belongs to
-                city.setDistrict(rset.getString("District"));         // Set the city's district
-                city.setRegion(rset.getString("Region"));             // Set the region name
-                city.setContinent(rset.getString("Continent"));       // Set the continent name
-                city.setPopulation(rset.getInt("Population"));        // Set the city's population
-
-                // Add the populated City object to the list
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 
@@ -119,7 +128,6 @@ public class CityReport {
 
     /**
      * Retrieves the top 50 most populated cities in the world.
-     * <p>
      * This method queries the database, joining the city and country tables
      * to get additional information such as country name, region, and continent.
      * Results are ordered by city population in descending order and limited to 50 entries.
@@ -128,6 +136,10 @@ public class CityReport {
      */
     public ArrayList<City> getTop50CitiesByPopulation() {
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             // Create a statement object to execute the SQL query
@@ -155,16 +167,14 @@ public class CityReport {
 
             // Process each row in the result set
             while (rset.next()) {
-                City city = new City();
-
-                city.setName(rset.getString("City"));              // Set city name
-                city.setCountry_name(rset.getString("Country"));   // Set country name
-                city.setDistrict(rset.getString("District"));      // Set district
-                city.setRegion(rset.getString("Region"));          // Set region
-                city.setContinent(rset.getString("Continent"));    // Set continent
-                city.setPopulation(rset.getInt("Population"));     // Set population
-
-                // Add city to the list
+                City city = new City(
+                        rset.getString("City"),     // Set city name
+                        rset.getString("Country"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
         } catch (SQLException e) {
@@ -185,6 +195,10 @@ public class CityReport {
      */
     public ArrayList<City> getTop10CitiesByContinentPopulation() {
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             // Create a statement to execute SQL query
@@ -211,15 +225,15 @@ public class CityReport {
 
             // Process each row in the result set
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));            // Set city name
-                city.setCountry_name(rset.getString("CountryName")); // Set country name
-                city.setDistrict(rset.getString("District"));        // Set district
-                city.setRegion(rset.getString("Region"));            // Set region
-                city.setContinent(rset.getString("Continent"));      // Set continent
-                city.setPopulation(rset.getInt("Population"));       // Set population
-
-                cities.add(city); // Add city to list
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
+                cities.add(city);
             }
         } catch (SQLException e) {
             // Print error message if query fails
@@ -238,6 +252,10 @@ public class CityReport {
      */
     public ArrayList<City> getTop5CitiesByRegionPopulation() {
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             Statement stmt = con.createStatement();
@@ -264,13 +282,14 @@ public class CityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 
@@ -298,6 +317,10 @@ public class CityReport {
     public ArrayList<City> getAllCitiesByRegionPopulationDesc() {
         ArrayList<City> cities = new ArrayList<>();
 
+        if (con == null) {
+            return cities;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -315,13 +338,14 @@ public class CityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 
@@ -341,6 +365,10 @@ public class CityReport {
     public ArrayList<City> getAllCitiesByCountryPopulationDesc() {
         ArrayList<City> cities = new ArrayList<>();
 
+        if (con == null) {
+            return cities;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -358,13 +386,14 @@ public class CityReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 
@@ -383,6 +412,10 @@ public class CityReport {
     public ArrayList<City> getCitiesByDistrictPopulationDesc() {
         // Create a list to store the retrieved City objects
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             // Create a SQL statement object to execute the query
@@ -404,15 +437,14 @@ public class CityReport {
 
             // Loop through the result set and map each row to a City object
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));             // Set city name
-                city.setCountry_name(rset.getString("CountryName"));  // Set the name of the country the city belongs to
-                city.setDistrict(rset.getString("District"));         // Set the city's district
-                city.setRegion(rset.getString("Region"));             // Set the region name
-                city.setContinent(rset.getString("Continent"));       // Set the continent name
-                city.setPopulation(rset.getInt("Population"));        // Set the city's population
-
-                // Add the populated City object to the list
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 
@@ -436,6 +468,10 @@ public class CityReport {
     public ArrayList<City> getTop5CitiesByCountryPopulation() {
         ArrayList<City> cities = new ArrayList<>();
 
+        if (con == null) {
+            return cities;
+        }
+
         String sql =
                 "SELECT CityName, CountryName, District, Region, Continent, Population " +
                         "FROM ( " +
@@ -456,13 +492,14 @@ public class CityReport {
              ResultSet rset = stmt.executeQuery(sql)) {
 
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
         } catch (SQLException e) {
@@ -479,6 +516,10 @@ public class CityReport {
     public ArrayList<City> getTopCityByDistrictPopulation() {
         // List to store the top cities for each district
         ArrayList<City> cities = new ArrayList<>();
+
+        if (con == null) {
+            return cities;
+        }
 
         try {
             // Create a SQL statement
@@ -505,15 +546,14 @@ public class CityReport {
 
             // Loop through the result set and create City objects
             while (rset.next()) {
-                City city = new City();
-                city.setName(rset.getString("CityName"));
-                city.setCountry_name(rset.getString("CountryName"));
-                city.setDistrict(rset.getString("District"));
-                city.setRegion(rset.getString("Region"));
-                city.setContinent(rset.getString("Continent"));
-                city.setPopulation(rset.getInt("Population"));
-
-                // Add the city to the list
+                City city = new City(
+                        rset.getString("CityName"),     // Set city name
+                        rset.getString("CountryName"),  // Set country name
+                        rset.getString("District"),     // Set district
+                        rset.getString("Region"),       // Set region
+                        rset.getString("Continent"),    // Set continent
+                        rset.getInt("Population")       // Set population
+                );
                 cities.add(city);
             }
 

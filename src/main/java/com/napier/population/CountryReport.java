@@ -34,6 +34,10 @@ public class CountryReport {
     public ArrayList<Country> getCountriesByContinentPopulationDesc() {
         ArrayList<Country> countries = new ArrayList<>();
 
+        if (con == null) {
+            return countries;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -47,16 +51,15 @@ public class CountryReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                Country country = new Country();
-
-                country.setCode(rset.getString("Code"));
-                country.setName(rset.getString("CountryName"));
-                country.setCapitalName(rset.getString("CapitalName"));      // Capital city name
-                country.setDistrict(rset.getString("CapitalDistrict"));     // Capital's district
-                country.setRegion(rset.getString("Region"));
-                country.setContinent(rset.getString("Continent"));
-                country.setPopulation(rset.getInt("Population"));
-
+                Country country = new Country(
+                        rset.getString("Code"),             // Country code
+                        rset.getString("CountryName"),      // Country name
+                        rset.getString("CapitalName"),      // Capital city name
+                        rset.getString("CapitalDistrict"),  // Capital's district
+                        rset.getString("Region"),           // Region of the country
+                        rset.getString("Continent"),        // Continent name
+                        rset.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
 
@@ -76,6 +79,10 @@ public class CountryReport {
     public ArrayList<Country> getAllCountriesByPopulationDesc() {
         // Create a list to hold all countries retrieved from the database
         ArrayList<Country> countries = new ArrayList<>();
+
+        if (con == null) {
+            return countries;
+        }
 
         try {
             // Create a statement to execute SQL queries
@@ -99,18 +106,15 @@ public class CountryReport {
 
             // Process each record in the result set
             while (rset.next()) {
-                Country country = new Country();
-
-                // Map each field from the query result to the Country object
-                country.setCode(rset.getString("Code"));               // Country code
-                country.setName(rset.getString("CountryName"));        // Country name
-                country.setCapitalName(rset.getString("CapitalName")); // Capital city name
-                country.setDistrict(rset.getString("District"));       // Capital's district
-                country.setRegion(rset.getString("Region"));           // Region of the country
-                country.setContinent(rset.getString("Continent"));     // Continent name
-                country.setPopulation(rset.getInt("Population"));      // Total population
-
-                // Add populated Country object to the list
+                Country country = new Country(
+                        rset.getString("Code"),             // Country code
+                        rset.getString("CountryName"),      // Country name
+                        rset.getString("CapitalName"),      // Capital city name
+                        rset.getString("District"),         // Capital's district
+                        rset.getString("Region"),           // Region of the country
+                        rset.getString("Continent"),        // Continent name
+                        rset.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
         } catch (SQLException e) {
@@ -121,6 +125,7 @@ public class CountryReport {
         // Return the complete list of countries sorted by population
         return countries;
     }
+
     /**
      * Retrieves the top 10 most populated countries within each continent.
      *
@@ -134,6 +139,10 @@ public class CountryReport {
     public ArrayList<Country> getTop10CountriesByContinentPopulation() {
         // Create a list to store the resulting countries
         ArrayList<Country> countries = new ArrayList<>();
+
+        if (con == null) {
+            return countries;
+        }
 
         try {
             // Create a statement to execute the SQL query
@@ -161,18 +170,15 @@ public class CountryReport {
 
             // Process each row in the result set
             while (rset.next()) {
-                Country country = new Country();
-
-                // Map each database column to the corresponding Country object field
-                country.setCode(rset.getString("Code"));               // Country code
-                country.setName(rset.getString("CountryName"));        // Country name
-                country.setCapitalName(rset.getString("CapitalName")); // Capital city name
-                country.setDistrict(rset.getString("District"));       // Capital's district
-                country.setRegion(rset.getString("Region"));           // Region
-                country.setContinent(rset.getString("Continent"));     // Continent
-                country.setPopulation(rset.getInt("Population"));      // Population
-
-                // Add the populated Country object to the list
+                Country country = new Country(
+                        rset.getString("Code"),             // Country code
+                        rset.getString("CountryName"),      // Country name
+                        rset.getString("CapitalName"),      // Capital city name
+                        rset.getString("District"),         // Capital's district
+                        rset.getString("Region"),           // Region of the country
+                        rset.getString("Continent"),        // Continent name
+                        rset.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
 
@@ -200,6 +206,10 @@ public class CountryReport {
         // Create a list to store the retrieved Country objects
         ArrayList<Country> countries = new ArrayList<>();
 
+        if (con == null) {
+            return countries;
+        }
+
         try {
             // Create a SQL statement object to execute the query
             Statement stmt = con.createStatement();
@@ -218,16 +228,15 @@ public class CountryReport {
 
             // Loop through the result set and map each row to a Country object
             while (rset.next()) {
-                Country country = new Country();
-                country.setCode(rset.getString("Code"));                // Set country code
-                country.setName(rset.getString("CountryName"));         // Set country name
-                country.setCapitalName(rset.getString("CapitalName"));  // Set capital city name
-                country.setDistrict(rset.getString("District"));        // Set district of the capital
-                country.setRegion(rset.getString("Region"));            // Set region name
-                country.setContinent(rset.getString("Continent"));      // Set continent name
-                country.setPopulation(rset.getInt("Population"));       // Set population value
-
-                // Add the populated Country object to the list
+                Country country = new Country(
+                        rset.getString("Code"),             // Country code
+                        rset.getString("CountryName"),      // Country name
+                        rset.getString("CapitalName"),      // Capital city name
+                        rset.getString("District"),         // Capital's district
+                        rset.getString("Region"),           // Region of the country
+                        rset.getString("Continent"),        // Continent name
+                        rset.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
 
@@ -248,6 +257,10 @@ public class CountryReport {
     public ArrayList<Country> getCountriesByRegionPopulationDesc() {
         ArrayList<Country> countries = new ArrayList<>();
 
+        if (con == null) {
+            return countries;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -262,14 +275,15 @@ public class CountryReport {
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Country country = new Country();
-                country.setCode(rs.getString("Code"));
-                country.setName(rs.getString("CountryName"));
-                country.setCapitalName(rs.getString("CapitalName"));  // string name of capital
-                country.setDistrict(rs.getString("CapitalDistrict"));     // Capital's district
-                country.setRegion(rs.getString("Region"));
-                country.setContinent(rs.getString("Continent"));
-                country.setPopulation(rs.getInt("Population"));
+                Country country = new Country(
+                        rs.getString("Code"),             // Country code
+                        rs.getString("CountryName"),      // Country name
+                        rs.getString("CapitalName"),      // Capital city name
+                        rs.getString("CapitalDistrict"),  // Capital's district
+                        rs.getString("Region"),           // Region of the country
+                        rs.getString("Continent"),        // Continent name
+                        rs.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
 
@@ -291,6 +305,10 @@ public class CountryReport {
      */
     public ArrayList<Country> getTop5CountriesPerRegion() {
         ArrayList<Country> countries = new ArrayList<>();
+
+        if (con == null) {
+            return countries;
+        }
 
         try {
             Statement stmt = con.createStatement();
@@ -317,14 +335,15 @@ public class CountryReport {
             ResultSet rset = stmt.executeQuery(sql);
 
             while (rset.next()) {
-                Country country = new Country();
-                country.setCode(rset.getString("Code"));
-                country.setName(rset.getString("CountryName"));
-                country.setCapitalName(rset.getString("CapitalName"));      // Capital city name
-                country.setDistrict(rset.getString("CapitalDistrict"));     // Capital's district
-                country.setRegion(rset.getString("Region"));
-                country.setContinent(rset.getString("Continent"));
-                country.setPopulation(rset.getInt("Population"));
+                Country country = new Country(
+                        rset.getString("Code"),             // Country code
+                        rset.getString("CountryName"),      // Country name
+                        rset.getString("CapitalName"),      // Capital city name
+                        rset.getString("CapitalDistrict"),  // Capital's district
+                        rset.getString("Region"),           // Region of the country
+                        rset.getString("Continent"),        // Continent name
+                        rset.getInt("Population")           // Total population
+                );
                 countries.add(country);
             }
 

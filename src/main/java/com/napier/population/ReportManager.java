@@ -23,7 +23,7 @@ public class ReportManager {
      */
     public ReportManager(Connection con) {
         this.con = con;
-        this.display = new Display();
+        this.display = new Display("reports/PopulationReports.txt");
         display.clearReportFile();
     }
 
@@ -37,48 +37,51 @@ public class ReportManager {
      */
     public void generateCityReport() {
         // Create CityReport instance to query database
-        CityReport report = new CityReport(con);
+        try {
+            CityReport report = new CityReport(con);
 
-        // All Cities by Population Report
-        ArrayList<City> allCities = report.getAllCitiesByPopulation();
-        display.writeCityReportToFile(allCities, "No 7 All Cities by Population Report");
+            // All Cities by Population Report
+            ArrayList<City> allCities = report.getAllCitiesByPopulation();
+            display.writeCityReportToFile(allCities, "No 7 All Cities by Population Report");
 
-        // All Cities by Population Report
-        ArrayList<City> citiesByContinent = report.getCitiesByContinentPopulationDesc();
-        display.writeCityReportToFile(citiesByContinent, "No 8 Cities by Continent Population Report");
+            // All Cities by Population Report
+            ArrayList<City> citiesByContinent = report.getCitiesByContinentPopulationDesc();
+            display.writeCityReportToFile(citiesByContinent, "No 8 Cities by Continent Population Report");
 
-        // Top 50 Cities by Population Report
-        ArrayList<City> top50Cities = report.getTop50CitiesByPopulation();
-        display.writeCityReportToFile(top50Cities, "No 12 Top 50 Cities by Population Report");
+            // Top 50 Cities by Population Report
+            ArrayList<City> top50Cities = report.getTop50CitiesByPopulation();
+            display.writeCityReportToFile(top50Cities, "No 12 Top 50 Cities by Population Report");
 
-        // Top 10 Cities By Continent Population Report
-        ArrayList<City> top10Cities = report.getTop10CitiesByContinentPopulation();
-        display.writeCityReportToFile(top10Cities, "No 13 Top 10 Cities By Continent Population Report");
+            // Top 10 Cities By Continent Population Report
+            ArrayList<City> top10Cities = report.getTop10CitiesByContinentPopulation();
+            display.writeCityReportToFile(top10Cities, "No 13 Top 10 Cities By Continent Population Report");
 
-        // The top 5 populated cities in a region.
-        ArrayList<City> top5Cities = report.getTop5CitiesByRegionPopulation();
-        display.writeCityReportToFile(top5Cities, "No 14 Top 5 Cities by Region Population Report");
+            // The top 5 populated cities in a region.
+            ArrayList<City> top5Cities = report.getTop5CitiesByRegionPopulation();
+            display.writeCityReportToFile(top5Cities, "No 14 Top 5 Cities by Region Population Report");
 
-        // Cities by Region Population Report
-        ArrayList<City> cityByRegion = report.getAllCitiesByRegionPopulationDesc();
-        display.writeCityReportToFile(cityByRegion, "No 9 Cities by Region Population Report");
+            // Cities by Region Population Report
+            ArrayList<City> cityByRegion = report.getAllCitiesByRegionPopulationDesc();
+            display.writeCityReportToFile(cityByRegion, "No 9 Cities by Region Population Report");
 
-        // Cities by Country Population Report
-        ArrayList<City> cityByCountry = report.getAllCitiesByCountryPopulationDesc();
-        display.writeCityReportToFile(cityByCountry, "No 10  Cities by Country Population Report");
+            // Cities by Country Population Report
+            ArrayList<City> cityByCountry = report.getAllCitiesByCountryPopulationDesc();
+            display.writeCityReportToFile(cityByCountry, "No 10  Cities by Country Population Report");
 
-        // Cities by District Population Report
-        ArrayList<City> cityByDistrict = report.getCitiesByDistrictPopulationDesc();
-        display.writeCityReportToFile(cityByDistrict, "No 11 Cities by District Population Report");
+            // Cities by District Population Report
+            ArrayList<City> cityByDistrict = report.getCitiesByDistrictPopulationDesc();
+            display.writeCityReportToFile(cityByDistrict, "No 11 Cities by District Population Report");
 
-        // Top 5 Cities By Country Population Report
-        ArrayList<City> top5CitiesByCountries = report.getTop5CitiesByCountryPopulation();
-        display.writeCityReportToFile(top5CitiesByCountries, "No 15 Top 5 Cities By Country Population Report");
+            // Top 5 Cities By Country Population Report
+            ArrayList<City> top5CitiesByCountries = report.getTop5CitiesByCountryPopulation();
+            display.writeCityReportToFile(top5CitiesByCountries, "No 15 Top 5 Cities By Country Population Report");
 
-        //16. The topmost populated cities in each district.
-        ArrayList<City> topMostCity = report.getTopCityByDistrictPopulation();
-        display.writeCityReportToFile(topMostCity, "No 16 Top Most City by District Population Report");
-
+            //16. The topmost populated cities in each district.
+            ArrayList<City> topMostCity = report.getTopCityByDistrictPopulation();
+            display.writeCityReportToFile(topMostCity, "No 16 Top Most City by District Population Report");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -90,31 +93,35 @@ public class ReportManager {
      * 3. Pass to Display for formatted output
      */
     public void generateCountryReport() {
-        CountryReport report = new CountryReport(con);
+        try {
+            CountryReport report = new CountryReport(con);
 
-        // Top 10 Cities By Continent Population Report
-        ArrayList<Country> countriesByContinent = report.getCountriesByContinentPopulationDesc();
-        display.writeCountryReportToFile(countriesByContinent, "No 2 Countries by Continent Population Report");
+            // Top 10 Cities By Continent Population Report
+            ArrayList<Country> countriesByContinent = report.getCountriesByContinentPopulationDesc();
+            display.writeCountryReportToFile(countriesByContinent, "No 2 Countries by Continent Population Report");
 
-        // All Countries by Population Report
-        ArrayList<Country> countriesByPopulation = report.getAllCountriesByPopulationDesc();
-        display.writeCountryReportToFile(countriesByPopulation, "No 1 All Countries by Population Report");
+            // All Countries by Population Report
+            ArrayList<Country> countriesByPopulation = report.getAllCountriesByPopulationDesc();
+            display.writeCountryReportToFile(countriesByPopulation, "No 1 All Countries by Population Report");
 
-        // Top 10 Countries by Continent Population Report
-        ArrayList<Country> top10Countries = report.getTop10CountriesByContinentPopulation();
-        display.writeCountryReportToFile(top10Countries, "No 5 Top 10 Countries by Continent Population Report");
+            // Top 10 Countries by Continent Population Report
+            ArrayList<Country> top10Countries = report.getTop10CountriesByContinentPopulation();
+            display.writeCountryReportToFile(top10Countries, "No 5 Top 10 Countries by Continent Population Report");
 
-        // Top 50 Countries by Population Report
-        ArrayList<Country> top50Countries = report.getTop50CountriesByPopulation();
-        display.writeCountryReportToFile(top50Countries, "No 4 Top 50 Countries by Population Report");
+            // Top 50 Countries by Population Report
+            ArrayList<Country> top50Countries = report.getTop50CountriesByPopulation();
+            display.writeCountryReportToFile(top50Countries, "No 4 Top 50 Countries by Population Report");
 
-        // Countries by Region Population Report
-        ArrayList<Country> countriesByRegion = report.getCountriesByRegionPopulationDesc();
-        display.writeCountryReportToFile(countriesByRegion, "No 3 Countries by Region Population Report");
+            // Countries by Region Population Report
+            ArrayList<Country> countriesByRegion = report.getCountriesByRegionPopulationDesc();
+            display.writeCountryReportToFile(countriesByRegion, "No 3 Countries by Region Population Report");
 
-        // The top 5 populated countries in a region.
-        ArrayList<Country> top5Countries = report.getTop5CountriesPerRegion();
-        display.writeCountryReportToFile(top5Countries, "No 6 Top 5 Countries by Population Report");
+            // The top 5 populated countries in a region.
+            ArrayList<Country> top5Countries = report.getTop5CountriesPerRegion();
+            display.writeCountryReportToFile(top5Countries, "No 6 Top 5 Countries by Population Report");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -126,35 +133,39 @@ public class ReportManager {
      * 3. Pass to Display for formatted output
      */
     public void generateCapitalCityReport() {
-        CapitalCityReport report = new CapitalCityReport(con);
+        try {
+            CapitalCityReport report = new CapitalCityReport(con);
 
-        // No 20 Retrieve the list of the top 50 most populated capital cities from the report
-        ArrayList<City> top50capitals = report.getTop50CapitalCitiesByPopulation();
-        // Write the retrieved data to a file with the given report title
-        display.writeCapitalCityReportToFile(top50capitals, "No 20 Top 50 Capital Cities by Population Report");
+            // No 20 Retrieve the list of the top 50 most populated capital cities from the report
+            ArrayList<City> top50capitals = report.getTop50CapitalCitiesByPopulation();
+            // Write the retrieved data to a file with the given report title
+            display.writeCapitalCityReportToFile(top50capitals, "No 20 Top 50 Capital Cities by Population Report");
 
-        // Fetch all capital cities sorted by continent and descending population
-        ArrayList<City> capitals = report.getAllCapitalCitiesByContinentPopulationDesc();
-        // then write the results to an output file with the given report title.
-        display.writeCityReportToFile(capitals, "No 18 Capital City by Continent Population Report");
+            // Fetch all capital cities sorted by continent and descending population
+            ArrayList<City> capitals = report.getAllCapitalCitiesByContinentPopulationDesc();
+            // then write the results to an output file with the given report title.
+            display.writeCityReportToFile(capitals, "No 18 Capital City by Continent Population Report");
 
-        // No 19 Retrieve all capital cities in each region organized by population
-        ArrayList<City> capitalCitiesByRegion = report.getAllCapitalCitiesByRegionPopulationDesc();
-        display.writeCapitalCityReportToFile(capitalCitiesByRegion, "No 19 Capital Cities by Region Population Report");
+            // No 19 Retrieve all capital cities in each region organized by population
+            ArrayList<City> capitalCitiesByRegion = report.getAllCapitalCitiesByRegionPopulationDesc();
+            display.writeCapitalCityReportToFile(capitalCitiesByRegion, "No 19 Capital Cities by Region Population Report");
 
-        // No 22 Top 5 Capital Cities by Region Population
-        ArrayList<City> top5CapitalsByRegion = report.getTop5CapitalCitiesByRegion();
-        display.writeCapitalCityReportToFile(top5CapitalsByRegion, "No 22 Top 5 Capital Cities by Region Population Report");
+            // No 22 Top 5 Capital Cities by Region Population
+            ArrayList<City> top5CapitalsByRegion = report.getTop5CapitalCitiesByRegion();
+            display.writeCapitalCityReportToFile(top5CapitalsByRegion, "No 22 Top 5 Capital Cities by Region Population Report");
 
-        // No 17 Retrieve all capital cities in the world ordered by population
-        ArrayList<City> allCapitalCities = report.getAllCapitalCitiesByPopulationDesc();
-        // Write the data to a report file
-        display.writeCapitalCityReportToFile(allCapitalCities, "No 17 All Capital Cities by Population Report");
+            // No 17 Retrieve all capital cities in the world ordered by population
+            ArrayList<City> allCapitalCities = report.getAllCapitalCitiesByPopulationDesc();
+            // Write the data to a report file
+            display.writeCapitalCityReportToFile(allCapitalCities, "No 17 All Capital Cities by Population Report");
 
-        // No 21 Top 10 Capital Cities by Continent Population Report
-        ArrayList<City> top10Capitals = report.getTop10CapitalCitiesByContinentPopulation();
-        // Write the data to a report file
-        display.writeCapitalCityReportToFile(top10Capitals, "No 21 Top 10 Capital Cities by Continent Population Report");
+            // No 21 Top 10 Capital Cities by Continent Population Report
+            ArrayList<City> top10Capitals = report.getTop10CapitalCitiesByContinentPopulation();
+            // Write the data to a report file
+            display.writeCapitalCityReportToFile(top10Capitals, "No 21 Top 10 Capital Cities by Continent Population Report");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -166,46 +177,50 @@ public class ReportManager {
      * 3. Pass to Display for formatted output
      */
     public void generatePopulationReport() {
-        PopulationReport report = new PopulationReport(con);
+        try {
+            PopulationReport report = new PopulationReport(con);
 
-        // Retrieve the population report for all countries and write it to a file.
-        ArrayList<PeoplePopulation> populations = report.getCountryPopulationReport();
-        display.writePopulationReportToFile(populations, "Country");
+            // Retrieve the population report for all countries and write it to a file.
+            ArrayList<PeoplePopulation> populations = report.getCountryPopulationReport();
+            display.writePopulationReportToFile(populations, "Country");
 
-        // Get the total world population and write it to a report file.
-        ArrayList<PeoplePopulation> worldPopulations = report.getWorldPopulation();
-        display.writeOverallPopulationReportToFile(worldPopulations, "World");
+            // Get the total world population and write it to a report file.
+            ArrayList<PeoplePopulation> worldPopulations = report.getWorldPopulation();
+            display.writeOverallPopulationReportToFile(worldPopulations, "World");
 
-        // No 29 Total world population
-        ArrayList<PeoplePopulation> totalCountryPopulations = report.getTotalPopulationPerCountry();
-        display.writeOverallPopulationReportToFile(totalCountryPopulations, "Country");
+            // No 29 Total world population
+            ArrayList<PeoplePopulation> totalCountryPopulations = report.getTotalPopulationPerCountry();
+            display.writeOverallPopulationReportToFile(totalCountryPopulations, "Country");
 
-        // Call the method in PopulationReport to get total population per continent
-        ArrayList<PeoplePopulation> continentTotalPopulations = report.getContinentTotalPopulation();
-        // Write the population report to file using Display
-        display.writeOverallPopulationReportToFile(continentTotalPopulations, "Continent");
+            // Call the method in PopulationReport to get total population per continent
+            ArrayList<PeoplePopulation> continentTotalPopulations = report.getContinentTotalPopulation();
+            // Write the population report to file using Display
+            display.writeOverallPopulationReportToFile(continentTotalPopulations, "Continent");
 
-        // No 31 the total city population and write it to a report file.
-        ArrayList<PeoplePopulation> cityTotalPopulations = report.getCityTotalPopulation();
-        display.writeOverallPopulationReportToFile(cityTotalPopulations, "City");
+            // No 31 the total city population and write it to a report file.
+            ArrayList<PeoplePopulation> cityTotalPopulations = report.getCityTotalPopulation();
+            display.writeOverallPopulationReportToFile(cityTotalPopulations, "City");
 
-        // No 23 Continent Population Report
-        ArrayList<PeoplePopulation> continentPopulations = report.getContinentPopulationReport();
-        display.writePopulationReportToFile(continentPopulations, "Continent");
+            // No 23 Continent Population Report
+            ArrayList<PeoplePopulation> continentPopulations = report.getContinentPopulationReport();
+            display.writePopulationReportToFile(continentPopulations, "Continent");
 
-        // No 30 get District Total Population
-        ArrayList<PeoplePopulation> districtTotalPopulations = report.getDistrictTotalPopulation();
-        display.writeOverallPopulationReportToFile(districtTotalPopulations, "District");
+            // No 30 get District Total Population
+            ArrayList<PeoplePopulation> districtTotalPopulations = report.getDistrictTotalPopulation();
+            display.writeOverallPopulationReportToFile(districtTotalPopulations, "District");
 
-        // No 24 Call the method in PopulationReport to get population data per region
-        ArrayList<PeoplePopulation> regionPopulations = report.getRegionPopulationReport();
-        // Write the population report to file using Display
-        display.writePopulationReportToFile(regionPopulations, "Region");
+            // No 24 Call the method in PopulationReport to get population data per region
+            ArrayList<PeoplePopulation> regionPopulations = report.getRegionPopulationReport();
+            // Write the population report to file using Display
+            display.writePopulationReportToFile(regionPopulations, "Region");
 
-        // No 28 Call the method in PopulationReport to get total population per region
-        ArrayList<PeoplePopulation> regionTotalPopulations = report.getRegionTotalPopulation();
-        // Write the population report to file using Display
-        display.writeOverallPopulationReportToFile(regionTotalPopulations, "Region");
+            // No 28 Call the method in PopulationReport to get total population per region
+            ArrayList<PeoplePopulation> regionTotalPopulations = report.getRegionTotalPopulation();
+            // Write the population report to file using Display
+            display.writeOverallPopulationReportToFile(regionTotalPopulations, "Region");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

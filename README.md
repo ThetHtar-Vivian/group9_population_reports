@@ -94,7 +94,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 19. All the capital cities in a region organised by largest to smallest.
 
-    [![No19getCapitalCitiesByRegionPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No19getCapitalCitiesByRegionPopulationDesc&label=No19getCapitalCitiesByRegionPopulationDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No19getCapitalCitiesByRegionPopulationDesc)
+    [![No19getCapitalCitiesByRegionPopulationDesc](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No19getAllCapitalCitiesByRegionPopulationDesc&label=No19getAllCapitalCitiesByRegionPopulationDesc&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No19getAllCapitalCitiesByRegionPopulationDesc)
 
 20. The top N populated capital cities in the world where N is provided by the user.
 
@@ -106,7 +106,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 22. The top N populated capital cities in a region where N is provided by the user.
 
-    [![No22getTop5CapitalCitiesByRegionPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No22getTop5CapitalCitiesByRegionPopulation&label=No22getTop5CapitalCitiesByRegionPopulation&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No22getTop5CapitalCitiesByRegionPopulation)
+    [![No22getTop5CapitalCitiesByRegionPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No22getTop5CapitalCitiesByRegion&label=No22getTop5CapitalCitiesByRegion&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No22getTop5CapitalCitiesByRegion)
 
 23. The population of people, people living in cities, and people not living in cities in each continent.
 
@@ -134,7 +134,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 29. The population of a country.
 
-    [![No29getCountryTotalPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No29getCountryTotalPopulation&label=No29getCountryTotalPopulation&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No29getCountryTotalPopulation)
+    [![No29getCountryTotalPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No29getCountryPopulations&label=No29getCountryPopulations&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No29getCountryPopulations)
 
 30. The population of a district.
 
@@ -151,7 +151,7 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
     * Spanish.
     * Arabic.
 
-    [![No32getContinentTotalPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No32getContinentTotalPopulation&label=No32getContinentTotalPopulation&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No32getContinentTotalPopulation)
+    [![No32getContinentTotalPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No32getTopLanguagesReport&label=No32getTopLanguagesReport&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No32getTopLanguagesReport)
 
 ---
 
@@ -159,12 +159,12 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 | Matriculation Number | Code Review 1 | Code Review 2 |
 | -------------------- |:-------------:|:-------------:|
-| 40794415             |18             |               |
-| 40794414             |18             |               |
-| 40804618             |16             |               |
-| 40794411             |16             |               |
-| 40794410             |16             |               |
-| 40794501             |16             |               |
-| Total                |100            |               |
+| 40794415             |      18       |      18       |
+| 40794414             |      18       |      18       |
+| 40804618             |      16       |      16       |
+| 40794411             |      16       |      16       |
+| 40794410             |      16       |      16       |
+| 40794501             |      16       |      16       |
+| Total                |      100      |      100      |
 
 ---

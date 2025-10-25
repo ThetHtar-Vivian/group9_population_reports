@@ -52,102 +52,27 @@ public class PeoplePopulation {
         this.totalPopulation = totalPopulation;
     }
 
-    // Getters and setters
-
-    /**
-     * @return the level of aggregation (World, Continent, Region, Country)
-     */
-    public String getLevel() {
-        return level;
-    }
-
-    /**
-     * @param level sets the aggregation level
-     */
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    /**
-     * @return the total population
-     */
     public long getTotalPopulation() {
         return totalPopulation;
     }
 
-    /**
-     * @param totalPopulation sets the total population
-     */
-    public void setTotalPopulation(long totalPopulation) {
-        this.totalPopulation = totalPopulation;
-    }
-
-    /**
-     * @return the city population
-     */
     public long getCityPopulation() {
         return cityPopulation;
     }
 
-    /**
-     * @param cityPopulation sets the city population
-     */
-    public void setCityPopulation(long cityPopulation) {
-        this.cityPopulation = cityPopulation;
-    }
-
-    /**
-     * @return the non-city (rural) population
-     */
     public long getNonCityPopulation() {
         return nonCityPopulation;
     }
 
-    /**
-     * @param nonCityPopulation sets the non-city (rural) population
-     */
-    public void setNonCityPopulation(long nonCityPopulation) {
-        this.nonCityPopulation = nonCityPopulation;
+    public String getLevel() {
+        return level;
     }
 
-    /**
-     * @return percentage of population living in cities
-     */
     public double getCityPopulationPercentage() {
         return cityPopulationPercentage;
     }
 
-    /**
-     * @param cityPopulationPercentage sets percentage of city population
-     */
-    public void setCityPopulationPercentage(double cityPopulationPercentage) {
-        this.cityPopulationPercentage = cityPopulationPercentage;
-    }
-
-    /**
-     * @return percentage of population not living in cities
-     */
     public double getNonCityPopulationPercentage() {
         return nonCityPopulationPercentage;
-    }
-
-    /**
-     * @param nonCityPopulationPercentage sets percentage of non-city population
-     */
-    public void setNonCityPopulationPercentage(double nonCityPopulationPercentage) {
-        this.nonCityPopulationPercentage = nonCityPopulationPercentage;
-    }
-
-    /**
-     * Returns a string representation of the PeoplePopulation object.
-     *
-     * @return Formatted string containing all population details
-     */
-    @Override
-    public String toString() {
-        return String.format(
-                "PeoplePopulation{level='%s', totalPopulation=%d, cityPopulation=%d (%.2f%%), nonCityPopulation=%d (%.2f%%)}",
-                level, totalPopulation, cityPopulation, cityPopulationPercentage, nonCityPopulation, nonCityPopulationPercentage
-        );
     }
 }

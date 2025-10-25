@@ -24845,8 +24845,8 @@ Zimbabwe                       11669000             2730420 (23.40%)            
 World                                    Total Population    
 World                                    6078749450          
 
-===== City Total Population Report =====
-City                                     Total Population    
+===== Country Total Population Report =====
+Country                                  Total Population    
 China                                    1277558000          
 India                                    1013662000          
 United States                            278357000           

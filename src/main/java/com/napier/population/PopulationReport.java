@@ -32,6 +32,10 @@ public class PopulationReport {
     public ArrayList<PeoplePopulation> getCountryPopulationReport() {
         ArrayList<PeoplePopulation> populations = new ArrayList<>();
 
+        if (con == null) {
+            return populations;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
@@ -51,12 +55,12 @@ public class PopulationReport {
 
             // Process each record
             while (rset.next()) {
-                String level = rset.getString("CountryName");
-                long total = rset.getLong("TotalPopulation");
-                long cityPop = rset.getLong("CityPopulation");
-                long nonCityPop = rset.getLong("NonCityPopulation");
-
-                PeoplePopulation pop = new PeoplePopulation(level, total, cityPop, nonCityPop);
+                PeoplePopulation pop = new PeoplePopulation(
+                        rset.getString("CountryName"),
+                        rset.getLong("TotalPopulation"),
+                        rset.getLong("CityPopulation"),
+                        rset.getLong("NonCityPopulation")
+                );
                 populations.add(pop);
             }
 
@@ -75,15 +79,19 @@ public class PopulationReport {
     public ArrayList<PeoplePopulation> getWorldPopulation() {
         ArrayList<PeoplePopulation> worldPopulations = new ArrayList<>();
 
+        if (con == null) {
+            return worldPopulations;
+        }
+
         try {
             Statement stmt = con.createStatement();
 
-            // ✅ SQL: Calculate total world population
+            // SQL: Calculate total world population
             String sql = "SELECT SUM(Population) AS WorldPopulation FROM country;";
 
             ResultSet rset = stmt.executeQuery(sql);
 
-            // ✅ Process result
+            // Process result
             if (rset.next()) {
                 long total = rset.getLong("WorldPopulation");
                 PeoplePopulation pop = new PeoplePopulation("World", total);
@@ -108,6 +116,10 @@ public class PopulationReport {
      */
     public ArrayList<PeoplePopulation> getTotalPopulationPerCountry() {
         ArrayList<PeoplePopulation> populations = new ArrayList<>();
+
+        if (con == null) {
+            return populations;
+        }
 
         try {
             Statement stmt = con.createStatement();
@@ -141,6 +153,7 @@ public class PopulationReport {
 
         return populations;
     }
+
     /**
      * No 27 Retrieves the total population of each continent.
      *
@@ -148,6 +161,11 @@ public class PopulationReport {
      */
     public ArrayList<PeoplePopulation> getContinentTotalPopulation() {
         ArrayList<PeoplePopulation> continentPopulations = new ArrayList<>();
+
+
+        if (con == null) {
+            return continentPopulations;
+        }
 
         try {
             Statement stmt = con.createStatement();
@@ -176,6 +194,7 @@ public class PopulationReport {
 
         return continentPopulations;
     }
+
     /**
      * Retrieves the total population for each district within each country.
      * Groups the city data by both CountryCode and District to avoid merging
@@ -186,6 +205,10 @@ public class PopulationReport {
     public ArrayList<PeoplePopulation> getDistrictTotalPopulation() {
         // Initialize list to store population data by district
         ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+
+        if (con == null) {
+            return peoplePopulations;
+        }
 
         try {
             // Create SQL statement object
@@ -230,6 +253,10 @@ public class PopulationReport {
         // Create a list to store population results
         ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
 
+        if (con == null) {
+            return peoplePopulations;
+        }
+
         try {
             // Create SQL statement object for query execution
             Statement stmt = con.createStatement();
@@ -237,10 +264,14 @@ public class PopulationReport {
             // SQL query to calculate continent-level populations
             String sql = "SELECT c.Continent AS name, " +
                     "SUM(c.Population) AS totalPopulation, " +
-                    "SUM(ci.Population) AS cityPopulation, " +
-                    "(SUM(c.Population) - SUM(ci.Population)) AS nonCityPopulation " +
+                    "SUM(ci.cityPopulation) AS cityPopulation, " +
+                    "SUM(c.Population - IFNULL(ci.cityPopulation, 0)) AS nonCityPopulation " +
                     "FROM country c " +
-                    "LEFT JOIN city ci ON ci.CountryCode = c.Code " +
+                    "LEFT JOIN ( " +
+                    "    SELECT CountryCode, SUM(Population) AS cityPopulation " +
+                    "    FROM city " +
+                    "    GROUP BY CountryCode " +
+                    ") ci ON ci.CountryCode = c.Code " +
                     "GROUP BY c.Continent";
 
             // Execute query and store result set
@@ -273,6 +304,10 @@ public class PopulationReport {
     public ArrayList<PeoplePopulation> getCityTotalPopulation() {
         // Create a list to store city-level population data
         ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+
+        if (con == null) {
+            return peoplePopulations;
+        }
 
         try {
             // Create SQL statement object
@@ -317,6 +352,10 @@ public class PopulationReport {
         // Initialize list to store language report data
         ArrayList<CountryLanguage> languages = new ArrayList<>();
 
+        if (con == null) {
+            return languages;
+        }
+
         try {
             // Create a Statement object to execute SQL queries
             Statement stmt = con.createStatement();
@@ -324,31 +363,24 @@ public class PopulationReport {
             // SQL query to calculate total speakers and world percentage for selected languages
             String sql = "SELECT " +
                     "cl.Language AS language, " +
-                    "SUM(c.Population * (cl.Percentage / 100)) AS totalSpeakers, " +
-                    "ROUND(SUM(c.Population * (cl.Percentage / 100)) / " +
+                    "ROUND(SUM(ROUND(c.Population * (cl.Percentage / 100))), 0) AS totalSpeakers, " +
+                    "ROUND(SUM(ROUND(c.Population * (cl.Percentage / 100))) / " +
                     "(SELECT SUM(Population) FROM country) * 100, 2) AS worldPercentage " +
                     "FROM countrylanguage cl " +
                     "JOIN country c ON cl.CountryCode = c.Code " +
                     "WHERE cl.Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic') " +
                     "GROUP BY cl.Language " +
-                    "ORDER BY totalSpeakers DESC;";
-
+                    "ORDER BY totalSpeakers DESC";
             // Execute the SQL query and obtain results
             ResultSet rset = stmt.executeQuery(sql);
 
             // Loop through the result set to populate CountryLanguage objects
             while (rset.next()) {
-                CountryLanguage cl = new CountryLanguage();
-
-                // Set the language name
-                cl.setLanguage(rset.getString("language"));
-
-                // Store total speakers temporarily in the 'percentage' field
-                // (optional: could create a separate field for total speakers)
-                cl.setPercentage(rset.getDouble("totalSpeakers"));
-
-                // Set world population percentage for this language
-                cl.setWorld_percentage(rset.getDouble("worldPercentage"));
+                CountryLanguage cl = new CountryLanguage(
+                        rset.getString("language"),
+                        rset.getDouble("totalSpeakers"),
+                        rset.getDouble("worldPercentage")
+                );
 
                 // Add the CountryLanguage object to the list
                 languages.add(cl);
@@ -378,6 +410,10 @@ public class PopulationReport {
         // List to store population data for each region
         ArrayList<PeoplePopulation> regionPopulations = new ArrayList<>();
 
+        if (con == null) {
+            return regionPopulations;
+        }
+
         try {
             // Create a SQL statement
             Statement stmt = con.createStatement();
@@ -388,10 +424,15 @@ public class PopulationReport {
             // - Groups results by region
             String sql = "SELECT co.Region AS RegionName, " +
                     "SUM(co.Population) AS TotalPopulation, " +
-                    "SUM(ci.Population) AS CityPopulation " +
+                    "SUM(ci.CityPopulation) AS CityPopulation, " +
+                    "SUM(co.Population - IFNULL(ci.CityPopulation, 0)) AS NonCityPopulation " +
                     "FROM country co " +
-                    "LEFT JOIN city ci ON ci.CountryCode = co.Code " +
-                    "GROUP BY co.Region;";
+                    "LEFT JOIN ( " +
+                    "    SELECT CountryCode, SUM(Population) AS CityPopulation " +
+                    "    FROM city " +
+                    "    GROUP BY CountryCode " +
+                    ") ci ON ci.CountryCode = co.Code " +
+                    "GROUP BY co.Region";
 
             // Execute the query
             ResultSet rset = stmt.executeQuery(sql);
@@ -425,6 +466,10 @@ public class PopulationReport {
     public ArrayList<PeoplePopulation> getRegionTotalPopulation() {
         // List to store total population data per region
         ArrayList<PeoplePopulation> regionPopulations = new ArrayList<>();
+
+        if (con == null) {
+            return regionPopulations;
+        }
 
         try {
             // Create a SQL statement
