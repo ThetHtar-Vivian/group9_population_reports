@@ -23,4 +23,34 @@ class ReportManagerTest {
     @AfterEach
     void tearDown() {
     }
+
+    @Test
+    void testGenerateCityReport() {
+        assertDoesNotThrow(() -> manager.generateCityReport(),
+                "generateCityReport() should not throw any exceptions");
+    }
+
+    @Test
+    void testGenerateCountryReport() {
+        assertDoesNotThrow(() -> manager.generateCountryReport(),
+                "generateCountryReport() should not throw any exceptions");
+    }
+
+    @Test
+    void testGenerateCapitalCityReport() {
+        assertDoesNotThrow(() -> manager.generateCapitalCityReport(),
+                "generateCapitalCityReport() should not throw any exceptions");
+    }
+
+    @Test
+    void testGeneratePopulationReport() {
+        assertDoesNotThrow(() -> manager.generatePopulationReport(),
+                "generatePopulationReport() should not throw any exceptions");
+    }
+
+    @Test
+    void testGenerateLanguageReport() {
+        assertDoesNotThrow(() -> manager.generateLanguageReport(),
+                "generateLanguageReport() should not throw any exceptions");
+    }
 }

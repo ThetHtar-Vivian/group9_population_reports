@@ -1,12 +1,10 @@
 version: '3'
 services:
+  # Application Dockerfile is in same folder which is .
   app:
     build: .
     volumes:
-      - ./reports:/app/reports
-    depends_on:
-      - db
-    working_dir: /app
+      - ./reports:/tmp/reports
 
   db:
     build: db/.

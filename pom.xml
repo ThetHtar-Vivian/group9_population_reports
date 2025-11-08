@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.napier.population</groupId>
-    <artifactId>populationTest</artifactId>
+    <artifactId>world-population</artifactId>
     <version>0.1.0.1</version>
 
     <properties>
