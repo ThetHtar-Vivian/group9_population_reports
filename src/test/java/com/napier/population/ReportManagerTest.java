@@ -16,7 +16,7 @@ class ReportManagerTest {
     @BeforeEach
     void setUp() {
         db = new DbConnection();// Establish connection to the database
-        connection = db.connect("localhost:33060", 10000);
+        connection = db.connect("localhost:33060", 10000, "com.mysql.cj.jdbc.Driver");
         manager = new ReportManager(connection);
     }
 

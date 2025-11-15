@@ -18,9 +18,9 @@ public class App {
         // Establish connection to the database
         Connection con;
         if(args.length < 1){
-            con = db.connect("localhost:33060", 30000);
+            con = db.connect("localhost:33060", 30000, "com.mysql.cj.jdbc.Driver");
         } else {
-            con = db.connect(args[0], Integer.parseInt(args[1]));
+            con = db.connect(args[0], Integer.parseInt(args[1]), args[2]);
         }
 
         // Initialize ReportManager with the database connection

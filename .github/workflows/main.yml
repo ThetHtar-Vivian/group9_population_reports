@@ -1,22 +1,91 @@
-name: A workflow for world-population App
-on: push
+name: A workflow for my Global World Population App
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+permissions:
+  contents: write
+  pages: write
 
 jobs:
-  build:
-    name: world-population action
-    runs-on: ubuntu-22.04
+  UnitTests:
+    name: Unit Tests
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up JDK 24
+        uses: actions/setup-java@v2
         with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: Build with Maven
-        run: mvn package
-      - name: Run docker compose
-        run: docker compose up --abort-on-container-exit
+          java-version: '24'
+          distribution: 'temurin'
+      - name: Unit Tests
+        run: mvn -Dtest=com.napier.population.DisplayTest test
+      - name: CodeCov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./target/site/jacoco/jacoco.xml
+          flags: Unit Tests # optional
+          fail_ci_if_error: true
+          verbose: true # optional (default = false)
 
+  IntegrationTests:
+    name: Integration Tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up JDK 24
+        uses: actions/setup-java@v2
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+      - name: Integration Tests
+        run: |
+          docker compose up -d db
+          mvn test
+      - name: Shutdown
+        run: docker compose down
+      - name: CodeCov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ./target/site/jacoco/jacoco.xml
+          flags: Unit Tests # optional
+          fail_ci_if_error: true
+          verbose: true # optional (default = false)
+
+
+  build:
+    name: Build Run in Docker and Deploy Release
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up JDK 24
+        uses: actions/setup-java@v2
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+      - name: Package and Run docker compose
+        run: |
+          mvn package -DskipTests
+          docker compose up --abort-on-container-exit
+      - name: Copy Output
+        run: |
+          mkdir -p reports
+          docker container cp populationtest-app-1:./tmp/reports/. ./reports
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: reports # The branch the action should deploy to.
+          folder: reports # The folder we are copying
