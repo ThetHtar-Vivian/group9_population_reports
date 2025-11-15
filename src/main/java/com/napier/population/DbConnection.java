@@ -20,13 +20,13 @@ public class DbConnection {
      * Includes retry logic (up to 10 attempts) with a wait time
      * between retries, useful when the database container is starting up.
      */
-    public Connection connect(String location, int delay) {
+    public Connection connect(String location, int delay, String className) {
         try {
             // Load Database driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(className);
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
-            System.exit(-1);
+            throw new RuntimeException(e);
         }
 
         int retries = 10;
