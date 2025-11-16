@@ -62,7 +62,6 @@ jobs:
           fail_ci_if_error: true
           verbose: true # optional (default = false)
 
-
   build:
     name: Build Run in Docker and Deploy Release
     runs-on: ubuntu-24.04
