@@ -82,12 +82,7 @@ jobs:
       - name: Copy Output
         run: |
           mkdir -p reports
-          CONTAINER=$(docker compose ps -q app)
-          docker cp $CONTAINER:/tmp/reports/ ../reports
-      - name: List reports directory
-        run: |
-          echo "Reports directory contents:"
-          ls -R ./reports
+          docker container cp group9_population_reports-app-1:./tmp/reports/. ./reports
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
