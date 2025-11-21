@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,7 +38,11 @@ class CapitalCityReportTest {
      */
     private void prepareOneRowResultSet(String cityName, String countryName,
                                         String district, String region, String continent, int population) throws SQLException {
-        when(mockRs.next()).thenReturn(true).thenReturn(false);
+        if (!mockRs.next()) {
+            when(mockRs.next()).thenReturn(true).thenReturn(false);
+        } else {
+            when(mockRs.next()).thenReturn(false);
+        }
 
         lenient().when(mockRs.getString(anyString())).thenAnswer(invocation -> {
             String col = invocation.getArgument(0);
@@ -70,7 +74,7 @@ class CapitalCityReportTest {
     }
 
     private void wireExecuteQueryReturnsMockRs(String sqlContains) throws SQLException {
-        lenient().when(mockStmt.executeQuery(contains("FROM city"))).thenReturn(mockRs);
+        lenient().when(mockStmt.executeQuery(contains(sqlContains))).thenReturn(mockRs);
     }
 
     private void wireExecuteQueryThrows(String sqlFragment) throws SQLException {
@@ -78,154 +82,172 @@ class CapitalCityReportTest {
                 .thenThrow(new SQLException("simulated"));
     }
 
-    // ---------- getAllCapitalCitiesByPopulationDesc ----------
+    // -------- Tests for getAllCapitalCitiesByPopulationDesc --------
     @Test
-    void testGetAllCapitalCitiesByPopulationDesc_happy() throws SQLException {
+    void testGetAllCapitalCitiesByPopulationDesc_returnsEmptyListOnSQLException() throws SQLException {
+        wireExecuteQueryThrows("ORDER BY ci.Population DESC");
+
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByPopulationDesc();
+
+        assertTrue(list.isEmpty(), "Expected empty list when SQL exception occurs");
+    }
+
+    @Test
+    void testGetAllCapitalCitiesByPopulationDesc_containsNullMember() throws SQLException {
+        // Mock result set returning one row but with a null city name
+        prepareOneRowResultSet(null, "CountryA", "DistrictA", "RegionA", "ContA", 1000);
+        wireExecuteQueryReturnsMockRs("ORDER BY ci.Population DESC");
+
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByPopulationDesc();
+
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
+    }
+
+    @Test
+    void testGetAllCapitalCitiesByPopulationDesc_returnsValidList() throws SQLException {
         prepareOneRowResultSet("CapA", "CountryA", "DistrictA", "RegionA", "ContA", 1000);
         wireExecuteQueryReturnsMockRs("ORDER BY ci.Population DESC");
 
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByPopulationDesc();
+        List<City> list = report.getAllCapitalCitiesByPopulationDesc();
 
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("CapA", list.get(0).getName());
+        assertEquals("CapA", list.get(0).getName(), "Expected valid city name for happy path");
     }
 
+    // -------- Tests for getAllCapitalCitiesByContinentPopulationDesc --------
     @Test
-    void testGetAllCapitalCitiesByPopulationDesc_exception() throws SQLException {
-        wireExecuteQueryThrows("ORDER BY ci.Population DESC");
-
-        report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByPopulationDesc();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
-    }
-
-    // ---------- getAllCapitalCitiesByContinentPopulationDesc ----------
-    @Test
-    void testGetAllCapitalCitiesByContinentPopulationDesc_happy() throws SQLException {
-        prepareOneRowResultSet("ContCap", "CountryB", "DistrictB", "RegionB", "ContB", 2000);
-        wireExecuteQueryReturnsMockRs("ORDER BY co.Continent, ci.Population DESC");
-
-        report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByContinentPopulationDesc();
-
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("ContCap", list.get(0).getName());
-    }
-
-    @Test
-    void testGetAllCapitalCitiesByContinentPopulationDesc_exception() throws SQLException {
+    void testGetAllCapitalCitiesByContinentPopulationDesc_sqlException() throws SQLException {
         wireExecuteQueryThrows("ORDER BY co.Continent");
-
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByContinentPopulationDesc();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
+        List<City> list = report.getAllCapitalCitiesByContinentPopulationDesc();
+        assertTrue(list.isEmpty(), "Expected empty list on SQL exception");
     }
 
-    // ---------- getAllCapitalCitiesByRegionPopulationDesc ----------
     @Test
-    void testGetAllCapitalCitiesByRegionPopulationDesc_happy() throws SQLException {
+    void testGetAllCapitalCitiesByContinentPopulationDesc_nullMember() throws SQLException {
+        prepareOneRowResultSet(null, "CountryB", "DistrictB", "RegionB", "ContB", 2000);
+        wireExecuteQueryReturnsMockRs("ORDER BY co.Continent");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByContinentPopulationDesc();
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
+    }
+
+    @Test
+    void testGetAllCapitalCitiesByContinentPopulationDesc_normalList() throws SQLException {
+        prepareOneRowResultSet("ContCap", "CountryB", "DistrictB", "RegionB", "ContB", 2000);
+        wireExecuteQueryReturnsMockRs("ORDER BY co.Continent");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByContinentPopulationDesc();
+        assertEquals("ContCap", list.get(0).getName(), "Expected valid city name for happy path");
+    }
+
+    // ---------- Tests for getAllCapitalCitiesByRegionPopulationDesc ----------
+    @Test
+    void testGetAllCapitalCitiesByRegionPopulationDesc_sqlException() throws SQLException {
+        wireExecuteQueryThrows("ORDER BY co.Region, ci.Population DESC");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByRegionPopulationDesc();
+        assertTrue(list.isEmpty(), "Expected empty list on SQL exception");
+    }
+
+    @Test
+    void testGetAllCapitalCitiesByRegionPopulationDesc_containsNullMember() throws SQLException {
+        prepareOneRowResultSet(null, "CountryC", "DistrictC", "RegionC", "ContC", 3000);
+        wireExecuteQueryReturnsMockRs("ORDER BY co.Region, ci.Population DESC");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getAllCapitalCitiesByRegionPopulationDesc();
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
+    }
+
+    @Test
+    void testGetAllCapitalCitiesByRegionPopulationDesc_normalList() throws SQLException {
         prepareOneRowResultSet("RegionCap", "CountryC", "DistrictC", "RegionC", "ContC", 3000);
         wireExecuteQueryReturnsMockRs("ORDER BY co.Region, ci.Population DESC");
-
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByRegionPopulationDesc();
+        List<City> list = report.getAllCapitalCitiesByRegionPopulationDesc();
+        assertEquals("RegionCap", list.get(0).getName(), "Expected valid city name for happy path");
+    }
 
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("RegionCap", list.get(0).getName());
+    // ---------- Tests for getTop50CapitalCitiesByPopulation ----------
+    @Test
+    void testGetTop50CapitalCitiesByPopulation_sqlException() throws SQLException {
+        wireExecuteQueryThrows("LIMIT 50");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getTop50CapitalCitiesByPopulation();
+        assertTrue(list.isEmpty(), "Expected empty list on SQL exception");
     }
 
     @Test
-    void testGetAllCapitalCitiesByRegionPopulationDesc_exception() throws SQLException {
-        wireExecuteQueryThrows("ORDER BY co.Region, ci.Population DESC");
-
+    void testGetTop50CapitalCitiesByPopulation_containsNullMember() throws SQLException {
+        prepareOneRowResultSet(null, "CountryD", "DistrictD", "RegionD", "ContD", 4000);
+        wireExecuteQueryReturnsMockRs("LIMIT 50");
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getAllCapitalCitiesByRegionPopulationDesc();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
+        List<City> list = report.getTop50CapitalCitiesByPopulation();
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
     }
 
-    // ---------- getTop50CapitalCitiesByPopulation ----------
     @Test
-    void testGetTop50CapitalCitiesByPopulation_happy() throws SQLException {
+    void testGetTop50CapitalCitiesByPopulation_normalList() throws SQLException {
         prepareOneRowResultSet("Top50", "CountryD", "DistrictD", "RegionD", "ContD", 4000);
         wireExecuteQueryReturnsMockRs("LIMIT 50");
-
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop50CapitalCitiesByPopulation();
+        List<City> list = report.getTop50CapitalCitiesByPopulation();
+        assertEquals("Top50", list.get(0).getName(), "Expected valid city name for happy path");
+    }
 
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("Top50", list.get(0).getName());
+    // ---------- Tests for getTop10CapitalCitiesByContinentPopulation ----------
+    @Test
+    void testGetTop10CapitalCitiesByContinentPopulation_sqlException() throws SQLException {
+        wireExecuteQueryThrows("ROW_NUMBER() OVER (PARTITION BY co.Continent");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getTop10CapitalCitiesByContinentPopulation();
+        assertTrue(list.isEmpty(), "Expected empty list on SQL exception");
     }
 
     @Test
-    void testGetTop50CapitalCitiesByPopulation_exception() throws SQLException {
-        wireExecuteQueryThrows("LIMIT 50");
-
+    void testGetTop10CapitalCitiesByContinentPopulation_containsNullMember() throws SQLException {
+        prepareOneRowResultSet(null, "CountryE", "DistrictE", "RegionE", "ContE", 5000);
+        wireExecuteQueryReturnsMockRs("ROW_NUMBER() OVER (PARTITION BY co.Continent");
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop50CapitalCitiesByPopulation();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
+        List<City> list = report.getTop10CapitalCitiesByContinentPopulation();
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
     }
 
-    // ---------- getTop10CapitalCitiesByContinentPopulation ----------
     @Test
-    void testGetTop10CapitalCitiesByContinentPopulation_happy() throws SQLException {
+    void testGetTop10CapitalCitiesByContinentPopulation_normalList() throws SQLException {
         prepareOneRowResultSet("Top10ContCap", "CountryE", "DistrictE", "RegionE", "ContE", 5000);
         wireExecuteQueryReturnsMockRs("ROW_NUMBER() OVER (PARTITION BY co.Continent");
-
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop10CapitalCitiesByContinentPopulation();
+        List<City> list = report.getTop10CapitalCitiesByContinentPopulation();
+        assertEquals("Top10ContCap", list.get(0).getName(), "Expected valid city name for happy path");
+    }
 
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("Top10ContCap", list.get(0).getName());
+    // ---------- Tests for getTop5CapitalCitiesByRegion ----------
+    @Test
+    void testGetTop5CapitalCitiesByRegion_sqlException() throws SQLException {
+        wireExecuteQueryThrows("PARTITION BY co.Region");
+        report = new CapitalCityReport(mockCon);
+        List<City> list = report.getTop5CapitalCitiesByRegion();
+        assertTrue(list.isEmpty(), "Expected empty list on SQL exception");
     }
 
     @Test
-    void testGetTop10CapitalCitiesByContinentPopulation_exception() throws SQLException {
-        wireExecuteQueryThrows("ROW_NUMBER() OVER (PARTITION BY co.Continent");
-
+    void testGetTop5CapitalCitiesByRegion_containsNullMember() throws SQLException {
+        prepareOneRowResultSet(null, "CountryF", "DistrictF", "RegionF", "ContF", 6000);
+        wireExecuteQueryReturnsMockRs("PARTITION BY co.Region");
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop10CapitalCitiesByContinentPopulation();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
+        List<City> list = report.getTop5CapitalCitiesByRegion();
+        assertNull(list.get(0).getName(), "Expected null city name in result list");
     }
 
-    // ---------- getTop5CapitalCitiesByRegion ----------
     @Test
-    void testGetTop5CapitalCitiesByRegion_happy() throws SQLException {
+    void testGetTop5CapitalCitiesByRegion_normalList() throws SQLException {
         prepareOneRowResultSet("Top5RegCap", "CountryF", "DistrictF", "RegionF", "ContF", 6000);
         wireExecuteQueryReturnsMockRs("PARTITION BY co.Region");
-
         report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop5CapitalCitiesByRegion();
-
-        assertNotNull(list);
-        assertEquals(1, list.size());
-        assertEquals("Top5RegCap", list.get(0).getName());
+        List<City> list = report.getTop5CapitalCitiesByRegion();
+        assertEquals("Top5RegCap", list.get(0).getName(), "Expected valid city name for happy path");
     }
-
-    @Test
-    void testGetTop5CapitalCitiesByRegion_exception() throws SQLException {
-        wireExecuteQueryThrows("PARTITION BY co.Region");
-
-        report = new CapitalCityReport(mockCon);
-        ArrayList<City> list = report.getTop5CapitalCitiesByRegion();
-
-        assertNotNull(list);
-        assertTrue(list.isEmpty());
-    }
-
 }

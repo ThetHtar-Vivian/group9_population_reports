@@ -1,10 +1,14 @@
 package com.napier.population;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PopulationReport is responsible for generating
@@ -14,6 +18,7 @@ public class PopulationReport {
 
     // Active database connection used to query capital city information
     private Connection con;
+    Logger log = LoggerFactory.getLogger(PopulationReport.class);
 
     /**
      * Constructor initializes the PopulationReport with a database connection.
@@ -29,8 +34,8 @@ public class PopulationReport {
      *
      * @return List of PeoplePopulation objects representing each country's population data.
      */
-    public ArrayList<PeoplePopulation> getCountryPopulationReport() {
-        ArrayList<PeoplePopulation> populations = new ArrayList<>();
+    public List<PeoplePopulation> getCountryPopulationReport() {
+        List<PeoplePopulation> populations = new ArrayList<>();
 
         if (con == null) {
             return populations;
@@ -65,7 +70,7 @@ public class PopulationReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get population by country: " + e.getMessage());
+            log.debug("Failed to get population by country: ", e);
         }
 
         return populations;
@@ -76,8 +81,8 @@ public class PopulationReport {
      *
      * @return a list with one PeoplePopulation object labeled "World"
      */
-    public ArrayList<PeoplePopulation> getWorldPopulation() {
-        ArrayList<PeoplePopulation> worldPopulations = new ArrayList<>();
+    public List<PeoplePopulation> getWorldPopulation() {
+        List<PeoplePopulation> worldPopulations = new ArrayList<>();
 
         if (con == null) {
             return worldPopulations;
@@ -102,7 +107,7 @@ public class PopulationReport {
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Failed to get world population: " + e.getMessage());
+            log.debug("Failed to get world population: ", e);
         }
 
         return worldPopulations;
@@ -114,8 +119,8 @@ public class PopulationReport {
      *
      * @return List of PeoplePopulation objects representing total population per country.
      */
-    public ArrayList<PeoplePopulation> getTotalPopulationPerCountry() {
-        ArrayList<PeoplePopulation> populations = new ArrayList<>();
+    public List<PeoplePopulation> getTotalPopulationPerCountry() {
+        List<PeoplePopulation> populations = new ArrayList<>();
 
         if (con == null) {
             return populations;
@@ -148,7 +153,7 @@ public class PopulationReport {
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Failed to get total population per country: " + e.getMessage());
+            log.debug("Failed to get total population per country: ", e);
         }
 
         return populations;
@@ -159,8 +164,8 @@ public class PopulationReport {
      *
      * @return ArrayList<PeoplePopulation> list of continents with their total population
      */
-    public ArrayList<PeoplePopulation> getContinentTotalPopulation() {
-        ArrayList<PeoplePopulation> continentPopulations = new ArrayList<>();
+    public List<PeoplePopulation> getContinentTotalPopulation() {
+        List<PeoplePopulation> continentPopulations = new ArrayList<>();
 
 
         if (con == null) {
@@ -189,7 +194,7 @@ public class PopulationReport {
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Failed to get continent total population: " + e.getMessage());
+            log.debug("Failed to get continent total population: ", e);
         }
 
         return continentPopulations;
@@ -202,9 +207,9 @@ public class PopulationReport {
      *
      * @return ArrayList of PeoplePopulation objects containing district population data.
      */
-    public ArrayList<PeoplePopulation> getDistrictTotalPopulation() {
+    public List<PeoplePopulation> getDistrictTotalPopulation() {
         // Initialize list to store population data by district
-        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+        List<PeoplePopulation> peoplePopulations = new ArrayList<>();
 
         if (con == null) {
             return peoplePopulations;
@@ -233,7 +238,7 @@ public class PopulationReport {
             }
         } catch (Exception e) {
             // Print exception message if any error occurs
-            System.out.println(e.getMessage());
+            log.debug("Failed to get district total population: ", e);
         }
 
         // Return final list of district populations
@@ -249,9 +254,9 @@ public class PopulationReport {
      *
      * @return ArrayList of PeoplePopulation objects containing population data per continent.
      */
-    public ArrayList<PeoplePopulation> getContinentPopulationReport() {
+    public List<PeoplePopulation> getContinentPopulationReport() {
         // Create a list to store population results
-        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+        List<PeoplePopulation> peoplePopulations = new ArrayList<>();
 
         if (con == null) {
             return peoplePopulations;
@@ -288,7 +293,7 @@ public class PopulationReport {
             }
         } catch (Exception e) {
             // Print exception message if something goes wrong
-            System.out.println(e.getMessage());
+            log.debug("Failed to get Continent total population: ", e);
         }
 
         // Return final list of continent population data
@@ -301,9 +306,9 @@ public class PopulationReport {
      *
      * @return ArrayList of PeoplePopulation objects containing city population data.
      */
-    public ArrayList<PeoplePopulation> getCityTotalPopulation() {
+    public List<PeoplePopulation> getCityTotalPopulation() {
         // Create a list to store city-level population data
-        ArrayList<PeoplePopulation> peoplePopulations = new ArrayList<>();
+        List<PeoplePopulation> peoplePopulations = new ArrayList<>();
 
         if (con == null) {
             return peoplePopulations;
@@ -331,7 +336,7 @@ public class PopulationReport {
             }
         } catch (SQLException e) {
             // Print detailed message if SQL query fails
-            System.out.println("Failed to get city population: " + e.getMessage());
+            log.debug("Failed to get city population: ", e);
         }
 
         // Return all city population data
@@ -348,9 +353,9 @@ public class PopulationReport {
      *
      * @return An ArrayList of CountryLanguage objects containing language statistics
      */
-    public ArrayList<CountryLanguage> getWorldLanguageReport() {
+    public List<CountryLanguage> getWorldLanguageReport() {
         // Initialize list to store language report data
-        ArrayList<CountryLanguage> languages = new ArrayList<>();
+        List<CountryLanguage> languages = new ArrayList<>();
 
         if (con == null) {
             return languages;
@@ -391,7 +396,7 @@ public class PopulationReport {
             stmt.close();
         } catch (Exception e) {
             // Print any errors encountered during the database operation
-            System.out.println("Error retrieving world language report: " + e.getMessage());
+            log.debug("Failed to get world language report: ", e);
         }
 
         // Return the list of languages with calculated statistics
@@ -406,9 +411,9 @@ public class PopulationReport {
      *
      * @return ArrayList<PeoplePopulation> population data per region
      */
-    public ArrayList<PeoplePopulation> getRegionPopulationReport() {
+    public List<PeoplePopulation> getRegionPopulationReport() {
         // List to store population data for each region
-        ArrayList<PeoplePopulation> regionPopulations = new ArrayList<>();
+        List<PeoplePopulation> regionPopulations = new ArrayList<>();
 
         if (con == null) {
             return regionPopulations;
@@ -451,7 +456,7 @@ public class PopulationReport {
 
         } catch (SQLException e) {
             // Print error message if query fails
-            System.out.println("Failed to get region population report: " + e.getMessage());
+            log.debug("Failed to get region population report: ", e);
         }
 
         // Return the list of population data per region
@@ -463,9 +468,9 @@ public class PopulationReport {
      *
      * @return ArrayList<PeoplePopulation> list of regions with their total population
      */
-    public ArrayList<PeoplePopulation> getRegionTotalPopulation() {
+    public List<PeoplePopulation> getRegionTotalPopulation() {
         // List to store total population data per region
-        ArrayList<PeoplePopulation> regionPopulations = new ArrayList<>();
+        List<PeoplePopulation> regionPopulations = new ArrayList<>();
 
         if (con == null) {
             return regionPopulations;
@@ -501,7 +506,7 @@ public class PopulationReport {
 
         } catch (SQLException e) {
             // Print error message if query fails
-            System.out.println("Failed to get region total population: " + e.getMessage());
+            log.debug("Failed to get region total population: ", e);
         }
 
         // Return the list of total populations per region

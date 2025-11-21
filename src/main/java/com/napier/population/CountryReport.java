@@ -1,10 +1,14 @@
 package com.napier.population;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles generating country-related reports from the database.
@@ -15,6 +19,7 @@ public class CountryReport {
 
     // Active database connection used to query capital city information
     private Connection con;
+    Logger log = LoggerFactory.getLogger(CountryReport.class);
 
     /**
      * Constructor initializes the CountryReport with an active database connection.
@@ -31,8 +36,8 @@ public class CountryReport {
      * Uses capital city's district for the report.
      * @return List of Country objects containing code, name, capital, district, region, continent, and population.
      */
-    public ArrayList<Country> getCountriesByContinentPopulationDesc() {
-        ArrayList<Country> countries = new ArrayList<>();
+    public List<Country> getCountriesByContinentPopulationDesc() {
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -64,7 +69,7 @@ public class CountryReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get countries by continent population: " + e.getMessage());
+            log.debug("Failed to get countries by continent population: ", e);
         }
 
         return countries;
@@ -76,9 +81,9 @@ public class CountryReport {
      * country and city tables to include capital city details.
      * @return ArrayList of Country objects sorted in descending order by population.
      */
-    public ArrayList<Country> getAllCountriesByPopulationDesc() {
+    public List<Country> getAllCountriesByPopulationDesc() {
         // Create a list to hold all countries retrieved from the database
-        ArrayList<Country> countries = new ArrayList<>();
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -119,7 +124,7 @@ public class CountryReport {
             }
         } catch (SQLException e) {
             // Handle SQL exceptions and log an error message
-            System.out.println("Failed to get countries by population: " + e.getMessage());
+            log.debug("Failed to get countries by population: ", e);
         }
 
         // Return the complete list of countries sorted by population
@@ -136,9 +141,9 @@ public class CountryReport {
      * @return ArrayList of Country objects containing the top 10 populated countries per continent,
      * ordered by continent and population in descending order.
      */
-    public ArrayList<Country> getTop10CountriesByContinentPopulation() {
+    public List<Country> getTop10CountriesByContinentPopulation() {
         // Create a list to store the resulting countries
-        ArrayList<Country> countries = new ArrayList<>();
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -188,7 +193,7 @@ public class CountryReport {
 
         } catch (SQLException e) {
             // Handle SQL exceptions and display error message
-            System.out.println("Failed to get top 10 countries by continent: " + e.getMessage());
+            log.debug("Failed to get top 10 countries by continent: ", e);
         }
 
         // Return the list of top 10 populated countries per continent
@@ -202,9 +207,9 @@ public class CountryReport {
      *
      * @return An ArrayList of Country objects representing the top 50 most populated countries.
      */
-    public ArrayList<Country> getTop50CountriesByPopulation() {
+    public List<Country> getTop50CountriesByPopulation() {
         // Create a list to store the retrieved Country objects
-        ArrayList<Country> countries = new ArrayList<>();
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -242,7 +247,7 @@ public class CountryReport {
 
         } catch (SQLException e) {
             // Handle any SQL errors that occur during the query execution
-            System.out.println("Failed to get top 50 countries by population: " + e.getMessage());
+            log.debug("Failed to get top 50 countries by population: ", e);
         }
 
         // Return the list of top 50 countries
@@ -254,8 +259,8 @@ public class CountryReport {
      * Uses capital city's name for the report.
      * @return A list of countries ordered by region and population
      */
-    public ArrayList<Country> getCountriesByRegionPopulationDesc() {
-        ArrayList<Country> countries = new ArrayList<>();
+    public List<Country> getCountriesByRegionPopulationDesc() {
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -291,7 +296,7 @@ public class CountryReport {
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Failed to get countries by region population: " + e.getMessage());
+            log.debug("Failed to get countries by region population: ", e);
         }
 
         return countries;
@@ -303,8 +308,8 @@ public class CountryReport {
      *
      * @return List of Country objects containing code, name, capital, district, region, continent, and population
      */
-    public ArrayList<Country> getTop5CountriesPerRegion() {
-        ArrayList<Country> countries = new ArrayList<>();
+    public List<Country> getTop5CountriesPerRegion() {
+        List<Country> countries = new ArrayList<>();
 
         if (con == null) {
             return countries;
@@ -348,7 +353,7 @@ public class CountryReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get top 5 countries per region: " + e.getMessage());
+            log.debug("Failed to get top 5 countries per region: ", e);
         }
 
         return countries;

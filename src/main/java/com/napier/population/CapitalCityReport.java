@@ -5,6 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles generating reports specifically for capital cities.
@@ -15,6 +19,7 @@ public class CapitalCityReport {
 
     // Active database connection used to query capital city information
     private Connection con;
+    Logger log = LoggerFactory.getLogger(CapitalCityReport.class);
 
     /**
      * Constructor initializes the CapitalCityReport with an active database connection.
@@ -32,9 +37,9 @@ public class CapitalCityReport {
      *
      * @return A list of City objects containing the top 50 capital cities by population.
      */
-    public ArrayList<City> getTop50CapitalCitiesByPopulation() {
+    public List<City> getTop50CapitalCitiesByPopulation() {
         // List to store the top 50 capital cities
-        ArrayList<City> capitals = new ArrayList<>();
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -74,7 +79,7 @@ public class CapitalCityReport {
 
         } catch (SQLException e) {
             // Handle any SQL errors
-            System.out.println("Failed to get top 50 capital cities by population: " + e.getMessage());
+            log.debug("Failed to get top 50 capital cities by population: ", e);
         }
 
         // Return the list of top 50 capital cities
@@ -87,8 +92,8 @@ public class CapitalCityReport {
      *
      * @return a list of capital cities sorted by continent and descending population
      */
-    public ArrayList<City> getAllCapitalCitiesByContinentPopulationDesc() {
-        ArrayList<City> capitals = new ArrayList<>();
+    public List<City> getAllCapitalCitiesByContinentPopulationDesc() {
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -124,7 +129,8 @@ public class CapitalCityReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get capital cities by continent population: " + e.getMessage());
+            // Handle any SQL errors
+            log.debug("Failed to get capital cities by continent population: ", e);
         }
 
         return capitals;
@@ -138,8 +144,8 @@ public class CapitalCityReport {
      *
      * @return List of City objects containing city name, country name, region, continent, and population.
      */
-    public ArrayList<City> getTop5CapitalCitiesByRegion() {
-        ArrayList<City> capitals = new ArrayList<>();
+    public List<City> getTop5CapitalCitiesByRegion() {
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -179,7 +185,7 @@ public class CapitalCityReport {
 
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Failed to get top 5 capital cities by region: " + e.getMessage());
+            log.debug("Failed to get top 5 capital cities by region: ", e);
         }
 
         return capitals;
@@ -192,8 +198,8 @@ public class CapitalCityReport {
      *
      * @return A list of City objects representing capital cities in each region, sorted by population.
      */
-    public ArrayList<City> getAllCapitalCitiesByRegionPopulationDesc() {
-        ArrayList<City> capitals = new ArrayList<>();
+    public List<City> getAllCapitalCitiesByRegionPopulationDesc() {
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -230,9 +236,8 @@ public class CapitalCityReport {
                 );
                 capitals.add(city);
             }
-
         } catch (SQLException e) {
-            System.out.println("Failed to get capital cities by region: " + e.getMessage());
+            log.debug("Failed to get capital cities by region: ", e);
         }
 
         return capitals;
@@ -244,9 +249,9 @@ public class CapitalCityReport {
      *
      * @return A list of City objects containing all capital cities ordered by population descending.
      */
-    public ArrayList<City> getAllCapitalCitiesByPopulationDesc() {
+    public List<City> getAllCapitalCitiesByPopulationDesc() {
         // List to store all capital cities
-        ArrayList<City> capitals = new ArrayList<>();
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -285,7 +290,7 @@ public class CapitalCityReport {
             rset.close();
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Failed to get all capital cities by population: " + e.getMessage());
+            log.debug("Failed to get capital cities by region: ", e);
         }
 
         return capitals;
@@ -297,8 +302,8 @@ public class CapitalCityReport {
      *
      * @return A list of City objects containing top 10 capitals per continent ordered by continent and population.
      */
-    public ArrayList<City> getTop10CapitalCitiesByContinentPopulation() {
-        ArrayList<City> capitals = new ArrayList<>();
+    public List<City> getTop10CapitalCitiesByContinentPopulation() {
+        List<City> capitals = new ArrayList<>();
 
         if (con == null) {
             return capitals;
@@ -336,7 +341,7 @@ public class CapitalCityReport {
             rset.close();
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Failed to get top 10 capital cities by continent: " + e.getMessage());
+            log.debug("Failed to get top 10 capital cities by continent: ", e);
         }
 
         return capitals;

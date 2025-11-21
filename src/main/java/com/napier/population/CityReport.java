@@ -1,10 +1,14 @@
 package com.napier.population;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides methods for generating city reports from the database.
@@ -15,6 +19,7 @@ public class CityReport {
 
     // Active database connection used to query capital city information
     private Connection con;
+    Logger log = LoggerFactory.getLogger(CityReport.class);
 
     /**
      * Constructor initializes the CityReport with an active DB connection.
@@ -31,8 +36,8 @@ public class CityReport {
      * @return A list of City objects sorted by population in descending order.
      */
 
-    public ArrayList<City> getAllCitiesByPopulation() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getAllCitiesByPopulation() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -65,7 +70,7 @@ public class CityReport {
                 cities.add(city);
             }
         } catch (SQLException e) {
-            System.out.println("Failed to get cities by population: " + e.getMessage());
+            log.debug("Failed to get cities by population: ", e);
         }
         return cities;
     }
@@ -78,9 +83,9 @@ public class CityReport {
      *
      * @return An ArrayList of City objects containing city details ordered by continent and population.
      */
-    public ArrayList<City> getCitiesByContinentPopulationDesc() {
+    public List<City> getCitiesByContinentPopulationDesc() {
         // Create a list to store the retrieved City objects
-        ArrayList<City> cities = new ArrayList<>();
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -119,7 +124,7 @@ public class CityReport {
 
         } catch (SQLException e) {
             // Handle any SQL errors that occur during the query execution
-            System.out.println("Failed to get cities by continent population: " + e.getMessage());
+            log.debug("Failed to get cities by continent population: ", e);
         }
 
         // Return the list of cities organized by continent and sorted by population
@@ -134,8 +139,8 @@ public class CityReport {
      *
      * @return ArrayList of City objects containing city name, country, district, region, continent, and population
      */
-    public ArrayList<City> getTop50CitiesByPopulation() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getTop50CitiesByPopulation() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -179,7 +184,7 @@ public class CityReport {
             }
         } catch (SQLException e) {
             // Print error message if query fails
-            System.out.println("Failed to get city report: " + e.getMessage());
+            log.debug("Failed to get city report: ", e);
         }
 
         // Return the list of top 50 cities
@@ -193,8 +198,8 @@ public class CityReport {
      *
      * @return ArrayList of City objects containing name, country, district, region, continent, and population
      */
-    public ArrayList<City> getTop10CitiesByContinentPopulation() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getTop10CitiesByContinentPopulation() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -237,7 +242,7 @@ public class CityReport {
             }
         } catch (SQLException e) {
             // Print error message if query fails
-            System.out.println("Failed to get top 10 cities by continent: " + e.getMessage());
+            log.debug("Failed to get top 10 cities by continent: ", e);
         }
 
         return cities; // Return list of top cities
@@ -250,8 +255,8 @@ public class CityReport {
      *
      * @return ArrayList of City objects containing name, country, district, region, continent, and population.
      */
-    public ArrayList<City> getTop5CitiesByRegionPopulation() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getTop5CitiesByRegionPopulation() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -294,11 +299,12 @@ public class CityReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get top 5 cities by region: " + e.getMessage());
+            log.debug("Failed to get top 5 cities by region: ", e);
         }
 
         return cities;
     }
+
 
     /**
      * Retrieves all cities from the database, ordered by region and then by population
@@ -314,8 +320,8 @@ public class CityReport {
      * - population
      * If a database error occurs, an empty list is returned.
      */
-    public ArrayList<City> getAllCitiesByRegionPopulationDesc() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getAllCitiesByRegionPopulationDesc() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -350,7 +356,7 @@ public class CityReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get cities by region population: " + e.getMessage());
+            log.debug("Failed to get cities by region population: ", e);
         }
 
         return cities;
@@ -362,8 +368,8 @@ public class CityReport {
      *
      * @return ArrayList of City objects
      */
-    public ArrayList<City> getAllCitiesByCountryPopulationDesc() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getAllCitiesByCountryPopulationDesc() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -398,7 +404,7 @@ public class CityReport {
             }
 
         } catch (SQLException e) {
-            System.out.println("Failed to get cities by country population: " + e.getMessage());
+            log.debug("Failed to get cities by country population: ", e);
         }
 
         return cities;
@@ -409,9 +415,9 @@ public class CityReport {
      *
      * @return ArrayList of City objects
      */
-    public ArrayList<City> getCitiesByDistrictPopulationDesc() {
+    public List<City> getCitiesByDistrictPopulationDesc() {
         // Create a list to store the retrieved City objects
-        ArrayList<City> cities = new ArrayList<>();
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -449,8 +455,8 @@ public class CityReport {
             }
 
         } catch (SQLException e) {
-            // Handle any SQL errors that occur during the query execution
-            System.out.println("Failed to get cities by district population: " + e.getMessage());
+            // Handle any SQL errors that occur during the query execution]
+            log.debug("Failed to get cities by district population: ", e);
         }
 
         // Return the list of cities organized by continent and sorted by population
@@ -459,14 +465,15 @@ public class CityReport {
 
     /**
      * Retrieves the top 5 most populated cities for each country.
+     *
      * Uses a window function to number cities per country by population and
      * returns rows where row_number <= 5. Results are ordered by country name
      * and city population descending.
      *
      * @return ArrayList of City objects containing city name, country, district, region, continent, and population
      */
-    public ArrayList<City> getTop5CitiesByCountryPopulation() {
-        ArrayList<City> cities = new ArrayList<>();
+    public List<City> getTop5CitiesByCountryPopulation() {
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -503,7 +510,7 @@ public class CityReport {
                 cities.add(city);
             }
         } catch (SQLException e) {
-            System.out.println("Failed to get city report: " + e.getMessage());
+            log.debug("Failed to get city report: ", e);
         }
 
         return cities;
@@ -513,9 +520,9 @@ public class CityReport {
      * 16. Retrieves the most populated city in each district.
      * @return A list of City objects containing the top city per district.
      */
-    public ArrayList<City> getTopCityByDistrictPopulation() {
+    public List<City> getTopCityByDistrictPopulation() {
         // List to store the top cities for each district
-        ArrayList<City> cities = new ArrayList<>();
+        List<City> cities = new ArrayList<>();
 
         if (con == null) {
             return cities;
@@ -559,7 +566,7 @@ public class CityReport {
 
         } catch (SQLException e) {
             // Print error message if query fails
-            System.out.println("Failed to get top city by district population: " + e.getMessage());
+            log.debug("Failed to get top city by district population: ", e);
         }
 
         // Return the list of top cities
