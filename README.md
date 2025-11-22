@@ -163,17 +163,3 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
     [![No32getContinentTotalPopulation](https://img.shields.io/github/actions/workflow/status/ThetHtar-Vivian/group9_population_reports/main.yml?branch=feature/No32getTopLanguagesReport&label=No32getTopLanguagesReport&style=flat-square)](https://github.com/ThetHtar-Vivian/group9_population_reports/tree/feature/No32getTopLanguagesReport)
 
 ---
-
-# Contribution Spreadsheet
-
-| Matriculation Number | Code Review 1 | Code Review 2 |
-| -------------------- |:-------------:|:-------------:|
-| 40794415             |      18       |      18       |
-| 40794414             |      18       |      18       |
-| 40804618             |      16       |      16       |
-| 40794411             |      16       |      16       |
-| 40794410             |      16       |      16       |
-| 40794501             |      16       |      16       |
-| Total                |      100      |      100      |
-
----
