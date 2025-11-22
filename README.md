@@ -22,6 +22,11 @@ using an SQL database, Java, and DevOps practices such as GitFlow branching, con
 
 [![codecov](https://codecov.io/gh/ThetHtar-Vivian/group9_population_reports/graph/badge.svg?token=MFG3U4BGP9)](https://codecov.io/gh/ThetHtar-Vivian/group9_population_reports)
 
+### Build status for master 
+![GitHub branch status](https://img.shields.io/github/checks-status/ThetHtar-Vivian/group9_population_reports/master)
+
+### Build status for develop 
+![GitHub branch status](https://img.shields.io/github/checks-status/ThetHtar-Vivian/group9_population_reports/develop)
 
 # Features
 1. All the countries in the world organized by largest population to smallest.
