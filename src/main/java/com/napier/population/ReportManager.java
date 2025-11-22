@@ -197,7 +197,7 @@ public class ReportManager {
 
             // No 31 the total city population and write it to a report file.
             List<PeoplePopulation> cityTotalPopulations = report.getCityTotalPopulation();
-            display.writeOverallPopulationReportToFile(cityTotalPopulations, "City", "No_31_Country_Total_Population_Report.md");
+            display.writeOverallPopulationReportToFile(cityTotalPopulations, "City", "No_31_City_Total_Population_Report.md");
 
             // No 23 Continent Population Report
             List<PeoplePopulation> continentPopulations = report.getContinentPopulationReport();
